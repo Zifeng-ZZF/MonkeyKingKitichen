@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * The entity class of Recipe
  * 
- * @author Jisheng
+ * @author Jisheng, Zifeng Zhang
  * @version 1.0 26/5/2018
  */
 
@@ -21,6 +21,34 @@ public class Recipe {
 	private String name;
 	private ArrayList<Ingredient> ingredients;
 	private ArrayList<String> preparationSetps;
+	
+	/**
+	 * Constructor
+	 * @param name
+	 * @param type
+	 * @param servings
+	 */
+	public Recipe(String name, String type, int servings) {
+		this.name = name;
+		this.type = type;
+		this.servings = servings;
+	}
+	
+	/**
+	 * Add ingredients to the recipe
+	 * @param ingredient
+	 */
+	public void addIngredient(Ingredient ingredient) {
+		this.ingredients.add(ingredient);
+	}
+	
+	/**
+	 * Add steps of preparing the meal
+	 * @param preparationSetp
+	 */
+	public void addPreparationSteps(String preparationSetp) {
+		this.preparationSetps.add(preparationSetp);
+	}
 
 	// getters and setters
 	public int getRecipeId() {
@@ -41,10 +69,6 @@ public class Recipe {
 
 	public int getPreparationTime() {
 		return preparationTime;
-	}
-
-	public void setPreparationTime(int preparationTime) {
-		this.preparationTime = preparationTime;
 	}
 
 	public int getCookingTime() {
@@ -89,10 +113,6 @@ public class Recipe {
 
 	public ArrayList<Ingredient> getIngredients() {
 		return ingredients;
-	}
-
-	public void setIngredients(ArrayList<Ingredient> ingredients) {
-		this.ingredients = ingredients;
 	}
 
 	public ArrayList<String> getPreparationSetps() {
