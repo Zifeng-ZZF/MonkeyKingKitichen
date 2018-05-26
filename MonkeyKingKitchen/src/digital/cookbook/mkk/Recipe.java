@@ -1,5 +1,6 @@
 package digital.cookbook.mkk;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  * @version 1.0 26/5/2018
  */
 
-public class Recipe {
+public class Recipe implements Serializable {
 	// Recipe attributes
 	private int recipeId;
 	private int uid;
@@ -46,7 +47,7 @@ public class Recipe {
 	 * Add steps of preparing the meal
 	 * @param preparationSetp
 	 */
-	public void addPreparationSteps(String preparationSetp) {
+	public void addPreparationStep(String preparationSetp) {
 		this.preparationSetps.add(preparationSetp);
 	}
 
@@ -69,6 +70,10 @@ public class Recipe {
 
 	public int getPreparationTime() {
 		return preparationTime;
+	}
+	
+	public void setPreparationTime(int preparationTime) {
+		this.preparationTime =preparationTime;
 	}
 
 	public int getCookingTime() {
@@ -117,10 +122,6 @@ public class Recipe {
 
 	public ArrayList<String> getPreparationSetps() {
 		return preparationSetps;
-	}
-
-	public void setPreparationSetps(ArrayList<String> preparationSetps) {
-		this.preparationSetps = preparationSetps;
 	}
 
 }
