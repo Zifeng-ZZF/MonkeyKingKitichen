@@ -1,5 +1,6 @@
 package digital.cookbook.mkk;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  * @version 1.0 26/5/2018
  */
 
-public class User {
+public class User implements Serializable{
 	// User attributes
 	private int uid;
 	private static int idCount;
