@@ -1,5 +1,7 @@
 package digital.cookbook.mkk;
 
+import java.io.Serializable;
+
 /**
  * The entity class of Ingredient
  * 
@@ -7,7 +9,7 @@ package digital.cookbook.mkk;
  * @version 1.0 26/5/2018
  */
 
-public class Ingredient {
+public class Ingredient implements Serializable {
 	// ingredient attributes
 	private String name;
 	private String unit;
