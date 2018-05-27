@@ -1,8 +1,8 @@
 package digital.cookbook.mkk;
 
+
 /**
- * @author Zifeng Zhang 
- * The class for testing search method
+ * @author Zifeng Zhang The class for testing search method
  */
 public class DemoTest {
 
@@ -138,11 +138,11 @@ public class DemoTest {
 		cb.add(createGongBaoJiding());
 		cb.add(createHongShaoRou());
 		cb.add(createSuanLaFen());
-
-		Recipe recipe = cb.getRecipe("Suan La Fen");
-		
-		if (recipe != null) {
-			System.out.println(recipe);
+		for(Object obj: cb.recipesList().keySet()) {
+			Recipe recipe = cb.recipesList().get(obj);
+			if (recipe != null) {
+				System.out.println(recipe);
+			}	
 		}
 	}
 }

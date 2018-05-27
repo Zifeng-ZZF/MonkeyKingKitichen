@@ -33,13 +33,21 @@ public class CookBook {
 	}
 	
 	/**
-	 * 
+	 * Use name to get the recipe with the same name
 	 * @param name
-	 * @return the recipe with the given name
+	 * @return null if no result, otherwise return the name-matched recipes
 	 */
 	public Recipe getRecipe(String name) {
-		Recipe recipe = this.recipes.get(name);
-		return recipe;
+		Recipe result = null;
+		Set recipeIds = recipes.keySet();
+		for (Object recipeIdObj : recipeIds) {
+			int id = (Integer)recipeIdObj;
+			String recipeName = recipes.get(id).getName();
+			if(recipeName.equals(name)) {
+				return recipes.get(id);
+			}
+		}
+		return null;
 	}
 	
 	/**
@@ -58,5 +66,9 @@ public class CookBook {
 			}
 		}
 		return null;
+	}
+	
+	public Map<Integer, Recipe> recipesList(){
+		return this.recipes;
 	}
 }
