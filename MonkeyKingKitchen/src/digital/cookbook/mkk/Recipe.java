@@ -33,6 +33,8 @@ public class Recipe implements Serializable {
 		this.name = name;
 		this.type = type;
 		this.servings = servings;
+		ingredients = new ArrayList<>();
+		preparationSetps = new ArrayList<>();
 	}
 	
 	/**
