@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * The entity class of Recipe
  * 
- * @author Jisheng, Zifeng Zhang
+ * @author Jisheng, Zifeng Zhang, Zhibin Xin
  * @version 1.0 26/5/2018
  * @version 2.0 27/5/2018
  */

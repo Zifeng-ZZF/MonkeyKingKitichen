@@ -7,7 +7,7 @@ import java.util.Set;
 
 /**
  * The cookbook
- * @author Zifeng Zhang
+ * @author Zifeng Zhang, Xinyue Shi
  * @version 2.0 27/5/2018
  *
  */

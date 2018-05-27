@@ -2,7 +2,8 @@ package digital.cookbook.mkk;
 
 
 /**
- * @author Zifeng Zhang The class for testing search method
+ * @author Zifeng Zhang 
+ * The class for testing search method
  */
 public class DemoTest {
 
