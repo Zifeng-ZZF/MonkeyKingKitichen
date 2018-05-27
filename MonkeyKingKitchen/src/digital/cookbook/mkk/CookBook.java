@@ -8,6 +8,7 @@ import java.util.Set;
 /**
  * The cookbook
  * @author Zifeng Zhang
+ * @version 2.0 27/5/2018
  *
  */
 public class CookBook {
@@ -29,7 +30,7 @@ public class CookBook {
 	 * @param recipe
 	 */
 	public void add(Recipe recipe) {
-		this.recipes.put(recipe.getUid(), recipe);
+		this.recipes.put(recipe.getRecipeId(), recipe);
 	}
 	
 	/**
@@ -38,7 +39,6 @@ public class CookBook {
 	 * @return null if no result, otherwise return the name-matched recipes
 	 */
 	public Recipe getRecipe(String name) {
-		Recipe result = null;
 		Set recipeIds = recipes.keySet();
 		for (Object recipeIdObj : recipeIds) {
 			int id = (Integer)recipeIdObj;
@@ -56,7 +56,6 @@ public class CookBook {
 	 * @return null if no result, otherwise return the name-matched recipes
 	 */
 	public Recipe searchByName(String name) {
-		Recipe result = null;
 		Set recipeIds = recipes.keySet();
 		for (Object recipeIdObj : recipeIds) {
 			int id = (Integer)recipeIdObj;

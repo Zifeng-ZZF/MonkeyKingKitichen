@@ -7,7 +7,8 @@ import java.util.ArrayList;
  * The entity class of User
  * 
  * @author Jisheng
- * @version 1.0 26/5/2018
+ * @version 1.0 26/5/2018 
+ * @version 2.0 27/5/2018
  */
 
 public class User implements Serializable{

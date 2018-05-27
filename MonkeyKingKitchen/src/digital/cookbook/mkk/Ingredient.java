@@ -7,6 +7,7 @@ import java.io.Serializable;
  * 
  * @author Jisheng, Zifeng Zhang
  * @version 1.0 26/5/2018
+ * @version 2.0 27/5/2018
  */
 
 public class Ingredient implements Serializable {

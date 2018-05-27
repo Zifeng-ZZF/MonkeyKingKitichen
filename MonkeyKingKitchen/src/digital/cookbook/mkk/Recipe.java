@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * 
  * @author Jisheng, Zifeng Zhang
  * @version 1.0 26/5/2018
+ * @version 2.0 27/5/2018
  */
 
 public class Recipe implements Serializable {
@@ -36,8 +37,11 @@ public class Recipe implements Serializable {
 		this.name = name;
 		this.type = type;
 		this.servings = servings;
+		idCount++;
+		this.recipeId = idCount;
 		ingredients = new ArrayList<>();
 		preparationSetps = new ArrayList<>();
+		
 	}
 	
 	/**
@@ -67,14 +71,6 @@ public class Recipe implements Serializable {
 		}
 		
 		return recipeInfo;
-	}
-	
-	/**
-	 * set id
-	 */
-	public void setId() {
-		idCount++;
-		this.recipeId = idCount;
 	}
 
 	// getters and setters
