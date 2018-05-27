@@ -15,15 +15,25 @@ public class User implements Serializable{
 	private int uid;
 	private static int idCount;
 	private String name;
+	private String passwd;
 	private ArrayList<Recipe> myFavoriteList;
 	private ArrayList<Recipe> myRecipeList;
-
-	public int getUid() {
-		return uid;
+	
+	/**
+	 * Constructor of user
+	 * @param username
+	 * @param passwd
+	 */
+	public User(String username, String passwd) {
+		this.name = username;
+		this.passwd = passwd;
+		idCount++;
+		this.uid = idCount;
 	}
 
-	public void setUid(int uid) {
-		this.uid = uid;
+	//getters and setters
+	public int getUid() {
+		return uid;
 	}
 
 	public static int getIdCount() {
