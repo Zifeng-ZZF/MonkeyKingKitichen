@@ -15,16 +15,16 @@ public class Recipe implements Serializable {
 	private static int idCount = 0;
 	
 	// Recipe attributes
-	private int recipeId;
-	private int uid;
-	private int preparationTime;
-	private int cookingTime;
-	private int servings;
-	private double rate;
-	private String type;
-	private String name;
-	private ArrayList<Ingredient> ingredients;
-	private ArrayList<String> preparationSetps;
+	private int recipeId = 0;
+	private int uid = 0;
+	private int preparationTime = 0;
+	private int cookingTime = 0;
+	private int servings = 0;
+	private double rate = 0;
+	private String type = null;
+	private String name = null;
+	private ArrayList<Ingredient> ingredients = null;
+	private ArrayList<String> preparationSetps = null;
 	
 	/**
 	 * Constructor
@@ -38,6 +38,8 @@ public class Recipe implements Serializable {
 		this.servings = servings;
 		ingredients = new ArrayList<>();
 		preparationSetps = new ArrayList<>();
+		idCount++;
+		this.recipeId = idCount;
 	}
 	
 	/**
@@ -68,14 +70,6 @@ public class Recipe implements Serializable {
 		
 		return recipeInfo;
 	}
-	
-	/**
-	 * set id
-	 */
-	public void setId() {
-		idCount++;
-		this.recipeId = idCount;
-	}
 
 	// getters and setters
 	public int getRecipeId() {
@@ -84,10 +78,6 @@ public class Recipe implements Serializable {
 
 	public int getUid() {
 		return uid;
-	}
-
-	public void setUid(int uid) {
-		this.uid = uid;
 	}
 
 	public int getPreparationTime() {

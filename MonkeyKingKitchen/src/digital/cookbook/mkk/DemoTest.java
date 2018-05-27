@@ -139,9 +139,7 @@ public class DemoTest {
 		cb.add(createHongShaoRou());
 		cb.add(createSuanLaFen());
 
-		Recipe recipe = cb.getRecipe("Gong Bao Jiding");
-		if (recipe != null) {
-			System.out.println(recipe);
-		}
+		
+		System.out.println(cb.searchByName("Gong Bao Jiding").getName());
 	}
 }

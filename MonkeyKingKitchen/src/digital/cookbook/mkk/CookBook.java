@@ -29,7 +29,7 @@ public class CookBook {
 	 * @param recipe
 	 */
 	public void add(Recipe recipe) {
-		this.recipes.put(recipe.getUid(), recipe);
+		this.recipes.put(recipe.getRecipeId(), recipe);
 	}
 	
 	/**
