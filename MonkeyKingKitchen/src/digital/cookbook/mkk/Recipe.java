@@ -57,10 +57,11 @@ public class Recipe implements Serializable {
 	 * Overide toString()
 	 */
 	public String toString() {
-		String recipeInfo = null;
+		String recipeInfo = "";
+		
 		
 		for(Ingredient ingredient : ingredients) {
-			recipeInfo += (ingredient.getName()+"/r/n");
+			recipeInfo += (ingredient.getName() + "  " + ingredient.getAmount() + "  " + ingredient.getUnit()+"\n");
 		}
 		
 		return recipeInfo;

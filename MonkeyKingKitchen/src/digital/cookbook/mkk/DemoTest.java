@@ -139,7 +139,8 @@ public class DemoTest {
 		cb.add(createHongShaoRou());
 		cb.add(createSuanLaFen());
 
-		Recipe recipe = cb.getRecipe("Gong Bao Jiding");
+		Recipe recipe = cb.getRecipe("Suan La Fen");
+		
 		if (recipe != null) {
 			System.out.println(recipe);
 		}
