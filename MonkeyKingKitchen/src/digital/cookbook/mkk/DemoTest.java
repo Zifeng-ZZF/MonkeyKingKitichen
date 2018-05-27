@@ -140,7 +140,7 @@ public class DemoTest {
 		cb.add(createSuanLaFen());
 		for(Object obj: cb.recipesList().keySet()) {
 			Recipe recipe = cb.recipesList().get(obj);
-			if (recipe != null) {
+			if (recipe != null) { 
 				System.out.println(recipe);
 			}	
 		}
