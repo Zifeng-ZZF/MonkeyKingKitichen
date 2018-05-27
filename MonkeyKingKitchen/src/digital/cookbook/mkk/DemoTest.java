@@ -138,11 +138,19 @@ public class DemoTest {
 		cb.add(createGongBaoJiding());
 		cb.add(createHongShaoRou());
 		cb.add(createSuanLaFen());
+		
+		//Test toString
 		for(Object obj: cb.recipesList().keySet()) {
 			Recipe recipe = cb.recipesList().get(obj);
 			if (recipe != null) {
 				System.out.println(recipe);
 			}	
 		}
+		
+		//Test changing servings
+		System.out.println(cb.getRecipe("Gong Bao Jiding"));
+		
+		System.out.println(cb.changeServings(cb.getRecipe("Gong Bao Jiding").getRecipeId(), 6));
+		
 	}
 }
