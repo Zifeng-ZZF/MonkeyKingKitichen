@@ -2,6 +2,8 @@ package digital.cookbook.mkk;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+
 
 /**
  * The cookbook
@@ -11,7 +13,7 @@ import java.util.Map;
 public class CookBook {
 	
 	private String cookBookTitle;
-	private Map<String,Recipe> recipes;
+	private Map<Integer,Recipe> recipes;
 	
 	/**
 	 * Constructor
@@ -27,7 +29,7 @@ public class CookBook {
 	 * @param recipe
 	 */
 	public void add(Recipe recipe) {
-		this.recipes.put(recipe.getName(), recipe);
+		this.recipes.put(recipe.getUid(), recipe);
 	}
 	
 	/**
@@ -40,4 +42,21 @@ public class CookBook {
 		return recipe;
 	}
 	
+	/**
+	 * Use name to get the recipe with the same name
+	 * @param name
+	 * @return null if no result, otherwise return the name-matched recipes
+	 */
+	public Recipe searchByName(String name) {
+		Recipe result = null;
+		Set recipeIds = recipes.keySet();
+		for (Object recipeIdObj : recipeIds) {
+			int id = (Integer)recipeIdObj;
+			String recipeName = recipes.get(id).getName();
+			if(recipeName.equals(name)) {
+				return recipes.get(id);
+			}
+		}
+		return null;
+	}
 }
