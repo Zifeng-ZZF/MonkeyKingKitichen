@@ -70,4 +70,22 @@ public class CookBook {
 	public Map<Integer, Recipe> recipesList(){
 		return this.recipes;
 	}
+	
+	/**
+	 * Change amount of preparation time, ingredients amount according to servings
+	 * @param recipeId
+	 * @param Servings
+	 * @return the altered recipe
+	 */
+	public Recipe changeServings(int recipeId, int Servings) {
+		Recipe recipe = recipes.get(recipeId);
+		int originalServings = recipe.getServings();
+		int preparationTime = Servings * (recipes.get(recipeId).getPreparationTime()) / originalServings;
+		recipe.setPreparationTime(preparationTime);
+		for (Object ingredientObj : recipe.getIngredients()) {
+			double amount = Servings * (((Ingredient)ingredientObj).getAmount()) / originalServings;
+			((Ingredient)ingredientObj).setAmount(amount);
+		}
+		return recipe;
+	}
 }
