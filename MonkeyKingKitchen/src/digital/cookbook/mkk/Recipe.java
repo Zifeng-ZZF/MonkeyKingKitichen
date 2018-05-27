@@ -50,6 +50,19 @@ public class Recipe implements Serializable {
 	public void addPreparationStep(String preparationSetp) {
 		this.preparationSetps.add(preparationSetp);
 	}
+	
+	/**
+	 * Overide toString()
+	 */
+	public String toString() {
+		String recipeInfo = null;
+		
+		for(Ingredient ingredient : ingredients) {
+			recipeInfo += (ingredient.getName()+"/r/n");
+		}
+		
+		return recipeInfo;
+	}
 
 	// getters and setters
 	public int getRecipeId() {
