@@ -11,6 +11,9 @@ import java.util.ArrayList;
  */
 
 public class Recipe implements Serializable {
+	
+	private static int idCount = 0;
+	
 	// Recipe attributes
 	private int recipeId;
 	private int uid;
@@ -65,14 +68,18 @@ public class Recipe implements Serializable {
 		
 		return recipeInfo;
 	}
+	
+	/**
+	 * set id
+	 */
+	public void setId() {
+		idCount++;
+		this.recipeId = idCount;
+	}
 
 	// getters and setters
 	public int getRecipeId() {
 		return recipeId;
-	}
-
-	public void setRecipeId(int recipeId) {
-		this.recipeId = recipeId;
 	}
 
 	public int getUid() {
