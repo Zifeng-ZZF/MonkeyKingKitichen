@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * The cookbook
  * @author Zifeng Zhang, Xinyue Shi
- * @version 2.0 27/5/2018
+ * @version 2.0.1 28/5/2018
  *
  */
 public class CookBook {
@@ -85,7 +85,9 @@ public class CookBook {
 		Recipe recipe = recipes.get(recipeId);
 		int originalServings = recipe.getServings();
 		int preparationTime = servings * (recipes.get(recipeId).getPreparationTime()) / originalServings;
+		int cookingTime = servings * (recipes.get(recipeId).getCookingTime()) / originalServings;
 		recipe.setPreparationTime(preparationTime);
+		recipe.setCookingTime(cookingTime);
 		for (Object ingredientObj : recipe.getIngredients()) {
 			double amount = servings * (((Ingredient)ingredientObj).getAmount()) / originalServings;
 			((Ingredient)ingredientObj).setAmount(amount);
