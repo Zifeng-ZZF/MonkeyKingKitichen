@@ -1,9 +1,8 @@
 package digital.cookbook.mkk;
 
-
+import java.sql.*;
 /**
- * @author Zifeng Zhang 
- * The class for testing search method
+ * @author Zifeng Zhang The class for testing search method
  */
 public class DemoTest {
 
@@ -130,7 +129,8 @@ public class DemoTest {
 	/**
 	 * Program entry point.
 	 * 
-	 * @param args command line arguments; not used.
+	 * @param args
+	 *            command line arguments; not used.
 	 * 
 	 */
 	public static void main(String[] args) {
@@ -139,19 +139,19 @@ public class DemoTest {
 		cb.add(createGongBaoJiding());
 		cb.add(createHongShaoRou());
 		cb.add(createSuanLaFen());
-		
-		//Test toString
-		for(Object obj: cb.recipesList().keySet()) {
+
+		// Test toString
+		for (Object obj : cb.recipesList().keySet()) {
 			Recipe recipe = cb.recipesList().get(obj);
 			if (recipe != null) {
 				System.out.println(recipe);
-			}	
+			}
 		}
-		
-		//Test changing servings
+
+		// Test changing servings
 		System.out.println(cb.getRecipe("Gong Bao Jiding"));
-		
+
 		System.out.println(cb.changeServings(cb.getRecipe("Gong Bao Jiding").getRecipeId(), 6));
-		
+
 	}
 }

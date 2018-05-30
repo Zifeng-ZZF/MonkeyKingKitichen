@@ -1,6 +1,7 @@
 package digital.cookbook.mkk;
 
 import java.io.Serializable;
+import java.sql.*;
 
 /**
  * The entity class of Ingredient
