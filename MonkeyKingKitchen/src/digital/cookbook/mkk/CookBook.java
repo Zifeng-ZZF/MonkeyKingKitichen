@@ -76,7 +76,7 @@ public class CookBook {
 	}
 	
 	/**
-	 * Change amount of preparation time, ingredients amount according to servings
+	 * Change amount of preparation time, ingredients amount and cooking time according to servings
 	 * @param recipeId
 	 * @param Servings
 	 * @return the altered recipe
