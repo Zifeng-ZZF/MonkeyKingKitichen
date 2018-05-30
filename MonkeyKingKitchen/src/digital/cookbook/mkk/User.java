@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class User implements Serializable{
 	// User attributes
 	private int uid;
-	private static int idCount;
 	private String name;
 	private String passwd;
 	private ArrayList<Recipe> myFavoriteList;
@@ -29,21 +28,15 @@ public class User implements Serializable{
 	public User(String username, String passwd) {
 		this.name = username;
 		this.passwd = passwd;
-		idCount++;
-		this.uid = idCount;
 	}
 
 	//getters and setters
 	public int getUid() {
 		return uid;
 	}
-
-	public static int getIdCount() {
-		return idCount;
-	}
-
-	public static void setIdCount(int idCount) {
-		User.idCount = idCount;
+	
+	public void setUid(int uid) {
+		this.uid = uid;
 	}
 
 	public String getName() {
