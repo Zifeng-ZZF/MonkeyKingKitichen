@@ -31,6 +31,10 @@ public class User implements Serializable{
 	}
 
 	//getters and setters
+	public String getPasswd() {
+		return this.passwd;
+	}
+	
 	public int getUid() {
 		return uid;
 	}
