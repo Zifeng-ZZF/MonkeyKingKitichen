@@ -26,6 +26,8 @@ public class Recipe implements Serializable {
 	private ArrayList<Ingredient> ingredients;
 	private ArrayList<String> preparationSetps;
 	
+	private DBProcessor dbProcessor = new DBProcessor();
+	
 	/**
 	 * Constructor
 	 * @param name
@@ -42,10 +44,12 @@ public class Recipe implements Serializable {
 	
 	/**
 	 * Add ingredients to the recipe
+	 * insert the item into DB
 	 * @param ingredient
 	 */
 	public void addIngredient(Ingredient ingredient) {
 		this.ingredients.add(ingredient);
+		dbProcessor.addIngredient(ingredient);
 	}
 	
 	/**
