@@ -1,5 +1,6 @@
 package digital.cookbook.mkk;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -15,6 +16,9 @@ public class CookBook {
 	
 	private String cookBookTitle;
 	private Map<Integer,Recipe> recipes;
+	private ArrayList<User> users;
+	private DBProcessor dbProcessor = new DBProcessor();
+	private User currentUser;
 	
 	/**
 	 * Constructor
@@ -22,7 +26,8 @@ public class CookBook {
 	 */
 	public CookBook(String title) {
 		this.cookBookTitle = title;
-		recipes = new HashMap<>();
+		recipes = dbProcessor.fetchRecipe();
+		users = dbProcessor.fetchUserInfo();
 	}
 	
 	/**
@@ -31,6 +36,7 @@ public class CookBook {
 	 */
 	public void add(Recipe recipe) {
 		this.recipes.put(recipe.getRecipeId(), recipe);
+		dbProcessor.insetRecipe(recipe,currentUser.getUid());
 	}
 	
 	/**
@@ -93,5 +99,17 @@ public class CookBook {
 			((Ingredient)ingredientObj).setAmount(amount);
 		}
 		return recipe;
+	}
+	
+	public void register(User user) {
+		this.users.add(user);
+		dbProcessor.insertUser(user);
+	}
+	
+	public void login(String username,String passwd) {
+		for (User user : users) {
+			if(user.getName().equals(username) && user.getPasswd().equals(passwd))
+				this.currentUser = user;
+		}
 	}
 }
