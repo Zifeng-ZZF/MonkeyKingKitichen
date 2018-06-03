@@ -2,6 +2,7 @@ package digital.cookbook.mkk;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Retrieve information from the DB
@@ -14,10 +15,9 @@ public class DBProcessor {
 	/**
 	 * Acquire all the user infomation in the DB
 	 * 
-	 * @param user
 	 * @return ArrayList contains all the user in the DB
 	 */
-	public ArrayList<User> fetchUserInfo(User user) {
+	public ArrayList<User> fetchUserInfo() {
 
 		Connection connection = DBUtil.open();
 		String sql = "select*from usertb;";
@@ -42,20 +42,19 @@ public class DBProcessor {
 	}
 
 	/**
-	 * Fetch all the myrecipe from the db to the ArrayList MyRecipeList
+	 * Fetch all the Recipe in the db to the CookBook
 	 * @param uid
 	 * @return
 	 */
-	public ArrayList<Recipe> fetchMyRecipe(int uid) {
+	public HashMap<Integer,Recipe> fetchRecipe() {
 
 		Connection connection = DBUtil.open();
-		String sql = "select*from recipetb where recipe_id=?;";
-		ArrayList<Recipe> recipeList = new ArrayList<>();
+		String sql = "select*from recipetb;";
+		HashMap<Integer,Recipe> recipeList = new HashMap<>();
 
 		try {
-			PreparedStatement pStatement = connection.prepareStatement(sql);
-			pStatement.setInt(1, uid);
-			ResultSet rSet = pStatement.executeQuery();
+			Statement statement = connection.createStatement();
+			ResultSet rSet = statement.executeQuery(sql);
 			while (rSet.next()) {
 				Recipe recipe = new Recipe(rSet.getString(2), rSet.getString(9), rSet.getInt(7));
 				recipe.setRecipeId(rSet.getInt(1));
@@ -74,7 +73,7 @@ public class DBProcessor {
 						step = "";
 					}
 				}
-				recipeList.add(recipe);
+				recipeList.put(recipe.getRecipeId(), recipe);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -88,4 +87,6 @@ public class DBProcessor {
 	public ArrayList<Recipe> fetchFavorite(int uid) {
 		return null;
 	}
+	
+	
 }
