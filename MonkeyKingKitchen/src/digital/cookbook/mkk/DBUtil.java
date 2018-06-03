@@ -24,16 +24,21 @@ public class DBUtil {
 	 * properties file
 	 */
 	static {
-		Properties properties = new Properties();
+		Properties prop = new Properties();
 
 		try {
-			InputStream inputStream = new FileInputStream("configure.properties");
-			properties.load(inputStream);
+			InputStream inputStream = new FileInputStream("src/configure.properties");
+			prop.load(inputStream);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+        driver = prop.getProperty("driver");
+        url = prop.getProperty("url");
+        username = prop.getProperty("username");
+        password = prop.getProperty("password");
 	}
 
 	/**
