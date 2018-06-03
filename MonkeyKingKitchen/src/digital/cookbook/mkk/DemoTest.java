@@ -134,24 +134,43 @@ public class DemoTest {
 	 * 
 	 */
 	public static void main(String[] args) {
+		
 		CookBook cb = new CookBook("Chinese Cuisine");
+		
+		/**
+		 * 1.Test adding a new user to the db
+		 */
+//		cb.register(new User("353283080", "a1234"));
 
-		cb.add(createGongBaoJiding());
-		cb.add(createHongShaoRou());
-		cb.add(createSuanLaFen());
+		/**
+		 * 2.Test login the cook book
+		 */
+//		cb.login("353283080", "a1234");
+		
+		/**
+		 * 3. Test add method 
+		 */
+//		cb.add(createGongBaoJiding());
+//		cb.add(createHongShaoRou());
+//		cb.add(createSuanLaFen());
 
-		// Test toString
-		for (Object obj : cb.recipesList().keySet()) {
-			Recipe recipe = cb.recipesList().get(obj);
-			if (recipe != null) {
-				System.out.println(recipe);
-			}
-		}
+		/**
+		 * Test toString();
+		 */
+//		for (Object obj : cb.recipesList().keySet()) {
+//			Recipe recipe = cb.recipesList().get(obj);
+//			if (recipe != null) {
+//				System.out.println(recipe);
+//			}
+//		}
 
-		// Test changing servings
-		System.out.println(cb.getRecipe("Gong Bao Jiding"));
-
-		System.out.println(cb.changeServings(cb.getRecipe("Gong Bao Jiding").getRecipeId(), 6));
+		/**
+		 * Test changing servings
+		 * 
+		 */
+//		System.out.println(cb.getRecipe("Gong Bao Jiding"));
+//
+//		System.out.println(cb.changeServings(cb.getRecipe("Gong Bao Jiding").getRecipeId(), 6));
 
 	}
 }
