@@ -7,7 +7,7 @@ import java.util.HashMap;
 /**
  * Retrieve information from the DB
  * 
- * @author User
+ * @author Zifeng Zhang, Xinyue Shi
  *
  */
 public class DBProcessor {
@@ -49,31 +49,40 @@ public class DBProcessor {
 	public HashMap<Integer,Recipe> fetchRecipe() {
 
 		Connection connection = DBUtil.open();
-		String sql = "select*from recipetb;";
+		String sql1 = "select*from recipetb;";
 		HashMap<Integer,Recipe> recipeList = new HashMap<>();
+		
+		String sql2 = 
+				"select*from recipeingredientdb where recipe_id=?";
 
 		try {
 			Statement statement = connection.createStatement();
-			ResultSet rSet = statement.executeQuery(sql);
+			ResultSet rSet = statement.executeQuery(sql1);
+			PreparedStatement pStatement = connection.prepareStatement(sql2);
+			
 			while (rSet.next()) {
-				Recipe recipe = new Recipe(rSet.getString(2), rSet.getString(9), rSet.getInt(7));
+				Recipe recipe = new Recipe(rSet.getString(2), rSet.getString(8), rSet.getInt(6));
 				recipe.setRecipeId(rSet.getInt(1));
 				recipe.setPreparationTime(rSet.getInt(3));
 				recipe.setCookingTime(rSet.getInt(4));
-				recipe.setRate(rSet.getDouble(6));
-
-				String step = "";
-				String steps = rSet.getString(5);
-				char[] stepsManage = steps.toCharArray();
-				for (char c : stepsManage) {
-					if (c != '|') {
-						step += c;
-					} else {
-						recipe.addPreparationStep(step);
-						step = "";
-					}
+				recipe.setRate(rSet.getDouble(5));
+				recipe.setUid(rSet.getInt(7));
+				
+				String[] steps = rSet.getString(9).split("|");
+				for (String step : steps) {
+					recipe.addPreparationStep(step);
 				}
+				
+				pStatement.setInt(1, recipe.getRecipeId());
+				ResultSet ingredientRSet = pStatement.executeQuery();
+				while(ingredientRSet.next()) {
+					Ingredient ingredient = new Ingredient(ingredientRSet.getString(1),
+							ingredientRSet.getDouble(5), ingredientRSet.getString(3), ingredientRSet.getString(4));
+					recipe.addIngredient(ingredient);
+				}
+				
 				recipeList.put(recipe.getRecipeId(), recipe);
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -85,14 +94,63 @@ public class DBProcessor {
 	}
 
 	/**
-	 * Fetch favorite recipes from db
+	 * Fetch all the MyFavouriteRecipe from the db to the ArrayList MyFavouriteList
 	 * @param uid
-	 * @return
+	 * @return ArrayList contains all recipes from MyFavouriteList
 	 */
 	public ArrayList<Recipe> fetchFavorite(int uid) {
-		return null;
+		Connection connection = DBUtil.open();
+		String sql1 = 
+				"select*from recipetb where recipe_id in"
+				+ "(select recipe_id from myfavoritetb where user_id=?)";
+		String sql2 = 
+				"select*from recipeingredientdb where recipe_id=?";
+		ArrayList<Recipe> favoriteList = new ArrayList<>();
+		
+		try {
+			PreparedStatement pStmt1 = connection.prepareStatement(sql1);
+			pStmt1.setInt(1, uid);
+			ResultSet recipeRS = pStmt1.executeQuery();
+			
+			PreparedStatement pStmt2 = connection.prepareStatement(sql2);
+			
+			while(recipeRS.next()) {
+				Recipe recipe = new Recipe(recipeRS.getString(2), recipeRS.getString(8), recipeRS.getInt(6));
+				recipe.setRecipeId(recipeRS.getInt(1));
+				recipe.setPreparationTime(recipeRS.getInt(3));
+				recipe.setCookingTime(recipeRS.getInt(4));
+				recipe.setRate(recipeRS.getDouble(5));
+				
+				//Get the preparation steps
+				String[] steps = recipeRS.getString(9).split("|");
+				for (String step : steps) {
+						recipe.addPreparationStep(step);
+				}
+				
+				//Get corresponding ingredient used in this recipe
+				pStmt2.setInt(1, recipe.getRecipeId());
+				ResultSet ingredientRS = pStmt2.executeQuery();
+				while(ingredientRS.next()) {
+					Ingredient ingredient = new Ingredient(ingredientRS.getString(1),
+							ingredientRS.getDouble(5), ingredientRS.getString(3), ingredientRS.getString(4));
+					recipe.addIngredient(ingredient);
+				}
+				
+				favoriteList.add(recipe);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(connection);
+		}
+		
+		return favoriteList;
 	}
 	
+	/**
+	 * Insert new user into the db
+	 * @param user
+	 */
 	public void insertUser(User user) {
 		Connection conn = DBUtil.open();
 		
@@ -171,6 +229,14 @@ public class DBProcessor {
         } finally {
             DBUtil.close(conn);
         }
+	}
+	
+	/**
+	 * Insert an ingredient into the db while adding ingredient to recipe
+	 * @param ingredient
+	 */
+	public void addIngredient(Ingredient ingredient) {
+		
 	}
 	
 	public void updateRecipe() {
