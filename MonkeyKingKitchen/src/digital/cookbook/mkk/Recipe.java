@@ -49,6 +49,7 @@ public class Recipe implements Serializable {
 	 */
 	public void addIngredient(Ingredient ingredient) {
 		this.ingredients.add(ingredient);
+		ingredient.setRecipeId(recipeId);
 		dbProcessor.addIngredient(ingredient);
 	}
 	
