@@ -17,6 +17,7 @@ public class Ingredient implements Serializable {
 	private String unit;
 	private String processMethod;
 	private double amount;
+	private int recipeId;
 
 	/**
 	 * Constructor without process method of the ingredient
@@ -79,4 +80,11 @@ public class Ingredient implements Serializable {
 		this.amount = amount;
 	}
 
+	public int getRecipeId() {
+		return recipeId;
+	}
+
+	public void setRecipeId(int recipeId) {
+		this.recipeId = recipeId;
+	}
 }
