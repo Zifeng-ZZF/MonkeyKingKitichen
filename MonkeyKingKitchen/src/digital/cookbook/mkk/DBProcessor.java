@@ -236,10 +236,51 @@ public class DBProcessor {
 	 * @param ingredient
 	 */
 	public void addIngredient(Ingredient ingredient) {
-		
+		Connection connection = DBUtil.open();
+		String sql = "insert into recipeingredientdb(ingredient_name,recipe_id,unit,process_method,amount)"
+				+ " values(?,?,?,?,5)";
+		try {
+			PreparedStatement pStatement = connection.prepareStatement(sql);
+			pStatement.setString(1, ingredient.getName());
+			pStatement.setInt(2, ingredient.getRecipeId());
+			pStatement.setString(3, ingredient.getUnit());
+			pStatement.setDouble(4, ingredient.getAmount());
+			pStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void updateRecipe() {
+	/**
+	 * Update the recipe if it is editted
+	 * @param recipe
+	 */
+	public void updateRecipe(Recipe recipe) {
+		Connection connection = DBUtil.open();
+		String sql = "update recipetb set recipe_name = ?, recipe_preparation_time = ?,"
+				+ "recipe_cooking_time = ?, recipe_averate = ?,"
+				+ "recipe_serving = ?, recipe_type = ?, recipe_steps = ? "
+				+ "where recipe_id = ?;";
 		
+		try {
+			PreparedStatement pStatement = connection.prepareStatement(sql);
+			pStatement.setString(1, recipe.getName());
+			pStatement.setInt(2, recipe.getPreparationTime());
+			pStatement.setInt(3, recipe.getCookingTime());
+			pStatement.setDouble(4, recipe.getRate());
+			pStatement.setInt(5, recipe.getServings());
+			pStatement.setString(6, recipe.getType());
+			pStatement.setInt(8, recipe.getRecipeId());
+			
+            String steps = "";
+            for (String step : recipe.getPreparationSetps()) {
+				step += "|";
+				steps += step;
+			}
+            pStatement.setString(7, steps);
+            
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
