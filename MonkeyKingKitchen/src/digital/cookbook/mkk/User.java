@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * The entity class of User
  * 
- * @author Jisheng
+ * @author Jisheng, Zifeng Zhang
  * @version 1.0 26/5/2018 
  * @version 2.0 27/5/2018
  */
@@ -19,6 +19,7 @@ public class User implements Serializable{
 	private String passwd;
 	private ArrayList<Recipe> myFavoriteList;
 	private ArrayList<Recipe> myRecipeList;
+	private DBProcessor dbProcessor = new DBProcessor();
 	
 	/**
 	 * Constructor of user
@@ -26,8 +27,17 @@ public class User implements Serializable{
 	 * @param passwd
 	 */
 	public User(String username, String passwd) {
+
 		this.name = username;
 		this.passwd = passwd;
+	}
+	
+	/**
+	 * Add recipe to favorite
+	 * @param recipe
+	 */
+	public void addToFavorite(Recipe recipe) {
+		this.myFavoriteList.add(recipe);
 	}
 
 	//getters and setters
