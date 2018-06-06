@@ -145,8 +145,9 @@ public class DemoTest {
 		/**
 		 * 2.Test login the cook book
 		 */
-//		cb.login("353283080", "a1234");
+		cb.login("353283080", "a1234");
 		
+		cb.deleteTheRecipe(cb.getRecipe("Gong Bao Jiding"));
 		/**
 		 * 3. Test add method 
 		 */
