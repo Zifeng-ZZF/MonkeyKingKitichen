@@ -15,6 +15,8 @@ import java.sql.*;
  */
 public class CookBook {
 
+	
+	
 	private String cookBookTitle;
 	private Map<Integer, Recipe> recipes;
 	private ArrayList<User> users;
@@ -109,6 +111,10 @@ public class CookBook {
 		return recipe;
 	}
 
+	/**
+	 * Register method
+	 * @param user
+	 */
 	public void register(User user) {
 		this.users.add(user);
 		dbProcessor.insertUser(user);
@@ -120,6 +126,8 @@ public class CookBook {
 	 * @param passwd
 	 */
 	public void login(String username, String passwd) {
+		ArrayList<Recipe> myRecipes = new ArrayList<>();
+		
 		for (User user : users) {
 			//Initialize current user
 			if (user.getName().equals(username) && user.getPasswd().equals(passwd)) {
@@ -130,9 +138,20 @@ public class CookBook {
 				for (int recipeId : recipes.keySet()) {
 					Recipe recipe = recipes.get(recipeId);
 					if(recipe.getUid() == user.getUid())
-						user.getMyRecipeList().add(recipe);
+						myRecipes.add(recipe);
 				}
+				user.setMyFavoriteList(myRecipes);
 			}
 		}
+	}
+
+	
+	/**
+	 * 
+	 * @param recipe
+	 */
+	public void deleteTheRecipe(Recipe recipe) {
+		if(currentUser.getUid() == recipe.getUid())
+			dbProcessor.deleteRecipe(recipe.getRecipeId());
 	}
 }
