@@ -41,7 +41,10 @@ public class User implements Serializable{
 		dbProcessor.insertIntoFavorite(recipe, this.uid);
 	}
 
-	//getters and setters
+	/**
+	 * getters and setters
+	 * @return
+	 */
 	public String getPasswd() {
 		return this.passwd;
 	}
