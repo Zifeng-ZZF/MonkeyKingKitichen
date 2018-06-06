@@ -39,7 +39,7 @@ public class CookBook {
 	 */
 	public void add(Recipe recipe) {
 		this.recipes.put(recipe.getRecipeId(), recipe);
-		dbProcessor.insetRecipe(recipe, currentUser.getUid());
+		dbProcessor.insertRecipe(recipe, currentUser.getUid());
 	}
 
 	/**
