@@ -38,6 +38,7 @@ public class User implements Serializable{
 	 */
 	public void addToFavorite(Recipe recipe) {
 		this.myFavoriteList.add(recipe);
+		dbProcessor.insertIntoFavorite(recipe, this.uid);
 	}
 
 	//getters and setters
