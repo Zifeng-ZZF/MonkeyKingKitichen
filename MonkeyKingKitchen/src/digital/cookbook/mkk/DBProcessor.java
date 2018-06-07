@@ -8,7 +8,7 @@ import java.util.HashMap;
  * Retrieve information from the DB
  * 
  * @author Zifeng Zhang, Xinyue Shi, Zhibin Xin
- *
+ * 
  */
 public class DBProcessor {
 
@@ -163,7 +163,8 @@ public class DBProcessor {
 			ResultSet resultSet = statement.executeQuery(idSql);
 			if (resultSet.next())
 				maxID = resultSet.getInt(1);
-			maxID = 0;
+			else
+				maxID = 0;
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
@@ -188,40 +189,24 @@ public class DBProcessor {
 	 */
 	public void insertRecipe(Recipe recipe, int currentUserID) {
 		Connection conn = DBUtil.open();
-
-		// At first, find the maximum id of current db
-		String idSql = "select max(recipe_id) from recipetb;";
-		Statement statement = null;
-		int maxID = 0;
-		try {
-			statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery(idSql);
-			if (resultSet.next())
-				maxID = resultSet.getInt(1);
-			maxID = 0;
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-
-		String sql = "insert into recipetb(recipe_id,recipe_name,recipe_preparation_time,"
+		String sql = "insert into recipetb(recipe_name,recipe_preparation_time,"
 				+ "recipe_cooking_time,recipe_averate,recipe_servings,user_id,recipe_type,recipe_steps)"
-				+ " values(?,?,?,?,?,?,?,?,?);";
+				+ " values(?,?,?,?,?,?,?,?);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, maxID);
-			pstmt.setString(2, recipe.getName());
-			pstmt.setInt(3, recipe.getPreparationTime());
-			pstmt.setInt(4, recipe.getCookingTime());
-			pstmt.setDouble(5, recipe.getRate());
-			pstmt.setInt(6, recipe.getServings());
-			pstmt.setInt(7, currentUserID);
-			pstmt.setString(8, recipe.getType());
+			pstmt.setString(1, recipe.getName());
+			pstmt.setInt(2, recipe.getPreparationTime());
+			pstmt.setInt(3, recipe.getCookingTime());
+			pstmt.setDouble(4, recipe.getRate());
+			pstmt.setInt(5, recipe.getServings());
+			pstmt.setInt(6, currentUserID);
+			pstmt.setString(7, recipe.getType());
 			String steps = "";
 			for (String step : recipe.getPreparationSetps()) {
 				step += "|";
 				steps += step;
 			}
-			pstmt.setString(9, steps);
+			pstmt.setString(8, steps);
 
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -239,13 +224,14 @@ public class DBProcessor {
 	public void addIngredient(Ingredient ingredient) {
 		Connection connection = DBUtil.open();
 		String sql = "insert into recipeingredientdb(ingredient_name,recipe_id,unit,process_method,amount)"
-				+ " values(?,?,?,?,5)";
+				+ " values(?,?,?,?,?)";
 		try {
 			PreparedStatement pStatement = connection.prepareStatement(sql);
 			pStatement.setString(1, ingredient.getName());
 			pStatement.setInt(2, ingredient.getRecipeId());
 			pStatement.setString(3, ingredient.getUnit());
-			pStatement.setDouble(4, ingredient.getAmount());
+			pStatement.setString(4, ingredient.getProcessMethod());
+			pStatement.setDouble(5, ingredient.getAmount());
 			pStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -323,7 +309,7 @@ public class DBProcessor {
 			DBUtil.close(connection);
 		}
 	}
-	
+
 	/**
 	 * insert the chosen recipe into myfavoritetb
 	 * 
@@ -356,5 +342,79 @@ public class DBProcessor {
 			DBUtil.close(conn);
 		}
 
+	}
+
+	/**
+	 * Insert individual rates of the user
+	 * 
+	 * @param recipe
+	 * @param userID
+	 * @param rate
+	 */
+	public void insertRate(Recipe recipe, int userID, double rate) {
+		Connection conn = DBUtil.open();
+		String sql = "insert into ratetb(user_id,recipe_id,rate)values(?,?,?)";
+		String querysql = "select rate from ratetb where recipe_id=?";
+		String updatesql = "update recipetb set recipe_averate =? where recipe_id=?";
+
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userID);
+			pstmt.setInt(2, recipe.getRecipeId());
+			pstmt.setDouble(3, rate);
+			pstmt.executeUpdate();
+
+			PreparedStatement queryPStmt = conn.prepareStatement(querysql);
+			queryPStmt.setInt(1, recipe.getRecipeId());
+			ResultSet rs = queryPStmt.executeQuery();
+			int Rate = 0;
+			int amount = 0;
+			while (rs.next()) {
+				Rate = Rate + rs.getInt(3);
+				amount = amount + 1;
+			}
+			double aveRate = Rate / amount;
+			PreparedStatement updatePStmt = conn.prepareStatement(updatesql);
+			updatePStmt.setDouble(1, aveRate);
+			updatePStmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(conn);
+		}
+
+	}
+
+	/**
+	 * Get the current largest recipe id in the recipetb
+	 * 
+	 * @return maxID
+	 */
+	public int getTheMaxID() {
+		Connection conn = DBUtil.open();
+		String idSql = "select max(recipe_id) from recipetb;";
+		String cleanAutoIncreaseSql = "alter table recipetb auto_increment=1;";
+		int maxID = 0;
+		try {
+			Statement statement = conn.createStatement();
+			ResultSet resultSet = statement.executeQuery(idSql);
+			if(resultSet.next()) {
+				maxID = resultSet.getInt(1);
+				System.out.println("Current Max id is: "+maxID);
+				if (maxID == 0) {
+					Statement statementClean = conn.createStatement();
+					statementClean.executeUpdate(cleanAutoIncreaseSql);
+				}
+			}
+		} catch (
+
+		SQLException e1) {
+			e1.printStackTrace();
+		} finally {
+			DBUtil.close(conn);
+		}
+//		System.out.println(maxID);
+		return maxID;
 	}
 }
