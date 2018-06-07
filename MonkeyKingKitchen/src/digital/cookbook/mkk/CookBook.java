@@ -23,6 +23,10 @@ public class CookBook {
 	private DBProcessor dbProcessor = new DBProcessor();
 	private User currentUser;
 
+	public User getCurrentUser() {
+		return currentUser;
+	}
+
 	/**
 	 * Constructor
 	 * 
@@ -35,14 +39,20 @@ public class CookBook {
 	}
 
 	/**
-	 * Add recipe to the cookBook
-	 * 
+	 * Add recipe to the cookBook, insert the reicpe to recipetb
+	 * Meanwhile insert the ingredient into recipeingredientdb
 	 * @param recipe
 	 */
-	public void add(Recipe recipe) {
+	public void addRecipe(Recipe recipe) {
+		//1. Insert recipes
 		this.recipes.put(recipe.getRecipeId(), recipe);
 		dbProcessor.insertRecipe(recipe, currentUser.getUid());
+		//2. Insert ingredients
+		for (Ingredient ingredient : recipe.getIngredients()) {
+			dbProcessor.addIngredient(ingredient);
+		}
 	}
+
 
 	/**
 	 * Use name to get the recipe with the same name
