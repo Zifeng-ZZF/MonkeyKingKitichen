@@ -42,6 +42,14 @@ public class User implements Serializable{
 	}
 
 	/**
+	 * Rate the recipe
+	 * @param rate
+	 */
+	public void rate(double rate, Recipe recipe) {
+		dbProcessor.insertRate(recipe, this.uid, rate);
+	}
+	
+	/**
 	 * getters and setters
 	 * @return
 	 */
