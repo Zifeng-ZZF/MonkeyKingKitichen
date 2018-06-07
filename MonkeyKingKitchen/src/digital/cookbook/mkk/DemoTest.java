@@ -140,20 +140,30 @@ public class DemoTest {
 		/**
 		 * 1.Test adding a new user to the db
 		 */
-//		cb.register(new User("353283080", "a1234"));
+//		for(int i = 0; i < 20; i++) {
+//			Integer j = (int)(Math.random()*1000);
+//			cb.register(new User(j.toString(), "a1234"+i));
+//		}
 
 		/**
 		 * 2.Test login the cook book
 		 */
-		cb.login("353283080", "a1234");
+		cb.login("703", "a12344");
 		
-		cb.deleteTheRecipe(cb.getRecipe("Gong Bao Jiding"));
+		
 		/**
 		 * 3. Test add method 
 		 */
-//		cb.add(createGongBaoJiding());
-//		cb.add(createHongShaoRou());
-//		cb.add(createSuanLaFen());
+		cb.addRecipe(createGongBaoJiding());
+//		cb.addRecipe(createHongShaoRou());
+//		cb.addRecipe(createSuanLaFen());
+		
+//		cb.deleteTheRecipe(cb.getRecipe("Gong Bao Jiding"));
+		
+//		Recipe recipe = cb.getRecipe("Gong Bao Jiding");
+		
+		
+//		cb.getCurrentUser().rate(4.5, recipe);
 
 		/**
 		 * Test toString();
