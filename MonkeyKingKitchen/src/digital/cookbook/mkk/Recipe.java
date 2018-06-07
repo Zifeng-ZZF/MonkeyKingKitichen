@@ -40,6 +40,7 @@ public class Recipe implements Serializable {
 		this.servings = servings;
 		ingredients = new ArrayList<>();
 		preparationSetps = new ArrayList<>();
+		this.recipeId = dbProcessor.getTheMaxID()+1;
 	}
 	
 	/**
@@ -48,9 +49,8 @@ public class Recipe implements Serializable {
 	 * @param ingredient
 	 */
 	public void addIngredient(Ingredient ingredient) {
-		this.ingredients.add(ingredient);
 		ingredient.setRecipeId(recipeId);
-		dbProcessor.addIngredient(ingredient);
+		this.ingredients.add(ingredient);
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public class Recipe implements Serializable {
 	}
 	
 	/**
-	 * Overide toString()
+	 * Override toString()
 	 */
 	public String toString() {
 		String recipeInfo = "";
