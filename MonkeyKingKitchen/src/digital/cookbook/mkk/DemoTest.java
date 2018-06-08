@@ -149,12 +149,13 @@ public class DemoTest {
 		 * 2.Test login the cook book
 		 */
 		cb.login("703", "a12344");
+		User currentUser = cb.getCurrentUser();
 		
 		
 		/**
 		 * 3. Test add method 
 		 */
-		cb.addRecipe(createGongBaoJiding());
+//		cb.addRecipe(createGongBaoJiding());
 //		cb.addRecipe(createHongShaoRou());
 //		cb.addRecipe(createSuanLaFen());
 		
@@ -165,6 +166,20 @@ public class DemoTest {
 		
 //		cb.getCurrentUser().rate(4.5, recipe);
 
+		/**
+		 * 4. Search a recipe and open it 
+		 */
+//		Recipe recipe1 = cb.getRecipe("Gong Bao Jiding");
+//		Recipe recipe2 = cb.getRecipe("Hong Shao Rou");
+//		cb.openRecipe(recipe1);
+		
+		/**
+		 * 5. User add recipe to favorite  
+		 */
+//		currentUser.addToFavorite(recipe1);
+//		currentUser.addToFavorite(recipe2);
+		
+		
 		/**
 		 * Test toString();
 		 */
