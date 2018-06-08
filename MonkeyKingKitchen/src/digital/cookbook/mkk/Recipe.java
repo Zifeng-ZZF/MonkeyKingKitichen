@@ -66,11 +66,19 @@ public class Recipe implements Serializable {
 	 */
 	public String toString() {
 		String recipeInfo = "";
-		System.out.println(name);
+		recipeInfo = name + "\r\n";
 		for(Ingredient ingredient : ingredients) {
 			recipeInfo += (ingredient.getName() + "  " + ingredient.getAmount() + "  " + ingredient.getUnit()+"\n");
 		}
+		recipeInfo += ("Cooking time: " + this.cookingTime + "minutes\r\n");
+		recipeInfo += ("Preparation time: " + this.preparationTime + "minutes\r\n");
+		recipeInfo += ("Servings: " + this.servings + "\r\n");
+		recipeInfo += ("Average rate: " + this.rate + "\r\n");
+		recipeInfo += "Steps: \r\n";
 		
+		for (String step : preparationSetps) {
+			recipeInfo += (step + "\r\n");
+		}
 		return recipeInfo;
 	}
 
