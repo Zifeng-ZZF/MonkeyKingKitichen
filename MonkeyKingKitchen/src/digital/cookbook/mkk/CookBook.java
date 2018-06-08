@@ -22,6 +22,7 @@ public class CookBook {
 	private ArrayList<User> users;
 	private DBProcessor dbProcessor = new DBProcessor();
 	private User currentUser;
+	private Recipe currentRecipe;
 
 	public User getCurrentUser() {
 		return currentUser;
@@ -95,7 +96,7 @@ public class CookBook {
 	 * 
 	 * @return the recipes list
 	 */
-	public Map<Integer, Recipe> recipesList() {
+	public Map<Integer, Recipe> getRecipesList() {
 		return this.recipes;
 	}
 
@@ -150,18 +151,36 @@ public class CookBook {
 					if(recipe.getUid() == user.getUid())
 						myRecipes.add(recipe);
 				}
-				user.setMyFavoriteList(myRecipes);
+				user.setMyRecipeList(myRecipes);
 			}
 		}
 	}
 
 	
 	/**
-	 * 
+	 * Delete the recipe of the current user in myRecipeList
 	 * @param recipe
 	 */
-	public void deleteTheRecipe(Recipe recipe) {
-		if(currentUser.getUid() == recipe.getUid())
-			dbProcessor.deleteRecipe(recipe.getRecipeId());
+	public void deleteTheRecipe(Recipe myRecipe) {
+		if(currentUser.getUid() == myRecipe.getUid())
+			dbProcessor.deleteRecipe(myRecipe.getRecipeId());
+	}
+	
+	/**
+	 * Over write deleteMethod
+	 * Delete the currentRecipe if it belongs to the currentUser
+	 */
+	public void deleteTheRecipe() {
+		if(currentUser.getUid() == this.currentRecipe.getUid())
+			dbProcessor.deleteRecipe(currentRecipe.getRecipeId());
+	}
+	
+	/**
+	 * Open one single recipe
+	 * @param recipe
+	 */
+	public void openRecipe(Recipe recipe) {
+		this.currentRecipe = recipe;
+		System.out.println(currentRecipe);
 	}
 }
