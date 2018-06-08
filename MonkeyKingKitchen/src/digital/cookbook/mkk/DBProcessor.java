@@ -68,7 +68,7 @@ public class DBProcessor {
 				recipe.setRate(rSet.getDouble(5));
 				recipe.setUid(rSet.getInt(7));
 
-				String[] steps = rSet.getString(9).split("|");
+				String[] steps = rSet.getString(9).split("\\|");
 				for (String step : steps) {
 					recipe.addPreparationStep(step);
 				}
@@ -119,9 +119,10 @@ public class DBProcessor {
 				recipe.setPreparationTime(recipeRS.getInt(3));
 				recipe.setCookingTime(recipeRS.getInt(4));
 				recipe.setRate(recipeRS.getDouble(5));
+				recipe.setUid(recipeRS.getInt(7));
 
 				// Get the preparation steps
-				String[] steps = recipeRS.getString(9).split("|");
+				String[] steps = recipeRS.getString(9).split("\\|");
 				for (String step : steps) {
 					recipe.addPreparationStep(step);
 				}
@@ -315,28 +316,20 @@ public class DBProcessor {
 	 * 
 	 * @param recipe,currentUserID
 	 */
-	public void insertIntoFavorite(Recipe recipe, int currentUserID) {
+	public void insertIntoFavorite(Recipe currentRecipe, int currentUserID) {
 		Connection conn = DBUtil.open();
-		String qeurySql = "select recipe_id from myfavoritetb where user_id=?;";
 		String sql = "insert into myfavoritetb(user_id,recipe_id)values(?,?);";
 
 		try {
-			PreparedStatement querystmt = conn.prepareStatement(qeurySql);
-			querystmt.setInt(1, currentUserID);
-			ResultSet rs = querystmt.executeQuery();
 
-			while (rs.next()) {
-				// check if recipe has been added
-				if (recipe.getRecipeId() == rs.getInt(2)) {
-					System.out.println("Recipe has been added to your favorite list");
-				} else {
-					PreparedStatement pstmt = conn.prepareStatement(sql);
-					pstmt.setInt(1, currentUserID);
-					pstmt.setInt(2, recipe.getRecipeId());
-					pstmt.executeUpdate();
-				}
-			}
-		} catch (SQLException e) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, currentUserID);
+			pstmt.setInt(2, currentRecipe.getRecipeId());
+			pstmt.executeUpdate();
+
+		} catch (
+
+		SQLException e) {
 			e.printStackTrace();
 		} finally {
 			DBUtil.close(conn);
@@ -399,9 +392,9 @@ public class DBProcessor {
 		try {
 			Statement statement = conn.createStatement();
 			ResultSet resultSet = statement.executeQuery(idSql);
-			if(resultSet.next()) {
+			if (resultSet.next()) {
 				maxID = resultSet.getInt(1);
-				System.out.println("Current Max id is: "+maxID);
+				System.out.println("Current Max id is: " + maxID);
 				if (maxID == 0) {
 					Statement statementClean = conn.createStatement();
 					statementClean.executeUpdate(cleanAutoIncreaseSql);
@@ -414,7 +407,7 @@ public class DBProcessor {
 		} finally {
 			DBUtil.close(conn);
 		}
-//		System.out.println(maxID);
+		// System.out.println(maxID);
 		return maxID;
 	}
 }
