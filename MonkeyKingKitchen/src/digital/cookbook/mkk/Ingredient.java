@@ -30,6 +30,7 @@ public class Ingredient implements Serializable {
 		this.name = name;
 		this.amount = amount;
 		this.unit = unit;
+		this.processMethod = "";
 	}
 
 	/**

@@ -149,8 +149,8 @@ public class DemoTest {
 		 * 2.Test login the cook book
 		 */
 		cb.login("703", "a12344");
-		User currentUser = cb.getCurrentUser();
-		
+//		User currentUser = cb.getCurrentUser();
+//		
 		
 		/**
 		 * 3. Test add method 
@@ -170,8 +170,8 @@ public class DemoTest {
 		 * 4. Search a recipe and open it 
 		 */
 //		Recipe recipe1 = cb.getRecipe("Gong Bao Jiding");
-//		Recipe recipe2 = cb.getRecipe("Hong Shao Rou");
-//		cb.openRecipe(recipe1);
+		Recipe recipe2 = cb.getRecipe("Hong Shao Rou");
+//		cb.openRecipe(recipe2);
 		
 		/**
 		 * 5. User add recipe to favorite  
@@ -179,6 +179,11 @@ public class DemoTest {
 //		currentUser.addToFavorite(recipe1);
 //		currentUser.addToFavorite(recipe2);
 		
+		/**
+		 * 6. Test PDf export
+		 */
+		PdfProcess pdfProcess = new PdfProcess();
+		pdfProcess.exportPDF(recipe2, "C:/Users/User/Desktop/221.pdf");
 		
 		/**
 		 * Test toString();
