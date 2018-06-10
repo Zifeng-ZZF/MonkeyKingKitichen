@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<VBox id="side-bar" prefHeight="600.0" prefWidth="207.0" style="-fx-background-color: #404040;" stylesheets="@sideBar.css">
+			<children>
+				<Label id="info-label" prefHeight="78.0" prefWidth="222.0" text="User1">
+					<font>
+						<Font name="Arial Bold" size="17.0" />
+					</font>
+					<padding>
+						<Insets top="10.0" />
+					</padding>
+				</Label>
+				<Label prefHeight="40.0" prefWidth="194.0" text="My Recipe">
+					<font>
+						<Font name="Arial Bold" size="13.0" />
+					</font>
+					<VBox.margin>
+						<Insets left="15.0" right="15.0" top="30.0" />
+					</VBox.margin>
+				</Label>
+				<Label layoutX="10.0" layoutY="73.0" prefHeight="40.0" prefWidth="227.0" text="My Favorite">
+					<font>
+						<Font name="Arial Bold" size="13.0" />
+					</font>
+					<VBox.margin>
+						<Insets left="15.0" right="15.0" />
+					</VBox.margin>
+				</Label>
+				<Label layoutX="20.0" layoutY="154.0" prefHeight="40.0" prefWidth="203.0" text="Log out">
+					<font>
+						<Font name="Arial Bold" size="13.0" />
+					</font>
+					<VBox.margin>
+						<Insets left="15.0" right="15.0" top="250.0" />
+					</VBox.margin>
+				</Label>
+				<Label layoutX="20.0" layoutY="516.0" prefHeight="40.0" prefWidth="206.0" text="Exit">
+					<font>
+						<Font name="Arial Bold" size="13.0" />
+					</font>
+					<VBox.margin>
+						<Insets left="15.0" right="15.0" />
+					</VBox.margin>
+				</Label>
+			</children>
+		</VBox>
+		<GridPane layoutX="248.0" layoutY="62.0" prefHeight="50.0" prefWidth="487.0" stylesheets="@searchBar.css">
+			<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="273.0" minWidth="10.0" prefWidth="124.0" />
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="296.0" />
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="112.0" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+			</rowConstraints>
+			<children>
+				<TextField prefHeight="31.0" prefWidth="203.0" GridPane.columnIndex="1">
+					<GridPane.margin>
+						<Insets left="15.0" right="15.0" />
+					</GridPane.margin>
+				</TextField>
+				<MenuButton mnemonicParsing="false" prefHeight="30.0" text="--select--" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="RIGHT">
+					<items>
+						<MenuItem mnemonicParsing="false" text="recipe name" />
+						<MenuItem mnemonicParsing="false" text="ingredient name" />
+					</items>
+					<font>
+						<Font name="Arial" size="14.0" />
+					</font>
+				</MenuButton>
+				<Button mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" text="search" GridPane.columnIndex="2">
+					<HBox.margin>
+						<Insets top="10.0" />
+					</HBox.margin>
+					<font>
+						<Font name="Arial Bold" size="15.0" />
+					</font>
+				</Button>
+			</children>
+		</GridPane>
+		<VBox layoutX="268.0" layoutY="134.0" prefHeight="316.0" prefWidth="437.0" stylesheets="@recommandation.css">
+			<children>
+				<Pane prefHeight="221.0" prefWidth="500.0">
+					<children>
+						<ImageView fitHeight="302.0" fitWidth="437.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@img_0177.jpg" />
+							</image>
+						</ImageView>
+						<Label id="title-label" layoutY="59.0" prefHeight="161.0" prefWidth="487.0" style="-fx-text-alignment: center;" text="                Gong Bao Jiding " textAlignment="RIGHT" textFill="WHITE">
+							<font>
+								<Font name="Arial Black" size="33.0" />
+							</font>
+						</Label>
+						<Label id="title-label" layoutX="-29.0" layoutY="30.0" prefHeight="23.0" prefWidth="495.0" style="-fx-text-alignment: left;" text="Recommandation" textFill="WHITE">
+							<font>
+								<Font name="Arial Black" size="39.0" />
+							</font>
+						</Label>
+					</children>
+				</Pane>
+				<Label id="desc-label" prefHeight="106.0" prefWidth="467.0" text="1. Cut potatoes into pieces.  2. Wash ...">
+					<padding>
+						<Insets left="20.0" />
+					</padding>
+					<font>
+						<Font name="Arial" size="14.0" />
+					</font>
+				</Label>
+			</children>
+			<effect>
+				<DropShadow color="#000000a6" />
+			</effect>
+		</VBox>
+		<Label layoutX="268.0" layoutY="501.0" prefHeight="58.0" prefWidth="466.0" text="———————————— copyright . mkk————————————" textFill="#b2afaf">
+			<font>
+				<Font name="Bell MT Bold" size="11.0" />
+			</font>
+			<padding>
+				<Insets left="50.0" right="30.0" />
+			</padding>
+		</Label>
+		<ImageView fitHeight="66.0" fitWidth="233.0" layoutX="430.0" layoutY="530.0" pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="@MMK%20logo2.png" />
+			</image>
+		</ImageView>
+	</children>
+</Pane>

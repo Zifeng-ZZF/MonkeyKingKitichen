@@ -1,0 +1,45 @@
+#ingredient-text-area{
+	-fx-background-color: #ffffff;
+	-fx-border-width: 1 0 0 0;
+	-fx-border-color: #61a0a4;
+}
+
+#recipe-name-label{
+	-fx-background-color: #16858d;
+	-fx-text-fill: #ffffff;
+}
+
+#info-pane{
+	-fx-background-color: #16858d;
+	-fx-text-fill: #ffffff;
+}
+
+#info-pane .label{
+	-fx-text-fill: #ffffff;
+}
+
+#steps-text-area{
+	-fx-background-color: #ffffff;
+}
+
+#steps-text-area .scroll-bar{
+	-fx-background-color: transparent;
+}
+
+#steps-text-area .increment-button, .decrement-button{
+	-fx-background-color: #ffffff;
+}
+
+#steps-text-area .thumb {
+	-fx-background-insets: 0, 0, 0;
+	-fx-background-radius: 120;
+	-fx-background-color: derive(gray,70%);
+}
+
+#btn-grid-pane .button{
+	-fx-pref-width: 170;
+	-fx-pref-height: 30;
+	-fx-text-fill: #ffffff;
+	-fx-background-color: #404040;
+	-fx-border-width: 0 0 0 0;
+}
