@@ -1,10 +1,15 @@
 package digital.cookbook.mkk;
 
 import java.sql.*;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 /**
  * @author Zifeng Zhang The class for testing search method
  */
-public class DemoTest {
+public class DemoTest extends Application{
 
 	/**
 	 * Creates a Gong Bao Jiding recipe.
@@ -136,72 +141,19 @@ public class DemoTest {
 	public static void main(String[] args) {
 		
 		CookBook cb = new CookBook("Chinese Cuisine");
-		
-		/**
-		 * 1.Test adding a new user to the db
-		 */
-//		for(int i = 0; i < 20; i++) {
-//			Integer j = (int)(Math.random()*1000);
-//			cb.register(new User(j.toString(), "a1234"+i));
-//		}
 
-		/**
-		 * 2.Test login the cook book
-		 */
-		cb.login("703", "a12344");
-//		User currentUser = cb.getCurrentUser();
-//		
-		
-		/**
-		 * 3. Test add method 
-		 */
-//		cb.addRecipe(createGongBaoJiding());
-//		cb.addRecipe(createHongShaoRou());
-//		cb.addRecipe(createSuanLaFen());
-		
-//		cb.deleteTheRecipe(cb.getRecipe("Gong Bao Jiding"));
-		
-//		Recipe recipe = cb.getRecipe("Gong Bao Jiding");
-		
-		
-//		cb.getCurrentUser().rate(4.5, recipe);
+		launch(args);
+	}
 
-		/**
-		 * 4. Search a recipe and open it 
-		 */
-//		Recipe recipe1 = cb.getRecipe("Gong Bao Jiding");
-		Recipe recipe2 = cb.getRecipe("Hong Shao Rou");
-//		cb.openRecipe(recipe2);
-		
-		/**
-		 * 5. User add recipe to favorite  
-		 */
-//		currentUser.addToFavorite(recipe1);
-//		currentUser.addToFavorite(recipe2);
-		
-		/**
-		 * 6. Test PDf export
-		 */
-		PdfProcess pdfProcess = new PdfProcess();
-		pdfProcess.exportPDF(recipe2, "C:/Users/User/Desktop/221.pdf");
-		
-		/**
-		 * Test toString();
-		 */
-//		for (Object obj : cb.recipesList().keySet()) {
-//			Recipe recipe = cb.recipesList().get(obj);
-//			if (recipe != null) {
-//				System.out.println(recipe);
-//			}
-//		}
-
-		/**
-		 * Test changing servings
-		 * 
-		 */
-//		System.out.println(cb.getRecipe("Gong Bao Jiding"));
-//
-//		System.out.println(cb.changeServings(cb.getRecipe("Gong Bao Jiding").getRecipeId(), 6));
-
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		String url = "LoginView/LoginView.fxml";
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		fxmlLoader.setLocation(getClass().getResource(url));
+		Scene scene = new Scene(fxmlLoader.load());
+		primaryStage.sizeToScene();
+		primaryStage.resizableProperty().set(false);
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 }

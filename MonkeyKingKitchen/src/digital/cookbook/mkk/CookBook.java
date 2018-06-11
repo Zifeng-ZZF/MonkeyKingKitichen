@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 
+
 /**
  * The cookbook
  * 
@@ -14,19 +15,29 @@ import java.util.Set;
  */
 public class CookBook {
 
-	
-	
 	private String cookBookTitle;
 	private Map<Integer, Recipe> recipes;
 	private ArrayList<User> users;
 	private DBProcessor dbProcessor = new DBProcessor();
-	private User currentUser;
-	private Recipe currentRecipe;
+	private static User currentUser;
+	private static Recipe currentRecipe;
 
-	public User getCurrentUser() {
+	public static User getCurrentUser() {
 		return currentUser;
 	}
+	
+	public static void setCurrentUser(User user) {
+		currentUser = user;
+	}
 
+	public static Recipe getCurrentRecipe() {
+		return currentRecipe;
+	}
+	
+	public static void setCurrentRecipe(Recipe recipe) {
+		currentRecipe = recipe;
+	}
+	
 	/**
 	 * Constructor
 	 * 
@@ -35,7 +46,6 @@ public class CookBook {
 	public CookBook(String title) {
 		this.cookBookTitle = title;
 		recipes = dbProcessor.fetchRecipe();
-		users = dbProcessor.fetchUserInfo();
 	}
 
 	/**
@@ -136,23 +146,7 @@ public class CookBook {
 	 * @param passwd
 	 */
 	public void login(String username, String passwd) {
-		ArrayList<Recipe> myRecipes = new ArrayList<>();
 		
-		for (User user : users) {
-			//Initialize current user
-			if (user.getName().equals(username) && user.getPasswd().equals(passwd)) {
-				this.currentUser = user;
-				//Initialize myFavoriteList
-				user.setMyFavoriteList(dbProcessor.fetchFavorite(user.getUid()));
-				//Initialize myRecipeList
-				for (int recipeId : recipes.keySet()) {
-					Recipe recipe = recipes.get(recipeId);
-					if(recipe.getUid() == user.getUid())
-						myRecipes.add(recipe);
-				}
-				user.setMyRecipeList(myRecipes);
-			}
-		}
 	}
 
 	
