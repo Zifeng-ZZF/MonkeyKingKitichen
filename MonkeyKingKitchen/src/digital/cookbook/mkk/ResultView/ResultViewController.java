@@ -61,7 +61,7 @@ public class ResultViewController implements Initializable{
     @FXML
     private Label exitLabel;
     
-    @FXML
+    
     public void intializeResult(ArrayList<Recipe> results) {
     	this.results = results;
     	for (Recipe recipe : results) {

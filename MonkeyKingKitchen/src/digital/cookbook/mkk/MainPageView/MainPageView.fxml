@@ -79,7 +79,7 @@
 						<Font name="Arial" size="14.0" />
 					</font>
 				</MenuButton>
-				<Button fx:id="searchBtn" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" text="search" GridPane.columnIndex="2">
+				<Button fx:id="searchBtn" mnemonicParsing="false" onAction="#sendSearchResult" prefHeight="35.0" prefWidth="90.0" text="search" GridPane.columnIndex="2">
 					<HBox.margin>
 						<Insets top="10.0" />
 					</HBox.margin>

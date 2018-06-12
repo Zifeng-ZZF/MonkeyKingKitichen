@@ -1,6 +1,3 @@
-/**
- * 
- */
 package digital.cookbook.mkk.LoginView;
 
 import java.io.IOException;
