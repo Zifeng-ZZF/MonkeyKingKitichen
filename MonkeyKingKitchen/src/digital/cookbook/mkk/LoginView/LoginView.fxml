@@ -9,7 +9,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digital.cookbook.mkk.Views.LoginView.LoginViewController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digital.cookbook.mkk.LoginView.LoginViewController">
 	<children>
 		<TabPane layoutY="-1.0" opacity="0.89" prefHeight="600.0" prefWidth="800.0" style="-fx-tab-min-width: 350;" stylesheets="@TabPane.css" tabClosingPolicy="UNAVAILABLE">
 			<tabs>
@@ -61,7 +61,7 @@
 												<Insets left="10.0" right="30.0" />
 											</GridPane.margin>
 										</PasswordField>
-										<Button fx:id="loginBtn" mnemonicParsing="false" prefHeight="42.0" prefWidth="277.0" style="-fx-background-color: #4F94CD;" text="Log In" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+										<Button id="login-button" fx:id="loginBtn" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="42.0" prefWidth="277.0" text="Log In" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
 											<font>
 												<Font name="Arial Black" size="14.0" />
 											</font>
@@ -127,7 +127,7 @@
 												<Insets left="10.0" right="30.0" />
 											</GridPane.margin>
 										</PasswordField>
-										<Button fx:id="registerBtn" mnemonicParsing="false" prefHeight="42.0" prefWidth="277.0" style="-fx-background-color: #6C7B8B;" text="Register" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+										<Button id="register-button" fx:id="registerBtn" mnemonicParsing="false" onAction="#handleRegisterButtonAction" prefHeight="42.0" prefWidth="277.0" text="Register" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
 											<font>
 												<Font name="Arial Black" size="14.0" />
 											</font>

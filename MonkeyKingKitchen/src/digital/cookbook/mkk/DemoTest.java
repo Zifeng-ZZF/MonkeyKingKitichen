@@ -151,7 +151,6 @@ public class DemoTest extends Application{
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		fxmlLoader.setLocation(getClass().getResource(url));
 		Scene scene = new Scene(fxmlLoader.load());
-		primaryStage.sizeToScene();
 		primaryStage.resizableProperty().set(false);
 		primaryStage.setScene(scene);
 		primaryStage.show();

@@ -139,16 +139,6 @@ public class CookBook {
 		this.users.add(user);
 		dbProcessor.insertUser(user);
 	}
-
-	/**
-	 * Via login, initialize the favoriteList and myRecipeList
-	 * @param username
-	 * @param passwd
-	 */
-	public void login(String username, String passwd) {
-		
-	}
-
 	
 	/**
 	 * Delete the recipe of the current user in myRecipeList

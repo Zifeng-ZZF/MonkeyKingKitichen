@@ -9,11 +9,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digital.cookbook.mkk.MainPageView.MainPageController">
 	<children>
 		<VBox id="side-bar" prefHeight="600.0" prefWidth="207.0" style="-fx-background-color: #404040;" stylesheets="@sideBar.css">
 			<children>
-				<Label id="info-label" prefHeight="78.0" prefWidth="222.0" text="User1">
+				<Label id="info-label" fx:id="userLabel" prefHeight="78.0" prefWidth="222.0" text="User1">
 					<font>
 						<Font name="Arial Bold" size="17.0" />
 					</font>
@@ -21,7 +21,7 @@
 						<Insets top="10.0" />
 					</padding>
 				</Label>
-				<Label prefHeight="40.0" prefWidth="194.0" text="My Recipe">
+				<Label fx:id="myRecipeLabel" prefHeight="40.0" prefWidth="194.0" text="My Recipe">
 					<font>
 						<Font name="Arial Bold" size="13.0" />
 					</font>
@@ -29,7 +29,7 @@
 						<Insets left="15.0" right="15.0" top="30.0" />
 					</VBox.margin>
 				</Label>
-				<Label layoutX="10.0" layoutY="73.0" prefHeight="40.0" prefWidth="227.0" text="My Favorite">
+				<Label fx:id="myFavoriteLabel" layoutX="10.0" layoutY="73.0" prefHeight="40.0" prefWidth="227.0" text="My Favorite">
 					<font>
 						<Font name="Arial Bold" size="13.0" />
 					</font>
@@ -37,7 +37,7 @@
 						<Insets left="15.0" right="15.0" />
 					</VBox.margin>
 				</Label>
-				<Label layoutX="20.0" layoutY="154.0" prefHeight="40.0" prefWidth="203.0" text="Log out">
+				<Label fx:id="logoutLabel" layoutX="20.0" layoutY="154.0" prefHeight="40.0" prefWidth="203.0" text="Log out">
 					<font>
 						<Font name="Arial Bold" size="13.0" />
 					</font>
@@ -45,7 +45,7 @@
 						<Insets left="15.0" right="15.0" top="250.0" />
 					</VBox.margin>
 				</Label>
-				<Label layoutX="20.0" layoutY="516.0" prefHeight="40.0" prefWidth="206.0" text="Exit">
+				<Label fx:id="exitLabel" layoutX="20.0" layoutY="516.0" prefHeight="40.0" prefWidth="206.0" text="Exit">
 					<font>
 						<Font name="Arial Bold" size="13.0" />
 					</font>
@@ -65,12 +65,12 @@
 				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<TextField prefHeight="31.0" prefWidth="203.0" GridPane.columnIndex="1">
+				<TextField fx:id="searchTxtField" prefHeight="31.0" prefWidth="203.0" GridPane.columnIndex="1">
 					<GridPane.margin>
 						<Insets left="15.0" right="15.0" />
 					</GridPane.margin>
 				</TextField>
-				<MenuButton mnemonicParsing="false" prefHeight="30.0" text="--select--" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="RIGHT">
+				<MenuButton fx:id="typeBtn" mnemonicParsing="false" prefHeight="30.0" text="--select--" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="RIGHT">
 					<items>
 						<MenuItem mnemonicParsing="false" text="recipe name" />
 						<MenuItem mnemonicParsing="false" text="ingredient name" />
@@ -79,7 +79,7 @@
 						<Font name="Arial" size="14.0" />
 					</font>
 				</MenuButton>
-				<Button mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" text="search" GridPane.columnIndex="2">
+				<Button fx:id="searchBtn" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" text="search" GridPane.columnIndex="2">
 					<HBox.margin>
 						<Insets top="10.0" />
 					</HBox.margin>
@@ -93,12 +93,12 @@
 			<children>
 				<Pane prefHeight="221.0" prefWidth="500.0">
 					<children>
-						<ImageView fitHeight="302.0" fitWidth="437.0" pickOnBounds="true" preserveRatio="true">
+						<ImageView fx:id="recommendImg" fitHeight="302.0" fitWidth="437.0" pickOnBounds="true" preserveRatio="true">
 							<image>
 								<Image url="@img_0177.jpg" />
 							</image>
 						</ImageView>
-						<Label id="title-label" layoutY="59.0" prefHeight="161.0" prefWidth="487.0" style="-fx-text-alignment: center;" text="                Gong Bao Jiding " textAlignment="RIGHT" textFill="WHITE">
+						<Label id="title-label" fx:id="recommendNameLabel" layoutY="59.0" prefHeight="161.0" prefWidth="487.0" style="-fx-text-alignment: center;" text="                Gong Bao Jiding " textAlignment="RIGHT" textFill="WHITE">
 							<font>
 								<Font name="Arial Black" size="33.0" />
 							</font>
@@ -110,7 +110,7 @@
 						</Label>
 					</children>
 				</Pane>
-				<Label id="desc-label" prefHeight="106.0" prefWidth="467.0" text="1. Cut potatoes into pieces.  2. Wash ...">
+				<Label id="desc-label" fx:id="briefStepLabel" prefHeight="106.0" prefWidth="467.0" text="1. Cut potatoes into pieces.  2. Wash ...">
 					<padding>
 						<Insets left="20.0" />
 					</padding>

@@ -41,3 +41,19 @@
 .tab-header-area {
 	-fx-background-color: #ffffff;
 }
+
+#login-button{
+	-fx-background-color: #4F94CD;
+}
+
+#login-button:hover{
+	-fx-background-color:#ADD8E6;
+}
+
+#register-button{
+	-fx-background-color: #696969;
+}
+
+#register-button:hover{
+	-fx-background-color:#708090;
+}

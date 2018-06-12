@@ -3,7 +3,6 @@
  */
 package digital.cookbook.mkk.LoginView;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -14,35 +13,31 @@ import digital.cookbook.mkk.CookBook;
 import digital.cookbook.mkk.DBProcessor;
 import digital.cookbook.mkk.Recipe;
 import digital.cookbook.mkk.User;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import javafx.fxml.Initializable;
 
 /**
  * Controller class for the login and register view
+ * 
  * @author Zifeng Zhang
  *
  */
 public class LoginViewController implements Initializable {
-	
+
 	private DBProcessor dbProcessor = new DBProcessor();
 	private ArrayList<User> users;
 	private Map<Integer, Recipe> recipes;
-	
-	/**
-	 * Private constructor to fetch data from DB
-	 */
-	private LoginViewController() {
-		users = dbProcessor.fetchUserInfo();
-		recipes = dbProcessor.fetchRecipe();
-	}
 
 	@FXML
 	private Button registerBtn;
@@ -67,41 +62,48 @@ public class LoginViewController implements Initializable {
 
 	@FXML
 	private PasswordField loginPasswdTxtField;
-	
+
 	/**
-	 * To realize the login function
-	 * Compare info from the view's textfields with the info retrieved from DB
-	 * If matched, then open the main page and set up the user and recipe data
+	 * To realize the login function Compare info from the view's textfields with
+	 * the info retrieved from DB If matched, then open the main page and set up the
+	 * user and recipe data
+	 * 
 	 * @param e
 	 */
 	@FXML
-	private void handleButtonAction(ActionEvent e) {
+	private void handleLoginButtonAction(ActionEvent e) {
 		String username = loginUsernameTxtField.getText();
 		String passwd = loginPasswdTxtField.getText();
 		ArrayList<Recipe> myRecipes = new ArrayList<>();
-		
+
+		System.out.println(username + passwd);
+
 		for (User user : users) {
-			//Initialize current user
+			// Initialize current user
 			if (user.getName().equals(username) && user.getPasswd().equals(passwd)) {
 				CookBook.setCurrentUser(user);
-				//Initialize myFavoriteList
+				// Initialize myFavoriteList
 				user.setMyFavoriteList(dbProcessor.fetchFavorite(user.getUid()));
-				//Initialize myRecipeList
+				// Initialize myRecipeList
 				for (int recipeId : recipes.keySet()) {
 					Recipe recipe = recipes.get(recipeId);
-					if(recipe.getUid() == user.getUid())
+					if (recipe.getUid() == user.getUid())
 						myRecipes.add(recipe);
 				}
 				user.setMyRecipeList(myRecipes);
-				
-				//At the meantime, jump to another 
+
+				// At the meantime, jump to another
 				FXMLLoader fxmlLoader = new FXMLLoader();
-				fxmlLoader.setLocation(getClass().getResource("../MainPageView/MainPageView/fxml"));
+				fxmlLoader.setLocation(getClass().getResource("../MainPageView/MainPageView.fxml"));
 				try {
 					Scene scene = new Scene(fxmlLoader.load());
-					//get the event button (Login button)'s window, which is also a stage 
-					Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-					stage.setScene(scene);
+					// get the event button (Login button)'s window, which is also a stage
+					Stage oldStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+					oldStage.close();
+					Stage newStage = new Stage();
+					newStage.setScene(scene);
+					newStage.setTitle("MMK Digital Cookbook");
+					newStage.show();
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
@@ -109,9 +111,40 @@ public class LoginViewController implements Initializable {
 		}
 	}
 
+	/**
+	 * 
+	 * @param e
+	 */
+	@FXML
+	private void handleRegisterButtonAction(ActionEvent e) {
+		String username = registerUsernameTxtField.getText();
+		String passwd = registerPasswdTxtField.getText();
+		boolean isExist = false;
+
+		for (User user : users) {
+			if (user.getName().equals(username)) {
+				isExist = true;
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setContentText("User name exists!");
+				alert.show();
+			}
+		}
+		
+		if(!isExist) {
+			User newUser = new User(username, passwd);
+			dbProcessor.insertUser(newUser);
+			users.add(newUser);
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setContentText("Register successfully!/r/n Log in right now!");
+			loginTab.getTabPane().getSelectionModel().select(loginTab);
+			alert.show();
+		}
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		users = dbProcessor.fetchUserInfo();
+		recipes = dbProcessor.fetchRecipe();
 	}
 
 }
