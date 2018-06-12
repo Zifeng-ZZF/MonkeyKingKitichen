@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
@@ -92,10 +94,22 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <TitledPane layoutX="248.0" layoutY="85.0" prefHeight="482.0" prefWidth="487.0" text="fdgdfgdfg">
+      <TitledPane collapsible="false" layoutX="248.0" layoutY="85.0" minHeight="-Infinity" minWidth="-Infinity" opacity="0.84" prefHeight="483.0" prefWidth="487.0" text="Search Result" textFill="WHITE">
          <content>
-            <VBox fx:id="listVBox" prefHeight="437.0" prefWidth="429.0" />
+            <VBox id="list-vbox" fx:id="listVBox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="484.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding></VBox>
          </content>
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <effect>
+            <InnerShadow color="#000000ba" />
+         </effect>
       </TitledPane>
    </children>
 </Pane>
