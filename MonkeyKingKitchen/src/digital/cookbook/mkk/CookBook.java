@@ -130,15 +130,6 @@ public class CookBook {
 		}
 		return recipe;
 	}
-
-	/**
-	 * Register method
-	 * @param user
-	 */
-	public void register(User user) {
-		this.users.add(user);
-		dbProcessor.insertUser(user);
-	}
 	
 	/**
 	 * Delete the recipe of the current user in myRecipeList
