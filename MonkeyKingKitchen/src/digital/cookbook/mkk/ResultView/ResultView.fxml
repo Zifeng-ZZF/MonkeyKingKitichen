@@ -37,23 +37,15 @@
                   <Insets left="15.0" right="15.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="logoutLabel" layoutX="20.0" layoutY="154.0" prefHeight="40.0" prefWidth="203.0" text="Log out">
-               <font>
-                  <Font name="Arial Bold" size="13.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="15.0" right="15.0" top="250.0" />
-               </VBox.margin>
-            </Label>
             <Label fx:id="exitLabel" layoutX="20.0" layoutY="516.0" prefHeight="40.0" prefWidth="206.0" text="Exit">
                <font>
                   <Font name="Arial Bold" size="13.0" />
                </font>
                <VBox.margin>
-                  <Insets left="15.0" right="15.0" />
+                  <Insets left="15.0" right="15.0" top="300.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="exitLabel1" layoutX="25.0" layoutY="488.0" prefHeight="40.0" prefWidth="206.0" text="Main Page">
+            <Label fx:id="mainPageLabel" layoutX="25.0" layoutY="498.0" prefHeight="40.0" prefWidth="206.0" text="Main Page">
                <font>
                   <Font name="Arial Bold" size="13.0" />
                </font>

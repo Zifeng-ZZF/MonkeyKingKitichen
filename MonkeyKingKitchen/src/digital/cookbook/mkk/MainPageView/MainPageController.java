@@ -7,10 +7,12 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+import digital.cookbook.mkk.CookBook;
 import digital.cookbook.mkk.DBProcessor;
 import digital.cookbook.mkk.Recipe;
 import digital.cookbook.mkk.ResultView.ResultViewController;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -61,6 +63,14 @@ public class MainPageController implements Initializable {
 
 	@FXML
 	private Label exitLabel;
+	
+	/**
+	 * Invoked in LoginView to set the user name tag
+	 * @param username
+	 */
+	public void setUserTag(String username){
+		userLabel.setText(username);
+	}
 
 	/**
 	 * Search recipe by name Send the result to the recipe result view
@@ -98,9 +108,16 @@ public class MainPageController implements Initializable {
 		}
 	}
 
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		allRecipes = dbProcessor.fetchRecipe();
+		
+		//Set exit label
+		exitLabel.setOnMouseClicked(e -> {
+			Stage currentStage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+			currentStage.close();
+		});
 	}
 
 }

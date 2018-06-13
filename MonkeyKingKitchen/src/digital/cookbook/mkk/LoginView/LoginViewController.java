@@ -10,6 +10,7 @@ import digital.cookbook.mkk.CookBook;
 import digital.cookbook.mkk.DBProcessor;
 import digital.cookbook.mkk.Recipe;
 import digital.cookbook.mkk.User;
+import digital.cookbook.mkk.MainPageView.MainPageController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -94,6 +95,9 @@ public class LoginViewController implements Initializable {
 				fxmlLoader.setLocation(getClass().getResource("../MainPageView/MainPageView.fxml"));
 				try {
 					Scene scene = new Scene(fxmlLoader.load());
+					//set the name tag
+					MainPageController controller = fxmlLoader.getController();
+					controller.setUserTag(user.getName());
 					// get the event button (Login button)'s window, which is also a stage
 					Stage oldStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 					oldStage.close();
@@ -142,6 +146,8 @@ public class LoginViewController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		users = dbProcessor.fetchUserInfo();
 		recipes = dbProcessor.fetchRecipe();
+		
+		
 	}
 
 }
