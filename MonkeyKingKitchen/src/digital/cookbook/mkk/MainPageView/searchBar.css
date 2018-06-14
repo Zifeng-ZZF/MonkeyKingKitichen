@@ -22,3 +22,7 @@
 	-fx-background-radius : 0;
 	-fx-text-fill: #ffffff;
 }
+
+.button:hover{
+	-fx-backgournd-color: derive(#404040,0.8);
+}

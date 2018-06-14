@@ -18,7 +18,8 @@ public class DBUtil {
 	private static String password;
 	private static String driver;
 	private static String url;
-
+	private static Connection connection;
+	
 	/**
 	 * static statement for fetching the info needed to set up connection from
 	 * properties file
@@ -39,30 +40,26 @@ public class DBUtil {
         url = prop.getProperty("url");
         username = prop.getProperty("username");
         password = prop.getProperty("password");
-	}
-
-	/**
-	 * Method to connect to the database
-	 * @return the connection to the database
-	 */
-	public static Connection open() {
+        
 		try {
 			Class.forName(driver);
-			return DriverManager.getConnection(url, username, password);
+			connection = DriverManager.getConnection(url, username, password);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		return null;
+	}
+
+	public static Connection getConnection() {
+		return connection;
 	}
 	
 	/**
 	 * Close given connection to the database
 	 * @param connection
 	 */
-	public static void close(Connection connection) {
+	public static void close() {
 		try {
 			connection.close();
 		} catch (SQLException e) {

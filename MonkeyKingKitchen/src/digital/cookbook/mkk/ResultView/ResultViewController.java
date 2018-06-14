@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+import digital.cookbook.mkk.CookBook;
 import digital.cookbook.mkk.DBProcessor;
 import digital.cookbook.mkk.Recipe;
 import javafx.event.ActionEvent;
@@ -104,6 +105,7 @@ public class ResultViewController implements Initializable {
 			button.setOnAction(e -> {
 				FXMLLoader fxmlLoader = new FXMLLoader();
 				fxmlLoader.setLocation(getClass().getResource("../RecipeView/RecipeView.fxml"));
+				CookBook.setCurrentRecipe(itemAcesses.get(button));
 
 				try {
 					Scene scene = new Scene(fxmlLoader.load());

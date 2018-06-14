@@ -19,7 +19,7 @@ public class DBProcessor {
 	 */
 	public ArrayList<User> fetchUserInfo() {
 
-		Connection connection = DBUtil.open();
+		Connection connection = DBUtil.getConnection();
 		String sql = "select*from usertb;";
 		ArrayList<User> userlist = new ArrayList<>(); // To store all the users in the DB
 
@@ -34,8 +34,6 @@ public class DBProcessor {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			DBUtil.close(connection);
 		}
 
 		return userlist;
@@ -49,7 +47,7 @@ public class DBProcessor {
 	 */
 	public HashMap<Integer, Recipe> fetchRecipe() {
 
-		Connection connection = DBUtil.open();
+		Connection connection = DBUtil.getConnection();
 		String sql1 = "select*from recipetb;";
 		HashMap<Integer, Recipe> recipeList = new HashMap<>();
 
@@ -86,8 +84,6 @@ public class DBProcessor {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			DBUtil.close(connection);
 		}
 
 		return recipeList;
@@ -100,7 +96,7 @@ public class DBProcessor {
 	 * @return ArrayList contains all recipes from MyFavouriteList
 	 */
 	public ArrayList<Recipe> fetchFavorite(int uid) {
-		Connection connection = DBUtil.open();
+		Connection connection = DBUtil.getConnection();
 		String sql1 = "select*from recipetb where recipe_id in"
 				+ "(select recipe_id from myfavoritetb where user_id=?)";
 		String sql2 = "select*from recipeingredientdb where recipe_id=?";
@@ -140,8 +136,6 @@ public class DBProcessor {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			DBUtil.close(connection);
 		}
 
 		return favoriteList;
@@ -153,7 +147,7 @@ public class DBProcessor {
 	 * @param user
 	 */
 	public void insertUser(User user) {
-		Connection conn = DBUtil.open();
+		Connection conn = DBUtil.getConnection();
 
 		// At first, find the maximum id of current db
 		String idSql = "select max(user_id) from usertb;";
@@ -189,7 +183,7 @@ public class DBProcessor {
 	 * @param recipe
 	 */
 	public void insertRecipe(Recipe recipe, int currentUserID) {
-		Connection conn = DBUtil.open();
+		Connection conn = DBUtil.getConnection();
 		String sql = "insert into recipetb(recipe_name,recipe_preparation_time,"
 				+ "recipe_cooking_time,recipe_averate,recipe_servings,user_id,recipe_type,recipe_steps)"
 				+ " values(?,?,?,?,?,?,?,?);";
@@ -212,8 +206,6 @@ public class DBProcessor {
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			DBUtil.close(conn);
 		}
 	}
 
@@ -223,7 +215,7 @@ public class DBProcessor {
 	 * @param ingredient
 	 */
 	public void addIngredient(Ingredient ingredient) {
-		Connection connection = DBUtil.open();
+		Connection connection = DBUtil.getConnection();
 		String sql = "insert into recipeingredientdb(ingredient_name,recipe_id,unit,process_method,amount)"
 				+ " values(?,?,?,?,?)";
 		try {
@@ -245,7 +237,7 @@ public class DBProcessor {
 	 * @param recipe
 	 */
 	public void updateRecipe(Recipe recipe) {
-		Connection connection = DBUtil.open();
+		Connection connection = DBUtil.getConnection();
 		String sql = "update recipetb set recipe_name = ?, recipe_preparation_time = ?,"
 				+ "recipe_cooking_time = ?, recipe_averate = ?,"
 				+ "recipe_serving = ?, recipe_type = ?, recipe_steps = ? " + "where recipe_id = ?;";
@@ -278,7 +270,7 @@ public class DBProcessor {
 	 * @param recipeId
 	 */
 	public void deleteRecipe(int recipeId) {
-		Connection connection = DBUtil.open();
+		Connection connection = DBUtil.getConnection();
 		String sql = "delete from recipetb where recipe_id=?;";
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
@@ -286,8 +278,6 @@ public class DBProcessor {
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			DBUtil.close(connection);
 		}
 	}
 
@@ -297,7 +287,7 @@ public class DBProcessor {
 	 * @param recipeId
 	 */
 	public void deleteFavoriteRecipe(int recipeId, int userId) {
-		Connection connection = DBUtil.open();
+		Connection connection = DBUtil.getConnection();
 		String sql = "delete from myfavoritetb where recipe_id=? and user_id=?;";
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
@@ -306,8 +296,6 @@ public class DBProcessor {
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			DBUtil.close(connection);
 		}
 	}
 
@@ -317,7 +305,7 @@ public class DBProcessor {
 	 * @param recipe,currentUserID
 	 */
 	public void insertIntoFavorite(Recipe currentRecipe, int currentUserID) {
-		Connection conn = DBUtil.open();
+		Connection conn = DBUtil.getConnection();
 		String sql = "insert into myfavoritetb(user_id,recipe_id)values(?,?);";
 
 		try {
@@ -331,8 +319,6 @@ public class DBProcessor {
 
 		SQLException e) {
 			e.printStackTrace();
-		} finally {
-			DBUtil.close(conn);
 		}
 
 	}
@@ -345,7 +331,7 @@ public class DBProcessor {
 	 * @param rate
 	 */
 	public void insertRate(Recipe recipe, int userID, double rate) {
-		Connection conn = DBUtil.open();
+		Connection conn = DBUtil.getConnection();
 		String sql = "insert into ratetb(user_id,recipe_id,rate)values(?,?,?)";
 		String querysql = "select rate from ratetb where recipe_id=?";
 		String updatesql = "update recipetb set recipe_averate =? where recipe_id=?";
@@ -373,10 +359,7 @@ public class DBProcessor {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			DBUtil.close(conn);
 		}
-
 	}
 
 	/**
@@ -385,7 +368,7 @@ public class DBProcessor {
 	 * @return maxID
 	 */
 	public int getTheMaxID() {
-		Connection conn = DBUtil.open();
+		Connection conn = DBUtil.getConnection();
 		String idSql = "select max(recipe_id) from recipetb;";
 		String cleanAutoIncreaseSql = "alter table recipetb auto_increment=1;";
 		int maxID = 0;
@@ -404,8 +387,6 @@ public class DBProcessor {
 
 		SQLException e1) {
 			e1.printStackTrace();
-		} finally {
-			DBUtil.close(conn);
 		}
 		// System.out.println(maxID);
 		return maxID;
