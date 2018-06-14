@@ -4,6 +4,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 /**
  * Retrieve information from the DB
  * 
@@ -346,8 +349,9 @@ public class DBProcessor {
 	 */
 	public void insertRate(Recipe recipe, int userID, double rate) {
 		Connection conn = DBUtil.open();
+		double aveRate = 0;
 		String sql = "insert into ratetb(user_id,recipe_id,rate)values(?,?,?)";
-		String querysql = "select rate from ratetb where recipe_id=?";
+		String querysql = "select * from ratetb where recipe_id=?";
 		String updatesql = "update recipetb set recipe_averate =? where recipe_id=?";
 
 		try {
@@ -362,21 +366,27 @@ public class DBProcessor {
 			ResultSet rs = queryPStmt.executeQuery();
 			int Rate = 0;
 			int amount = 0;
+			
 			while (rs.next()) {
 				Rate = Rate + rs.getInt(3);
 				amount = amount + 1;
+				aveRate = Rate / amount;
 			}
-			double aveRate = Rate / amount;
+			
 			PreparedStatement updatePStmt = conn.prepareStatement(updatesql);
 			updatePStmt.setDouble(1, aveRate);
+			updatePStmt.setInt(2,recipe.getRecipeId());
 			updatePStmt.executeUpdate();
-
+			recipe.setRate(aveRate);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Alert");
+			alert.setHeaderText("Duplicate Action");
+			alert.setContentText("You have already rated this recipe!");
+			alert.showAndWait();
 		} finally {
 			DBUtil.close(conn);
 		}
-
 	}
 
 	/**

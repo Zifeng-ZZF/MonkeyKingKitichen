@@ -43,3 +43,10 @@
 	-fx-background-color: #404040;
 	-fx-border-width: 0 0 0 0;
 }
+
+#servings-textfield{
+	-fx-background-color: transparent;
+	-fx-border-width: 0 0 0 0;
+	-fx-text-fill: #ffffff;
+	-fx-focus-color: transparent;
+}

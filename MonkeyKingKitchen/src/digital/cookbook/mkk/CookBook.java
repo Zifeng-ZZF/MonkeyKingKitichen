@@ -109,27 +109,6 @@ public class CookBook {
 		return this.recipes;
 	}
 
-	/**
-	 * Change amount of preparation time, ingredients amount and cooking time
-	 * according to servings
-	 * 
-	 * @param recipeId
-	 * @param Servings
-	 * @return the altered recipe
-	 */
-	public Recipe changeServings(int recipeId, int servings) {
-		Recipe recipe = recipes.get(recipeId);
-		int originalServings = recipe.getServings();
-		int preparationTime = servings * (recipes.get(recipeId).getPreparationTime()) / originalServings;
-		int cookingTime = servings * (recipes.get(recipeId).getCookingTime()) / originalServings;
-		recipe.setPreparationTime(preparationTime);
-		recipe.setCookingTime(cookingTime);
-		for (Object ingredientObj : recipe.getIngredients()) {
-			double amount = servings * (((Ingredient) ingredientObj).getAmount()) / originalServings;
-			((Ingredient) ingredientObj).setAmount(amount);
-		}
-		return recipe;
-	}
 	
 	/**
 	 * Delete the recipe of the current user in myRecipeList
