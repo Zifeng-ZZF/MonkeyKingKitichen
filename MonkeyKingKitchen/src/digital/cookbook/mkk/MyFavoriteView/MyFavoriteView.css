@@ -1,0 +1,38 @@
+#list-vbox{
+	-fx-background-image: url("bg1.jpg");
+    -fx-background-position: center center;
+    -fx-background-repeat: stretch;
+    -fx-padding:0 0 0 0;
+}
+
+
+#list-vbox .hbox{
+	-fx-padding:0 0 0 0;
+	-fx-pref-width: 484;
+}
+
+#list-vbox .label, #list-vbox .button{
+	-fx-text-fill: #ffffff;
+	-fx-border-width:0 0 0 0;
+	-fx-background-color: rgba(0,0,0,0.6);
+	-fx-padding: 10;
+	-fx-font-size: 11;
+	-fx-pref-height: 80;
+}
+
+#list-vbox .label{
+	-fx-min-width: 100;
+}
+
+.titled-pane .title{
+	-fx-border-width: 1 1 0 1;
+	-fx-background-color: #404040;
+	-fx-text-fill:#ffffff;
+	
+}
+
+.titled-pane{
+	-fx-border-width: 0 0 0 0;
+	-fx-background-color: #ffffff;
+	
+}

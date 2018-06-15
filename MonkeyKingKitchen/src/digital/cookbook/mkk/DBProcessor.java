@@ -4,6 +4,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 /**
  * Retrieve information from the DB
  * 
@@ -332,8 +335,10 @@ public class DBProcessor {
 	 */
 	public void insertRate(Recipe recipe, int userID, double rate) {
 		Connection conn = DBUtil.getConnection();
+
+		double aveRate = 0;
 		String sql = "insert into ratetb(user_id,recipe_id,rate)values(?,?,?)";
-		String querysql = "select rate from ratetb where recipe_id=?";
+		String querysql = "select * from ratetb where recipe_id=?";
 		String updatesql = "update recipetb set recipe_averate =? where recipe_id=?";
 
 		try {
@@ -348,15 +353,18 @@ public class DBProcessor {
 			ResultSet rs = queryPStmt.executeQuery();
 			int Rate = 0;
 			int amount = 0;
+			
 			while (rs.next()) {
 				Rate = Rate + rs.getInt(3);
 				amount = amount + 1;
+				aveRate = Rate / amount;
 			}
-			double aveRate = Rate / amount;
+			
 			PreparedStatement updatePStmt = conn.prepareStatement(updatesql);
 			updatePStmt.setDouble(1, aveRate);
+			updatePStmt.setInt(2,recipe.getRecipeId());
 			updatePStmt.executeUpdate();
-
+			recipe.setRate(aveRate);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -388,7 +396,48 @@ public class DBProcessor {
 		SQLException e1) {
 			e1.printStackTrace();
 		}
-		// System.out.println(maxID);
 		return maxID;
+	}
+
+	/**
+	 * Get the recommending Recipe
+	 * @return
+	 */
+	public Recipe getRecommendRecipe() {
+		Connection connection = DBUtil.getConnection();
+		String sql1 = "select * from recipetb order by recipe_averate desc limit 1";
+		String sql2 = "select*from recipeingredientdb where recipe_id=?";
+		Recipe recipe = null;
+		
+		try {
+			Statement statement = connection.createStatement();
+			PreparedStatement pStatement = connection.prepareStatement(sql2);
+
+			ResultSet rSet = statement.executeQuery(sql1);
+			while (rSet.next()) {
+				recipe = new Recipe(rSet.getString(2), rSet.getString(8), rSet.getInt(6));
+				recipe.setRecipeId(rSet.getInt(1));
+				recipe.setPreparationTime(rSet.getInt(3));
+				recipe.setCookingTime(rSet.getInt(4));
+				recipe.setRate(rSet.getDouble(5));
+				recipe.setUid(rSet.getInt(7));
+
+				String[] steps = rSet.getString(9).split("\\|");
+				for (String step : steps) {
+					recipe.addPreparationStep(step);
+				}
+		
+				pStatement.setInt(1, recipe.getRecipeId());
+				ResultSet ingredientRSet = pStatement.executeQuery();
+				while (ingredientRSet.next()) {
+					Ingredient ingredient = new Ingredient(ingredientRSet.getString(1), ingredientRSet.getDouble(5),
+							ingredientRSet.getString(3), ingredientRSet.getString(4));
+					recipe.addIngredient(ingredient);
+				}	
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return recipe;
 	}
 }

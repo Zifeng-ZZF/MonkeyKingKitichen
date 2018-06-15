@@ -53,6 +53,7 @@
 
 #list-vbox .hbox{
 	-fx-padding:0 0 0 0;
+	-fx-pref-width: 484;
 }
 
 #list-vbox .label, #list-vbox .button{
@@ -64,9 +65,14 @@
 	-fx-pref-height: 80;
 }
 
+#list-vbox .label{
+	-fx-min-width: 100;
+}
+
 #list-vbox .button{
 	-fx-padding: 20;
 	-fx-background-color: rgba(0,0,0,0.8);
+	-fx-min-width: 80;
 }
 
 #list-vbox .button:hover{

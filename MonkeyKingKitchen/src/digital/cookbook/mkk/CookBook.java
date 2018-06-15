@@ -21,6 +21,7 @@ public class CookBook {
 	private DBProcessor dbProcessor = new DBProcessor();
 	private static User currentUser;
 	private static Recipe currentRecipe;
+	private static Recipe recommendRecipe;
 
 	public static User getCurrentUser() {
 		return currentUser;
@@ -44,8 +45,9 @@ public class CookBook {
 	 * @param title
 	 */
 	public CookBook(String title) {
+		recommendRecipe = dbProcessor.getRecommendRecipe();
 		this.cookBookTitle = title;
-		recipes = dbProcessor.fetchRecipe();
+		this.recipes = dbProcessor.fetchRecipe();
 	}
 
 	/**
@@ -109,27 +111,6 @@ public class CookBook {
 		return this.recipes;
 	}
 
-	/**
-	 * Change amount of preparation time, ingredients amount and cooking time
-	 * according to servings
-	 * 
-	 * @param recipeId
-	 * @param Servings
-	 * @return the altered recipe
-	 */
-	public Recipe changeServings(int recipeId, int servings) {
-		Recipe recipe = recipes.get(recipeId);
-		int originalServings = recipe.getServings();
-		int preparationTime = servings * (recipes.get(recipeId).getPreparationTime()) / originalServings;
-		int cookingTime = servings * (recipes.get(recipeId).getCookingTime()) / originalServings;
-		recipe.setPreparationTime(preparationTime);
-		recipe.setCookingTime(cookingTime);
-		for (Object ingredientObj : recipe.getIngredients()) {
-			double amount = servings * (((Ingredient) ingredientObj).getAmount()) / originalServings;
-			((Ingredient) ingredientObj).setAmount(amount);
-		}
-		return recipe;
-	}
 	
 	/**
 	 * Delete the recipe of the current user in myRecipeList
@@ -156,5 +137,13 @@ public class CookBook {
 	public void openRecipe(Recipe recipe) {
 		this.currentRecipe = recipe;
 		System.out.println(currentRecipe);
+	}
+	
+	/**
+	 * Get the recommendRecipe
+	 * @return
+	 */
+	public static Recipe getRecommandRecipe() {
+		return recommendRecipe;
 	}
 }

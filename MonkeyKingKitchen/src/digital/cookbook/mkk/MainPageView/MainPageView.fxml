@@ -21,7 +21,7 @@
 						<Insets top="10.0" />
 					</padding>
 				</Label>
-				<Label fx:id="myRecipeLabel" prefHeight="40.0" prefWidth="194.0" text="My Recipe">
+				<Label fx:id="myRecipeLabel" onMouseClicked="#handleMyRecipeLabel" prefHeight="40.0" prefWidth="194.0" text="My Recipe">
 					<font>
 						<Font name="Arial Bold" size="13.0" />
 					</font>
@@ -29,7 +29,7 @@
 						<Insets left="15.0" right="15.0" top="30.0" />
 					</VBox.margin>
 				</Label>
-				<Label fx:id="myFavoriteLabel" layoutX="10.0" layoutY="73.0" prefHeight="40.0" prefWidth="227.0" text="My Favorite">
+				<Label fx:id="myFavoriteLabel" layoutX="10.0" layoutY="73.0" onMouseClicked="#handleMyFavoriteLabel" prefHeight="40.0" prefWidth="227.0" text="My Favorite">
 					<font>
 						<Font name="Arial Bold" size="13.0" />
 					</font>
@@ -71,7 +71,7 @@
 						<Font name="Arial" size="14.0" />
 					</font>
 				</MenuButton>
-				<Button fx:id="searchBtn" mnemonicParsing="false" onAction="#sendSearchResult" prefHeight="35.0" prefWidth="90.0" text="search" GridPane.columnIndex="2">
+				<Button fx:id="searchBtn" mnemonicParsing="false" onAction="#handleSearchResult" prefHeight="35.0" prefWidth="90.0" text="search" GridPane.columnIndex="2">
 					<HBox.margin>
 						<Insets top="10.0" />
 					</HBox.margin>
@@ -81,7 +81,7 @@
 				</Button>
 			</children>
 		</GridPane>
-		<VBox layoutX="268.0" layoutY="134.0" prefHeight="316.0" prefWidth="437.0" stylesheets="@recommandation.css">
+		<VBox id="recommend-vbox" layoutX="268.0" layoutY="134.0" prefHeight="316.0" prefWidth="437.0" stylesheets="@recommandation.css">
 			<children>
 				<Pane prefHeight="221.0" prefWidth="500.0">
 					<children>

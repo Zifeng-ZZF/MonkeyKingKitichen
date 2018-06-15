@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" stylesheets="@MyRecipeView.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ListView fx:id="myFavorList" layoutX="76.0" layoutY="154.0" prefHeight="318.0" prefWidth="472.0" style="-fx-background-color: 78a2bf;" />
-      <Text fx:id="myFavor" fill="#363c40" layoutX="77.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Recipe" wrappingWidth="481.6888122558594">
+      <Text fx:id="myFavor" fill="#363c40" layoutX="70.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Recipe" wrappingWidth="481.6888122558594">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="55.0" />
          </font>
       </Text>
-      <Button fx:id="deleteBt" layoutX="428.0" layoutY="500.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #363c40;" text="Delete" textFill="WHITE">
+      <Button fx:id="deleteBt" layoutX="417.0" layoutY="509.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #404040;" text="Delete" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Button fx:id="openBt" layoutX="77.0" layoutY="500.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #363c40;" text="Open" textFill="WHITE">
+      <Button fx:id="openBt" layoutX="66.0" layoutY="509.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #404040;" text="Open" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Pane fx:id="rightPane" layoutX="595.0" layoutY="-2.0" prefHeight="603.0" prefWidth="205.0" style="-fx-background-color: #363c40;">
+      <Pane fx:id="rightPane" layoutX="595.0" layoutY="-2.0" prefHeight="603.0" prefWidth="205.0" style="-fx-background-color: #404040;" stylesheets="@MyRecipeView.css">
          <children>
             <Label fx:id="userName" alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="43.0" prefHeight="76.0" prefWidth="169.0" text="User" textFill="WHITE">
                <font>
@@ -47,15 +48,33 @@
             </Label>
          </children>
       </Pane>
-      <Button fx:id="editBt" layoutX="194.0" layoutY="500.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #363c40;" text="Edit" textFill="WHITE">
+      <Button fx:id="editBt" layoutX="183.0" layoutY="509.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #404040;" text="Edit" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="createBt" layoutX="311.0" layoutY="500.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #363c40;" text="Create" textFill="WHITE">
+      <Button fx:id="createBt" layoutX="300.0" layoutY="509.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #404040;" text="Create" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
+      <TitledPane collapsible="false" layoutX="66.0" layoutY="121.0" minHeight="-Infinity" minWidth="-Infinity" opacity="0.84" prefHeight="358.0" prefWidth="471.0" text="favorite" textFill="WHITE">
+         <content>
+            <VBox id="list-vbox" fx:id="listVBox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="484.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </VBox>
+         </content>
+         <effect>
+            <DropShadow radius="15.465" width="42.86" />
+         </effect>
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </TitledPane>
    </children>
 </Pane>

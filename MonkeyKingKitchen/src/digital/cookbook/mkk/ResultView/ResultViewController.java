@@ -11,6 +11,7 @@ import java.util.Set;
 import digital.cookbook.mkk.CookBook;
 import digital.cookbook.mkk.DBProcessor;
 import digital.cookbook.mkk.Recipe;
+import digital.cookbook.mkk.RecipeView.RecipeViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -83,6 +84,7 @@ public class ResultViewController implements Initializable {
 		this.results = results;
 		itemAcesses = new HashMap<>();
 		
+		//Add all the items(hbox = name label + description label + open button) to the Map
 		for (Recipe recipe : results) {
 			itemName = new Label(recipe.getName());
 			itemDesc = new Label(recipe.getType() + ", Cooking time: " + recipe.getCookingTime() + ", Preparing time: "
@@ -106,9 +108,12 @@ public class ResultViewController implements Initializable {
 				FXMLLoader fxmlLoader = new FXMLLoader();
 				fxmlLoader.setLocation(getClass().getResource("../RecipeView/RecipeView.fxml"));
 				CookBook.setCurrentRecipe(itemAcesses.get(button));
-
+				System.out.println(CookBook.getCurrentRecipe().getName());
+				
 				try {
 					Scene scene = new Scene(fxmlLoader.load());
+					RecipeViewController controller = fxmlLoader.getController();
+					controller.setRecipeDetail(CookBook.getCurrentRecipe());
 					Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 					currentStage.setScene(scene);
 				} catch (IOException e1) {

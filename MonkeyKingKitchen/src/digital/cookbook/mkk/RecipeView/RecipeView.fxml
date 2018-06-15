@@ -35,11 +35,6 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       					</rowConstraints>
       					<children>
-      						<Label fx:id="servingsLb" prefHeight="16.0" prefWidth="255.0" text="Servings : 4" textFill="WHITE" GridPane.rowIndex="1">
-      							<font>
-      								<Font name="Arial" size="14.0" />
-      							</font>
-      						</Label>
       						<Label fx:id="cookingTimeLb" prefHeight="16.0" prefWidth="258.0" text="Cooking Time : 20" textFill="#61a0a4" GridPane.rowIndex="3">
       							<font>
       								<Font name="Arial" size="14.0" />
@@ -55,6 +50,32 @@
       								<Font name="Arial" size="14.0" />
       							</font>
       						</Label>
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Label fx:id="servingsLb" text="Servings : " textFill="WHITE">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="8.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField id="servings-textfield" fx:id="servingsTxtField" alignment="TOP_LEFT" onAction="#handleChangeServings" prefHeight="26.0" prefWidth="26.0" text="4">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets top="9.0" />
+                           </padding>
+                        </TextField>
+                     </children>
+                  </HBox>
       					</children>
       				</GridPane>
          </children>
@@ -74,9 +95,9 @@
       								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       							</rowConstraints>
       							<children>
-      								<Button fx:id="exportPdfBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="173.0" text="Export PDF" textFill="WHITE" GridPane.halignment="CENTER" />
-      								<Button fx:id="toHomepageBtn" mnemonicParsing="false" style="-fx-background-color: #003366;" text="Homepage" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-      								<Button fx:id="addToFavoriteBtn" mnemonicParsing="false" prefHeight="85.0" prefWidth="194.0" text="Add to Favoirte" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      								<Button fx:id="exportPdfBtn" mnemonicParsing="false" onAction="#exportPDF" prefHeight="30.0" prefWidth="173.0" text="Export PDF" textFill="WHITE" GridPane.halignment="CENTER" />
+      								<Button fx:id="toHomepageBtn" mnemonicParsing="false" onAction="#returnToHomepage" style="-fx-background-color: #003366;" text="Homepage" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+      								<Button fx:id="addToFavoriteBtn" mnemonicParsing="false" onAction="#addToFavoriteAction" prefHeight="85.0" prefWidth="194.0" text="Add to Favoirte" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
       							</children>
       							<padding>
       								<Insets bottom="10.0" left="5.0" />
@@ -111,15 +132,15 @@
       				</GridPane>
 			</children>
 		</Pane>
-		<Pane layoutX="231.0" layoutY="176.0" prefHeight="425.0" prefWidth="567.0">
+		<Pane layoutX="238.0" layoutY="176.0" prefHeight="425.0" prefWidth="560.0">
 			<children>
-				<GridPane layoutX="99.0" layoutY="8.0" prefHeight="392.0" prefWidth="419.0">
+				<GridPane layoutX="99.0" layoutY="8.0" prefHeight="404.0" prefWidth="428.0">
 					<columnConstraints>
 						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
 					</columnConstraints>
 					<rowConstraints>
-						<RowConstraints maxHeight="379.0" minHeight="10.0" prefHeight="379.0" vgrow="SOMETIMES" />
-						<RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+						<RowConstraints maxHeight="379.0" minHeight="10.0" prefHeight="354.0" vgrow="SOMETIMES" />
+						<RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
 					</rowConstraints>
 					<children>
 						<Label fx:id="rateOnLb" text="Rate" textFill="#61a0a4" GridPane.rowIndex="1">
@@ -130,12 +151,12 @@
 								<Insets left="10.0" />
 							</GridPane.margin>
 						</Label>
-						<Slider fx:id="rateSlider" max="10.0" prefHeight="14.0" prefWidth="414.0" GridPane.rowIndex="1">
+						<Slider fx:id="rateSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" onMouseClicked="#rateAction" prefHeight="50.0" prefWidth="384.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.rowIndex="1">
 							<GridPane.margin>
 								<Insets left="50.0" />
 							</GridPane.margin>
 						</Slider>
-                  <TextArea id="steps-text-area" fx:id="stepsTxtArea" editable="false" prefHeight="200.0" prefWidth="200.0" text="1. Mix together cornstarch and 1 tbsp. of the soy sauce in a medium bowl.&#10;2. Add chicken, toss well, and set aside to marinate for 30 minutes.&#10;3. Meanwhile, mix together the remaining 3 tbsp. soy sauce, rice wine, sugar, stock, vinegar, sesame oil, and dark soy sauce.&#10;4. Set aside.&#10;5. Heat peanut oil in a wok or large nonstick skillet over high heat until just beginning to smoke.&#10;6. Add chilis, half the scallions, garlic, ginger, and chicken and stir-fry until chicken is golden, 3-5 minutes.&#10;7. Add soy sauce mixture and stir-fry until sauce thickens, about 2 minutes.&#10;8.  Stir in peanuts.&#10;9. Garnish with remaining scallions." wrapText="true">
+                  <TextArea id="steps-text-area" fx:id="stepsTxtArea" editable="false" prefHeight="353.0" prefWidth="426.0" text="1. Mix together cornstarch and 1 tbsp. of the soy sauce in a medium bowl.&#10;2. Add chicken, toss well, and set aside to marinate for 30 minutes.&#10;3. Meanwhile, mix together the remaining 3 tbsp. soy sauce, rice wine, sugar, stock, vinegar, sesame oil, and dark soy sauce.&#10;4. Set aside.&#10;5. Heat peanut oil in a wok or large nonstick skillet over high heat until just beginning to smoke.&#10;6. Add chilis, half the scallions, garlic, ginger, and chicken and stir-fry until chicken is golden, 3-5 minutes.&#10;7. Add soy sauce mixture and stir-fry until sauce thickens, about 2 minutes.&#10;8.  Stir in peanuts.&#10;9. Garnish with remaining scallions." wrapText="true">
                      <padding>
                         <Insets bottom="20.0" top="20.0" />
                      </padding>

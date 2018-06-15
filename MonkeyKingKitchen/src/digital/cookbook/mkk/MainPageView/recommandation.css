@@ -6,3 +6,7 @@
 #desc-label{
 	-fx-background-color: #ffffff;
 }
+
+#recommandation-vbox:hover{
+	-fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );
+}
