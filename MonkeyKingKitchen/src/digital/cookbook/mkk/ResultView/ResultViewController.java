@@ -128,7 +128,7 @@ public class ResultViewController implements Initializable {
 	//sdsd
 	/**
 	 * Search in the result UI
-	 * 
+	 * After searching in the main page, user can continue to search
 	 * @param e
 	 */
 	public void handleSearchBtn(ActionEvent e) {
