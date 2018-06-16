@@ -7,53 +7,53 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" stylesheets="@MyRecipeView.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" stylesheets="@MyRecipeView.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digital.cookbook.mkk.MyRecipeView.MyRecipeController">
    <children>
-      <Text fx:id="myFavor" fill="#363c40" layoutX="70.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Recipe" wrappingWidth="481.6888122558594">
+      <Text fx:id="myFavoriteLabel" fill="#363c40" layoutX="70.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Recipe" wrappingWidth="481.6888122558594">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="55.0" />
          </font>
       </Text>
-      <Button fx:id="deleteBt" layoutX="417.0" layoutY="509.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #404040;" text="Delete" textFill="WHITE">
+      <Button fx:id="deleteButton" layoutX="417.0" layoutY="509.0" mnemonicParsing="false" onAction="#deleteEvent" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #404040;" text="Delete" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Button fx:id="openBt" layoutX="66.0" layoutY="509.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #404040;" text="Open" textFill="WHITE">
+      <Button fx:id="openButton" layoutX="66.0" layoutY="509.0" mnemonicParsing="false" onAction="#openEvent" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #404040;" text="Open" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
       <Pane fx:id="rightPane" layoutX="595.0" layoutY="-2.0" prefHeight="603.0" prefWidth="205.0" style="-fx-background-color: #404040;" stylesheets="@MyRecipeView.css">
          <children>
-            <Label fx:id="userName" alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="43.0" prefHeight="76.0" prefWidth="169.0" text="User" textFill="WHITE">
+            <Label fx:id="userNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="43.0" prefHeight="76.0" prefWidth="169.0" text="User" textFill="WHITE">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <Button fx:id="myRecipeBt" layoutX="44.0" layoutY="170.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="127.0" style="-fx-background-color: #ffffff;" text="My Favorite">
+            <Button fx:id="myRecipeButton" layoutX="44.0" layoutY="170.0" mnemonicParsing="false" onAction="#jumpToMyFavoriteEvent" prefHeight="76.0" prefWidth="127.0" style="-fx-background-color: #ffffff;" text="My Favorite">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="mainPageBt" layoutX="41.0" layoutY="289.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="134.0" style="-fx-background-color: #ffffff;" text="Main Page">
+            <Button fx:id="mainPageButton" layoutX="41.0" layoutY="289.0" mnemonicParsing="false" onAction="#jumpToMainPageEvent" prefHeight="76.0" prefWidth="134.0" style="-fx-background-color: #ffffff;" text="Main Page">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Label fx:id="mkkLogo" layoutX="58.0" layoutY="487.0" prefHeight="67.0" prefWidth="101.0" text="MKK" textFill="WHITE">
+            <Label fx:id="mkkLogoLabel" layoutX="58.0" layoutY="487.0" prefHeight="67.0" prefWidth="101.0" text="MKK" textFill="WHITE">
                <font>
                   <Font name="Berlin Sans FB Demi Bold" size="39.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Button fx:id="editBt" layoutX="183.0" layoutY="509.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #404040;" text="Edit" textFill="WHITE">
+      <Button fx:id="editButton" layoutX="183.0" layoutY="509.0" mnemonicParsing="false" onAction="#editEvent" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #404040;" text="Edit" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="createBt" layoutX="300.0" layoutY="509.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #404040;" text="Create" textFill="WHITE">
+      <Button fx:id="createButton" layoutX="300.0" layoutY="509.0" mnemonicParsing="false" onAction="#createEvent" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #404040;" text="Create" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
