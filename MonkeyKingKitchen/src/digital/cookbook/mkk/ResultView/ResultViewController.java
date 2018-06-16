@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -130,6 +131,9 @@ public class ResultViewController implements Initializable {
 	 * @param e
 	 */
 	public void handleSearchBtn(ActionEvent e) {
+		
+		listVBox.getChildren().clear();
+		
 		String name = searchTxtField.getText();
 		ArrayList<Recipe> newResults = new ArrayList<>();
 
@@ -141,7 +145,7 @@ public class ResultViewController implements Initializable {
 				newResults.add(allRecipes.get(id));
 			}
 		}
-
+		
 		for (Recipe recipe : newResults) {
 			itemName = new Label(recipe.getName());
 			itemDesc = new Label(recipe.getType() + ", Cooking time: " + recipe.getCookingTime() + ", Preparing time: "
@@ -155,6 +159,8 @@ public class ResultViewController implements Initializable {
 
 			listVBox.getChildren().add(item);
 		}
+
+		
 	}
 
 	@Override

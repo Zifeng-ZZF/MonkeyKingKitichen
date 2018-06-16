@@ -6,160 +6,127 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane prefHeight="175.0" prefWidth="558.0" style="-fx-background-color: #F5F5F5;">
+      <Label fx:id="recipeName" prefHeight="600.0" prefWidth="164.0" text="Edit" textFill="#16858d">
+         <font>
+            <Font name="Microsoft YaHei Light" size="80.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+      <VBox layoutX="178.0" layoutY="28.0" prefHeight="558.0" prefWidth="300.0">
          <children>
-            <Label fx:id="recipeName" layoutX="38.0" layoutY="31.0" text="Recipe Name" textFill="#16858d">
-               <font>
-                  <Font name="Microsoft YaHei Light" size="80.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </Label>
-         </children>
-      </Pane>
-      <Pane layoutX="557.0" prefHeight="175.0" prefWidth="243.0" style="-fx-background-color: #F5F5F5;">
-         <children>
-            <GridPane layoutX="1.0" prefHeight="175.0" prefWidth="286.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            <HBox prefHeight="40.0" prefWidth="264.0">
                <children>
-                  <Label fx:id="servings" text="Servings :" textFill="#61a0a4">
-                     <font>
-                        <Font name="Arial" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="cookingTime" text="Cooking Time :" textFill="#61a0a4" GridPane.rowIndex="2">
-                     <font>
-                        <Font name="Arial" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="preparationTime" text="Preparation Time :" textFill="#61a0a4" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="Arial" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </GridPane>
-         </children>
-      </Pane>
-      <Pane layoutY="175.0" prefHeight="425.0" prefWidth="209.0">
-         <children>
-            <GridPane layoutY="11.0" prefHeight="376.0" prefWidth="209.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="136.0" minHeight="0.0" prefHeight="41.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="136.0" minHeight="0.0" prefHeight="35.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="136.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="136.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="373.0" minHeight="10.0" prefHeight="208.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label prefHeight="41.0" prefWidth="173.0" text="Ingredients" textFill="#61a0a4">
-                     <font>
-                        <Font name="Microsoft YaHei Light" size="24.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets left="8.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <TextField prefHeight="203.0" prefWidth="201.0" GridPane.rowIndex="4">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <GridPane.margin>
-                        <Insets bottom="3.0" left="3.0" />
-                     </GridPane.margin>
+                  <Label prefHeight="79.0" prefWidth="70.0" text="Label" />
+                  <TextField prefHeight="59.0" prefWidth="230.0">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
                   </TextField>
-                  <ComboBox fx:id="ingredientChoose" prefHeight="27.0" prefWidth="198.0" promptText="Ingredient" GridPane.rowIndex="1">
-                     <GridPane.margin>
-                        <Insets left="5.0" />
-                     </GridPane.margin>
-                  </ComboBox>
-                  <TextArea prefHeight="28.0" prefWidth="145.0" promptText="amount" GridPane.rowIndex="2">
-                     <GridPane.margin>
-                        <Insets bottom="2.0" left="5.0" right="55.0" top="2.0" />
-                     </GridPane.margin>
-                  </TextArea>
-                  <TextArea prefHeight="200.0" prefWidth="200.0" promptText="unit" GridPane.rowIndex="2">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <GridPane.margin>
-                        <Insets bottom="2.0" left="150.0" top="2.0" />
-                     </GridPane.margin>
-                  </TextArea>
-                  <TextArea prefHeight="33.0" prefWidth="176.0" promptText="process method" GridPane.rowIndex="3">
-                     <GridPane.margin>
-                        <Insets bottom="2.0" left="5.0" top="2.0" />
-                     </GridPane.margin>
-                  </TextArea>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="47.0" text="Add" GridPane.rowIndex="3">
-                     <GridPane.margin>
-                        <Insets left="160.0" right="5.0" />
-                     </GridPane.margin>
-                  </Button>
+               </children>
+            </HBox>
+            <HBox prefHeight="40.0" prefWidth="266.0">
+               <children>
+                  <Label prefHeight="79.0" prefWidth="70.0" text="Label" />
+                  <TextField prefHeight="68.0" prefWidth="230.0">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="40.0" prefWidth="264.0">
+               <children>
+                  <Label prefHeight="79.0" prefWidth="70.0" text="Label" />
+                  <TextField prefHeight="53.0" prefWidth="230.0">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="264.0">
+               <children>
+                  <Label prefHeight="79.0" prefWidth="70.0" text="Label" />
+                  <TextField prefHeight="53.0" prefWidth="230.0">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </HBox>
+            <Label prefHeight="41.0" prefWidth="173.0" text="Ingredients" textFill="#61a0a4">
+               <font>
+                  <Font name="Microsoft YaHei Light" size="24.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="15.0" />
+               </VBox.margin>
+            </Label>
+            <ComboBox fx:id="ingredientChoose" prefHeight="41.0" prefWidth="191.0" promptText="Ingredient">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </VBox.margin>
+            </ComboBox>
+            <HBox prefHeight="40.0" prefWidth="197.0">
+               <children>
+                  <TextField prefHeight="40.0" prefWidth="160.0" promptText="amount">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField prefHeight="40.0" prefWidth="160.0" promptText="unit">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
                </children>
                <padding>
-                  <Insets left="5.0" />
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </padding>
-            </GridPane>
-         </children>
-      </Pane>
-      <Pane layoutX="231.0" layoutY="176.0" prefHeight="425.0" prefWidth="567.0">
-         <children>
-            <GridPane layoutX="-10.0" prefHeight="425.0" prefWidth="577.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="379.0" minHeight="10.0" prefHeight="379.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            </HBox>
+            <HBox prefHeight="40.0" prefWidth="209.0">
                <children>
-                  <TextField fx:id="steps" prefHeight="403.0" prefWidth="567.0">
-                     <GridPane.margin>
-                        <Insets right="5.0" top="10.0" />
-                     </GridPane.margin>
+                  <TextField prefHeight="20.0" prefWidth="121.0" promptText="process method">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </TextField>
-                  <GridPane GridPane.rowIndex="1">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="73.0" minWidth="10.0" prefWidth="70.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="59.0" minWidth="10.0" prefWidth="57.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Button mnemonicParsing="false" text="Cancel">
-                           <GridPane.margin>
-                              <Insets left="15.0" />
-                           </GridPane.margin>
-                        </Button>
-                        <Button fx:id="save" mnemonicParsing="false" text="Save" GridPane.columnIndex="1">
-                           <GridPane.margin>
-                              <Insets left="10.0" />
-                           </GridPane.margin>
-                        </Button>
-                     </children>
-                     <GridPane.margin>
-                        <Insets bottom="3.0" left="450.0" />
-                     </GridPane.margin>
-                  </GridPane>
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="54.0" text="Add">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Button>
                </children>
-            </GridPane>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <TextArea prefHeight="215.0" prefWidth="280.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </TextArea>
          </children>
-      </Pane>
+      </VBox>
+      <TextArea layoutX="499.0" layoutY="27.0" prefHeight="548.0" prefWidth="280.0" />
    </children>
 </Pane>

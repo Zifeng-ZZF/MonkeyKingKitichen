@@ -68,7 +68,7 @@
                   <MenuItem mnemonicParsing="false" text="ingredient name" />
                </items>
             </MenuButton>
-            <Button fx:id="searchBtn" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" text="search" GridPane.columnIndex="2">
+            <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#handleSearchBtn" prefHeight="35.0" prefWidth="90.0" text="search" GridPane.columnIndex="2">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
