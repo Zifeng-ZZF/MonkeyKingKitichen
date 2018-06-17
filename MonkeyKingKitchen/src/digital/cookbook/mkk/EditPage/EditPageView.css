@@ -1,0 +1,44 @@
+.text-field{
+	-fx-background-color: transparent;
+	-fx-border-width: 0 0 1 0;
+	-fx-border-color: #404040;
+}
+
+
+
+.combo-box-base  
+{
+	-fx-background-color:#404040;
+    -fx-background-radius: 5, 5, 4, 3;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-padding: 0;
+}
+
+.combo-box .text{
+	-fx-fill:#ffffff;
+}
+
+.combo-box .arrow{
+	-fx-background-color:#ffffff;
+}
+
+.combo-box-base:hover
+{
+    -fx-background-color: derive(#404040,0.6);
+}
+
+.button{
+	-fx-text-fill:#ffffff;
+	-fx-background-color:#404040;
+    -fx-background-radius: 5, 5, 4, 3;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-padding: 0;
+}
+
+.button:hover{
+	-fx-background-color: derive(#404040,0.6);
+}
+
+#save-label:hover,#cancel-label:hover{
+	-fx-background-color: derive(#404040,0.8);
+}
