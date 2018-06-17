@@ -160,10 +160,11 @@ public class ResultViewController implements Initializable {
 
 			listVBox.getChildren().add(item);
 		}
-
-		
 	}
 
+	/**
+	 * Initialize the variables for this UI
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		allRecipes = dbProcessor.fetchRecipe();
