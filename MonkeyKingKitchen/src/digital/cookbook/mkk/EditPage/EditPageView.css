@@ -81,4 +81,5 @@
 
 #list-vbox .button:hover{
 	-fx-text-fill: derive(#6495ED,0.7);
+
 }

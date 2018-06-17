@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@EditPageView.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digital.cookbook.mkk.EditPage.EditViewController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" stylesheets="@EditPageView.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digital.cookbook.mkk.EditPage.EditViewController">
    <children>
       <Pane layoutX="-9.0" layoutY="-12.0">
          <children>
@@ -189,6 +189,6 @@
             </VBox>
          </children>
       </VBox>
-      <TextArea fx:id="stepsTxtArea" layoutX="499.0" layoutY="27.0" prefHeight="548.0" prefWidth="280.0" promptText="steps" />
+      <TextArea fx:id="stepsTxtArea" layoutX="499.0" layoutY="27.0" prefHeight="548.0" prefWidth="280.0" promptText="steps" wrapText="true" />
    </children>
 </Pane>
