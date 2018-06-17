@@ -210,6 +210,9 @@ public class RecipeViewController implements Initializable{
 	 * @param e
 	 */
 	public void returnToHomepage(ActionEvent e) {
+		//Clear currentRecipe
+		CookBook.setCurrentRecipe(null);
+		
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		fxmlLoader.setLocation(getClass().getResource("../MainPageView/MainPageView.fxml"));
 		try {

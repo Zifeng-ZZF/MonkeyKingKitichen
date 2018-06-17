@@ -29,11 +29,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Edit page controller
+ * @author Xinyue Shi, Zifeng Zhang
+ *
+ */
 public class EditViewController implements Initializable {
 	
-	private DBProcessor dbp = new DBProcessor();
+	private DBProcessor dbProcessor = new DBProcessor();
 	private User currentUser = CookBook.getCurrentUser();
-	ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+	private ArrayList<Ingredient> addedIngredients = new ArrayList<Ingredient>();
 	
 	@FXML
 	private Label EditLb;
@@ -98,7 +103,96 @@ public class EditViewController implements Initializable {
 	@FXML
 	private ComboBox<String> ingredientCb;
 	
-	public void turnToMyRecipe(ActionEvent e) {
+	
+	/**
+	 * Add an ingredient item to the recipe and show on the view
+	 * @param e
+	 */
+	public void addBtnAction(ActionEvent e) {
+			String name = ingredientCb.getSelectionModel().getSelectedItem().toString();
+			boolean isAdded = false;
+			//Warn the user if the ingredients have been added
+			for(int i=0; i<addedIngredients.size();i++){
+				if(addedIngredients.get(i).getName().equals(name)) {
+				    Alert alert = new Alert(AlertType.ERROR);
+					alert.titleProperty().set("Alert");
+					alert.headerTextProperty().set("Duplicate Action");
+					alert.contentTextProperty().set("You have already added this ingredient!");
+					alert.showAndWait();
+					isAdded = true;
+					break;
+				}
+			}
+			if(!isAdded) {
+				double amount = Double.parseDouble(amountTxtField.getText());
+				String unit = unitTxtField.getText();
+				String processMethod = processTxtField.getText();
+				Ingredient newIngredient = new Ingredient(name, amount, unit, processMethod);
+				this.addedIngredients.add(newIngredient);
+				
+				String ingredientDesc = null;
+
+				if(!processMethod.equals("")) 
+					ingredientDesc = name+" * "+amount+" "+unit+" : "+processMethod;
+				else 
+					ingredientDesc = name+" * "+amount+" "+unit;
+				
+				HBox item = new HBox();
+				Label ingredientTxt = new Label(ingredientDesc);
+				Button removeBtn = new Button("REMOVE");
+				item.getChildren().add(ingredientTxt);
+				item.getChildren().add(removeBtn);
+				
+				ingredientVBox.getChildren().add(item);
+				//Listen to every remove buttons
+				removeBtn.setOnAction(ActionEvent->{
+					ingredientVBox.getChildren().remove(item);
+					addedIngredients.remove(newIngredient);
+				});
+			}
+	}
+	
+	/**
+	 * Save the ingredient
+	 * @param e
+	 */
+	public void saveBtnAction(ActionEvent e) {
+		//Retrieve info from the UI
+		String name = recipeNameTxtField.getText();
+		String type = typeTxtField.getText();
+		int servings = Integer.parseInt(servingsTxtField.getText());
+		Recipe recipe = new Recipe(name, type, servings);
+		recipe.setPreparationTime(Integer.parseInt(prepareTimeTxtField.getText()));
+		recipe.setCookingTime(Integer.parseInt(cookingTimeTxtField.getText()));
+		String[] steps = stepsTxtArea.getText().split("\n");
+		for(String step : steps)
+			recipe.addPreparationStep(step);
+		
+		//Insert into DB and pop up informing
+		dbProcessor.insertRecipe(recipe, 5);
+		
+		for(Ingredient ingredient : this.addedIngredients) {
+			recipe.addIngredient(ingredient);
+			ingredient.setRecipeId(recipe.getRecipeId());
+			dbProcessor.addIngredient(ingredient);
+		}
+		
+	    Alert alert = new Alert(AlertType.INFORMATION);
+        alert.titleProperty().set("Save");
+        alert.headerTextProperty().set("Success");
+        alert.contentTextProperty().set("You have successfully created a recipe!");
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+            	cancelBtnAction(e);
+            }
+        });
+	}
+	
+	/**
+	 * Canceling edit and return to my recipe list
+	 * @param e
+	 */
+	public void cancelBtnAction(ActionEvent e) {
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		fxmlLoader.setLocation(getClass().getResource("../MyRecipeView/MyRecipeView.fxml"));
 		try {
@@ -111,83 +205,9 @@ public class EditViewController implements Initializable {
 		}
 	}
 	
-	public void addBtnAction(ActionEvent e) {
-			String name = ingredientCb.getSelectionModel().getSelectedItem().toString();
-			boolean add = true;
-			for(int i=0; i<ingredients.size();i++){
-				if(ingredients.get(i).getName().equals(name)) {
-				    Alert alert = new Alert(AlertType.ERROR);
-					alert.titleProperty().set("Alert");
-					alert.headerTextProperty().set("Duplicate Action");
-					alert.contentTextProperty().set("You have already added this ingredient!");
-					alert.showAndWait();
-					add = false;
-					break;
-				}
-			}
-			if(add) {
-				double amount = Double.parseDouble(amountTxtField.getText());
-				String unit = unitTxtField.getText();
-				String processMethod = processTxtField.getText();
-				Ingredient newIngredient = new Ingredient(name, amount, unit, processMethod);
-				this.ingredients.add(newIngredient);
-				String text = null;
-
-				if(!processMethod.equals("")) 
-					text = name+" * "+amount+" "+unit+" : "+processMethod;
-				else 
-					text = name+" * "+amount+" "+unit;
-				
-				HBox item = new HBox();
-				Label ingredientTxt = new Label(text);
-				Button remove = new Button("REMOVE");
-				item.getChildren().add(ingredientTxt);
-				item.getChildren().add(remove);
-				
-				ingredientVBox.getChildren().add(item);
-				remove.setOnMouseClicked(ActionEvent->{
-					ingredientVBox.getChildren().remove(item);
-					ingredients.remove(newIngredient);
-					System.out.println(ingredients);
-				});
-			}
-	}
-	
-	public void saveBtnAction(ActionEvent e) {
-		String name = recipeNameTxtField.getText();
-		String type = typeTxtField.getText();
-		int servings = Integer.parseInt(servingsTxtField.getText());
-		Recipe recipe = new Recipe(name, type, servings);
-		recipe.setPreparationTime(Integer.parseInt(prepareTimeTxtField.getText()));
-		recipe.setCookingTime(Integer.parseInt(cookingTimeTxtField.getText()));
-		System.out.print("1");
-		String[] steps = stepsTxtArea.getText().split("\n");
-		for(String step : steps)
-			recipe.addPreparationStep(step);
-		dbp.insertRecipe(recipe, currentUser.getUid());
-	    Alert alert = new Alert(AlertType.INFORMATION);
-        alert.titleProperty().set("Save");
-        alert.headerTextProperty().set("Success");
-        alert.contentTextProperty().set("You have successfully created a recipe!");
-        alert.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-            	for(Ingredient ingredient : this.ingredients) {
-        			recipe.addIngredient(ingredient);
-        			ingredient.setRecipeId(recipe.getRecipeId());
-        			dbp.addIngredient(ingredient);
-        		}
-            	turnToMyRecipe(e);
-            }
-        });
-	}
-	
-	public void cancelBtnAction(ActionEvent e) {
-		turnToMyRecipe(e);
-	}
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		ArrayList<String> allIngredients = dbp.fetchIngredients();
+		ArrayList<String> allIngredients = dbProcessor.fetchIngredients();
 		for(String ingredientName: allIngredients)
 			ingredientCb.getItems().add(ingredientName);
 	}

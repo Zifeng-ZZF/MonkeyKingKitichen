@@ -136,7 +136,8 @@ public class LoginViewController implements Initializable {
 			dbProcessor.insertUser(newUser);
 			users.add(newUser);
 			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setContentText("Register successfully!/r/n Log in right now!");
+			alert.setContentText("Register successfully!\r\n Log in right now!");
+			alert.setHeaderText("Warning");
 			loginTab.getTabPane().getSelectionModel().select(loginTab);
 			alert.show();
 		}

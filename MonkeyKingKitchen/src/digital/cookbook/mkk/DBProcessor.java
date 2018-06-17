@@ -102,13 +102,13 @@ public class DBProcessor {
 		ArrayList<String> allIngredients = new ArrayList<String>();
 		String sql = "select*from ingredienttb";
 		
-		Statement stmt;
 		try {
-			stmt = conn.createStatement();
+			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
 				allIngredients.add(rs.getString(1));
+				System.out.println("666"+rs.getString(1));
 			}
 			
 		} catch (SQLException e) {
