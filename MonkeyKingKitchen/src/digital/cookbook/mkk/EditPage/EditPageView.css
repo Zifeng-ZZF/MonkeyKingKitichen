@@ -42,3 +42,8 @@
 #save-label:hover,#cancel-label:hover{
 	-fx-background-color: derive(#404040,0.8);
 }
+
+.list-vbox .button{
+	-fx-background-color: transparent;
+	-fx-border-color:#D3D3D3;
+}
