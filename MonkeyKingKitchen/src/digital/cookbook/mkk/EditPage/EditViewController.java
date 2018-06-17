@@ -98,6 +98,50 @@ public class EditViewController implements Initializable {
 	@FXML
 	private ComboBox<String> ingredientCb;
 	
+	public void setRecipeDetail(Recipe recipe) {
+		this.recipeNameTxtField.setText(recipe.getName());
+		this.servingsTxtField.setText(String.valueOf(recipe.getServings()));
+		this.prepareTimeTxtField.setText(String.valueOf(recipe.getPreparationTime()));
+		this.cookingTimeLb.setText(String.valueOf(recipe.getCookingTime()));
+		this.typeTxtField.setText(recipe.getType());
+		setIngredients(recipe);
+		setSteps(recipe);
+	}
+	
+	public void setSteps(Recipe recipe) {
+		ArrayList<String> steps = recipe.getPreparationSetps();
+		String step = "";
+		for (String str : steps) {
+			step = str + "\n";
+		}
+		this.stepsTxtArea.setText(step);
+	}
+	
+	public void addIngredients(Ingredient ingredient) {
+		String text = ingredient.getName()+" * "+ingredient.getAmount()+" "+ingredient.getUnit();
+		if(ingredient.getProcessMethod()!=null) 
+			text = text+" : "+ingredient.getProcessMethod();
+		
+		HBox item = new HBox();
+		Label ingredientTxt = new Label(text);
+		Button remove = new Button("REMOVE");
+		item.getChildren().add(ingredientTxt);
+		item.getChildren().add(remove);
+		
+		ingredientVBox.getChildren().add(item);
+		remove.setOnMouseClicked(ActionEvent->{
+			ingredientVBox.getChildren().remove(item);
+			ingredients.remove(ingredient);
+		});
+	}
+	
+	public void setIngredients(Recipe recipe) {
+		ingredients = recipe.getIngredients();
+		for(Ingredient ingredient : ingredients) {
+			addIngredients(ingredient);
+		}
+	}
+	
 	public void turnToMyRecipe(ActionEvent e) {
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		fxmlLoader.setLocation(getClass().getResource("../MyRecipeView/MyRecipeView.fxml"));
@@ -129,27 +173,9 @@ public class EditViewController implements Initializable {
 				double amount = Double.parseDouble(amountTxtField.getText());
 				String unit = unitTxtField.getText();
 				String processMethod = processTxtField.getText();
-				Ingredient newIngredient = new Ingredient(name, amount, unit, processMethod);
-				this.ingredients.add(newIngredient);
-				String text = null;
-
-				if(!processMethod.equals("")) 
-					text = name+" * "+amount+" "+unit+" : "+processMethod;
-				else 
-					text = name+" * "+amount+" "+unit;
-				
-				HBox item = new HBox();
-				Label ingredientTxt = new Label(text);
-				Button remove = new Button("REMOVE");
-				item.getChildren().add(ingredientTxt);
-				item.getChildren().add(remove);
-				
-				ingredientVBox.getChildren().add(item);
-				remove.setOnMouseClicked(ActionEvent->{
-					ingredientVBox.getChildren().remove(item);
-					ingredients.remove(newIngredient);
-					System.out.println(ingredients);
-				});
+				Ingredient ingredient = new Ingredient(name, amount, unit,processMethod);
+				this.ingredients.add(ingredient);
+				addIngredients(ingredient);
 			}
 	}
 	
@@ -160,7 +186,6 @@ public class EditViewController implements Initializable {
 		Recipe recipe = new Recipe(name, type, servings);
 		recipe.setPreparationTime(Integer.parseInt(prepareTimeTxtField.getText()));
 		recipe.setCookingTime(Integer.parseInt(cookingTimeTxtField.getText()));
-		System.out.print("1");
 		String[] steps = stepsTxtArea.getText().split("\n");
 		for(String step : steps)
 			recipe.addPreparationStep(step);
