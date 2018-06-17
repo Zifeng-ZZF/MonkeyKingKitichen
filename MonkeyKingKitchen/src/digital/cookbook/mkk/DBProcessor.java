@@ -93,6 +93,31 @@ public class DBProcessor {
 	}
 
 	/**
+	 * Fetch all the ingredients from the db to the ArrayList allIngredients
+	 * 
+	 * @return ArrayList contains all ingredients
+	 */
+	public ArrayList<String> fetchIngredients(){
+		Connection conn = DBUtil.getConnection();
+		ArrayList<String> allIngredients = new ArrayList<String>();
+		String sql = "select*from ingredienttb";
+		
+		Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				allIngredients.add(rs.getString(1));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return allIngredients;
+	}
+	
+	/**
 	 * Fetch all the MyFavouriteRecipe from the db to the ArrayList MyFavouriteList
 	 * 
 	 * @param uid

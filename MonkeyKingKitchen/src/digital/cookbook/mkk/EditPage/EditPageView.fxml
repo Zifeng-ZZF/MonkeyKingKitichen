@@ -7,11 +7,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@EditPageView.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@EditPageView.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digital.cookbook.mkk.EditPage.EditViewController">
    <children>
       <Pane layoutX="-9.0" layoutY="-12.0">
          <children>
-            <Label id="title-label" fx:id="recipeName" layoutX="9.0" layoutY="12.0" prefHeight="600.0" prefWidth="164.0" style="-fx-background-color: #404040;" text="Edit" textFill="#a7ddda">
+            <Label id="title-label" fx:id="EditLb" layoutX="9.0" layoutY="12.0" prefHeight="600.0" prefWidth="164.0" style="-fx-background-color: #404040;" text="Edit" textFill="#a7ddda">
                <font>
                   <Font name="Cambria Bold" size="74.0" />
                </font>
@@ -22,29 +22,23 @@
                   <DropShadow color="#338d91f4" height="25.67" radius="11.1675" />
                </effect>
             </Label>
-            <Label id="save-label" layoutY="510.0" prefHeight="34.0" prefWidth="173.0" text="      Save" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="saveBtn" layoutX="10.0" layoutY="480.0" mnemonicParsing="false" onAction="#saveBtnAction" prefHeight="41.0" prefWidth="163.0" text="Save">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
-               <padding>
-                  <Insets left="40.0" />
-               </padding>
-            </Label>
-            <Label id="cancel-label" layoutX="-1.0" layoutY="544.0" prefHeight="34.0" prefWidth="174.0" text="     Cancel" textAlignment="CENTER" textFill="WHITE">
+            </Button>
+            <Button fx:id="cancelBtn" layoutX="10.0" layoutY="526.0" mnemonicParsing="false" onAction="#cancelBtnAction" prefHeight="46.0" prefWidth="163.0" text=" Cancel">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Arial" size="18.0" />
                </font>
-               <padding>
-                  <Insets left="35.0" />
-               </padding>
-            </Label>
+            </Button>
          </children>
       </Pane>
       <VBox layoutX="187.0" layoutY="27.0" prefHeight="558.0" prefWidth="300.0">
          <children>
             <HBox id="upper-hbox" alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="264.0">
                <children>
-                  <Label prefHeight="79.0" prefWidth="120.0" text="Recipe Name" textFill="#a7ddda">
+                  <Label fx:id="recipeNameLb" prefHeight="79.0" prefWidth="120.0" text="Recipe Name" textFill="#a7ddda">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
@@ -60,14 +54,14 @@
             </HBox>
             <HBox prefHeight="40.0" prefWidth="266.0">
                <children>
-                  <Label prefHeight="40.0" prefWidth="120.0" text="Servings" textFill="#404040">
+                  <Label fx:id="servingsLb" prefHeight="40.0" prefWidth="120.0" text="Servings" textFill="#404040">
                      <font>
                         <Font size="13.0" />
                      </font>
                      <padding>
                         <Insets left="10.0" top="10.0" />
                      </padding></Label>
-                  <TextField fx:id="servingTxtField" prefHeight="30.0" prefWidth="180.0">
+                  <TextField fx:id="servingsTxtField" prefHeight="30.0" prefWidth="180.0">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
@@ -76,7 +70,7 @@
             </HBox>
             <HBox prefHeight="40.0" prefWidth="264.0">
                <children>
-                  <Label prefHeight="40.0" prefWidth="130.0" text="Preparation time" textFill="#404040">
+                  <Label fx:id="preparaTimeLb" prefHeight="40.0" prefWidth="130.0" text="Preparation time" textFill="#404040">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -92,14 +86,14 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="264.0">
                <children>
-                  <Label prefHeight="40.0" prefWidth="120.0" text="Cooking time" textFill="#404040">
+                  <Label fx:id="cookingTimeLb" prefHeight="40.0" prefWidth="120.0" text="Cooking time" textFill="#404040">
                      <font>
                         <Font size="13.0" />
                      </font>
                      <padding>
                         <Insets left="10.0" top="10.0" />
                      </padding></Label>
-                  <TextField fx:id="cookTimeTxtField" prefHeight="30.0" prefWidth="180.0">
+                  <TextField fx:id="cookingTimeTxtField" prefHeight="30.0" prefWidth="180.0">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
@@ -111,7 +105,7 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="112.0" prefHeight="40.0" prefWidth="264.0">
                <children>
-                  <Label prefHeight="40.0" prefWidth="120.0" text="Type" textFill="#404040">
+                  <Label fx:id="typeLb" prefHeight="27.0" prefWidth="110.0" text="Type" textFill="#404040">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -119,14 +113,14 @@
                         <Insets left="10.0" top="10.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="cookTimeTxtField1" prefHeight="30.0" prefWidth="180.0">
+                  <TextField fx:id="typeTxtField" prefHeight="30.0" prefWidth="180.0">
                      <HBox.margin>
                         <Insets bottom="20.0" left="10.0" right="10.0" />
                      </HBox.margin>
                   </TextField>
                </children>
             </HBox>
-            <Label prefHeight="41.0" prefWidth="173.0" text="Ingredients" textFill="#61a0a4">
+            <Label fx:id="ingredientsLb" prefHeight="41.0" prefWidth="173.0" text="Ingredients" textFill="#61a0a4">
                <font>
                   <Font name="Microsoft YaHei Light" size="24.0" />
                </font>
@@ -134,7 +128,7 @@
                   <Insets bottom="10.0" left="15.0" />
                </VBox.margin>
             </Label>
-            <ComboBox fx:id="ingredientComBox" prefHeight="45.0" prefWidth="191.0" promptText="Ingredient" visibleRowCount="13">
+            <ComboBox fx:id="ingredientCb" prefHeight="45.0" prefWidth="191.0" promptText="Ingredient" visibleRowCount="13">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" />
                </VBox.margin>
@@ -175,7 +169,7 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="addProcessBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="54.0" text="Add">
+                  <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addBtnAction" prefHeight="40.0" prefWidth="54.0" text="Add">
                      <font>
                         <Font size="11.0" />
                      </font>
@@ -188,13 +182,13 @@
                   <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                </padding>
             </HBox>
-            <TextArea fx:id="IngredientsTxtArea" editable="false" prefHeight="215.0" prefWidth="280.0">
+            <VBox id="list-vbox" fx:id="ingredientVBox" prefHeight="218.0" prefWidth="300.0" style="-fx-border-color: #C0C0C0; -fx-border-radius: 3;">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
-            </TextArea>
+            </VBox>
          </children>
       </VBox>
-      <TextArea fx:id="stepsTxtArea" layoutX="499.0" layoutY="27.0" prefHeight="548.0" prefWidth="280.0" />
+      <TextArea fx:id="stepsTxtArea" layoutX="499.0" layoutY="27.0" prefHeight="548.0" prefWidth="280.0" promptText="steps" />
    </children>
 </Pane>
