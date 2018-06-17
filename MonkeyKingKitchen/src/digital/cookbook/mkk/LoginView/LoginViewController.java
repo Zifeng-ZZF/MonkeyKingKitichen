@@ -36,6 +36,9 @@ public class LoginViewController implements Initializable {
 	private DBProcessor dbProcessor = new DBProcessor();
 	private ArrayList<User> users;
 	private Map<Integer, Recipe> recipes;
+	private boolean isLoginNameValid;
+	private boolean isRegisterNameValid;
+	private boolean isPasswordValid;
 
 	@FXML
 	private Button registerBtn;
@@ -95,7 +98,7 @@ public class LoginViewController implements Initializable {
 				fxmlLoader.setLocation(getClass().getResource("../MainPageView/MainPageView.fxml"));
 				try {
 					Scene scene = new Scene(fxmlLoader.load());
-					//set the name tag
+					// set the name tag
 					MainPageController controller = fxmlLoader.getController();
 					controller.setUserTag(user.getName());
 					// get the event button (Login button)'s window, which is also a stage
@@ -113,6 +116,7 @@ public class LoginViewController implements Initializable {
 	}
 
 	/**
+	 * Register a new account
 	 * 
 	 * @param e
 	 */
@@ -130,16 +134,33 @@ public class LoginViewController implements Initializable {
 				alert.show();
 			}
 		}
-		
-		if(!isExist) {
-			User newUser = new User(username, passwd);
-			dbProcessor.insertUser(newUser);
-			users.add(newUser);
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setContentText("Register successfully!\r\n Log in right now!");
-			alert.setHeaderText("Warning");
-			loginTab.getTabPane().getSelectionModel().select(loginTab);
-			alert.show();
+
+		if (!isExist) {
+			if (isRegisterNameValid && isPasswordValid) {
+				User newUser = new User(username, passwd);
+				dbProcessor.insertUser(newUser);
+				users.add(newUser);
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setContentText("Register successfully!/r/n Log in right now!");
+				alert.setHeaderText("Warning");
+				loginTab.getTabPane().getSelectionModel().select(loginTab);
+				alert.show();
+			}
+		}
+
+	}
+
+	/**
+	 * Judge the username's validity
+	 * @param e
+	 */
+	@FXML
+	private void handleUsernameLength(ActionEvent e) {
+		String username = registerUsernameTxtField.getText();
+		if (username.length() < 8) {
+			registerUsernameTxtField.setStyle("-fx-effect: innershadow( one-pass-box , red , 8 , 0.0 , 2 , 0 )");
+		} else {
+			this.isRegisterNameValid = true;
 		}
 	}
 
@@ -147,8 +168,7 @@ public class LoginViewController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		users = dbProcessor.fetchUserInfo();
 		recipes = dbProcessor.fetchRecipe();
-		
-		
+
 	}
 
 }
