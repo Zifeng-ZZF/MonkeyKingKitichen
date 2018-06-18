@@ -149,7 +149,7 @@
                                     <Insets right="10.0" />
                                  </GridPane.margin>
                               </Label>
-                              <PasswordField fx:id="registerPasswdTxtField1" prefHeight="30.0" prefWidth="253.0" promptText="confirm your password" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                              <PasswordField fx:id="confirmPasswdTxtField" prefHeight="30.0" prefWidth="253.0" promptText="confirm your password" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets left="10.0" right="30.0" />
                                  </GridPane.margin>

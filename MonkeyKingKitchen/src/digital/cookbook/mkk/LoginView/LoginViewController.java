@@ -63,6 +63,9 @@ public class LoginViewController implements Initializable {
 
 	@FXML
 	private PasswordField loginPasswdTxtField;
+	
+	@FXML
+	private PasswordField confirmPasswdTxtField;
 
 	/**
 	 * To realize the login function Compare info from the view's textfields with
@@ -117,7 +120,7 @@ public class LoginViewController implements Initializable {
 
 	/**
 	 * Register a new account
-	 * 
+	 * After which will directily jump to login interface
 	 * @param e
 	 */
 	@FXML
@@ -162,6 +165,20 @@ public class LoginViewController implements Initializable {
 		} else {
 			this.isRegisterNameValid = true;
 		}
+	}
+	
+	/**
+	 * Judge the validity and compatibility of the registering password
+	 * @param e
+	 */
+	@FXML
+	private void handlePasswordConfirm(ActionEvent e) {
+		String fisrtPasswd = registerPasswdTxtField.getText();
+		String confirmPasswd = confirmPasswdTxtField.getText();
+		if(fisrtPasswd.length() < 6)
+			registerPasswdTxtField.setStyle("-fx-effect: innershadow( one-pass-box , red , 8 , 0.0 , 2 , 0 )");
+		if(!fisrtPasswd.equals(confirmPasswd))
+			registerPasswdTxtField.setStyle("-fx-effect: innershadow( one-pass-box , red , 8 , 0.0 , 2 , 0 )");
 	}
 
 	@Override

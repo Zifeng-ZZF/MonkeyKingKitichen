@@ -20,7 +20,7 @@ public class CookBook {
 	private ArrayList<User> users;
 	private DBProcessor dbProcessor = new DBProcessor();
 	private static User currentUser;
-	private static Recipe currentRecipe;
+	private static Recipe currentRecipe = null;
 	private static Recipe recommendRecipe;
 
 	public static User getCurrentUser() {
