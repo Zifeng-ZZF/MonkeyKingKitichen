@@ -38,7 +38,9 @@ public class EditViewController implements Initializable {
 	
 	private DBProcessor dbProcessor = new DBProcessor();
 	private User currentUser = CookBook.getCurrentUser();
+	private Recipe currentRecipe = CookBook.getCurrentRecipe();
 	private ArrayList<Ingredient> addedIngredients = new ArrayList<Ingredient>();
+	private ArrayList<Ingredient> deletedIngredients = new ArrayList<Ingredient>();
 	
 	@FXML
 	private Label EditLb;
@@ -103,12 +105,49 @@ public class EditViewController implements Initializable {
 	@FXML
 	private ComboBox<String> ingredientCb;
 	
+	public void setRecipeDetails(Recipe recipe) {
+		this.recipeNameTxtField.setText(recipe.getName());
+		this.prepareTimeTxtField.setText(String.valueOf(recipe.getPreparationTime()));
+		this.servingsTxtField.setText(String.valueOf(recipe.getServings()));
+		this.servingsTxtField.setText(String.valueOf(recipe.getServings()));
+		this.cookingTimeTxtField.setText(String.valueOf(recipe.getCookingTime()));
+		
+		String step = "";
+		for (String str : recipe.getPreparationSetps()) {
+			step += str;
+		}
+		this.stepsTxtArea.setText(step+"\n");
+		
+		for(Ingredient ingredient : recipe.getIngredients()) {
+			addIngredientHBox(ingredient);
+		}
+	}
+	
+	public void addIngredientHBox(Ingredient ingredient) {
+		String ingredientDesc = ingredient.getName()+" * "+ingredient.getAmount()+" "+ingredient.getUnit();
+
+		if(!ingredient.getProcessMethod().equals("")) 
+			ingredientDesc += " : "+ingredient.getProcessMethod();
+		
+		HBox item = new HBox();
+		Label ingredientTxt = new Label(ingredientDesc);
+		Button deleteBtn = new Button("DELETE");
+		item.getChildren().add(ingredientTxt);
+		item.getChildren().add(deleteBtn);
+		
+		ingredientVBox.getChildren().add(item);
+		//Listen to every delete buttons
+		deleteBtn.setOnAction(ActionEvent->{
+			ingredientVBox.getChildren().remove(item);
+			deletedIngredients.add(ingredient);
+		});
+	}
 	
 	/**
 	 * Add an ingredient item to the recipe and show on the view
 	 * @param e
 	 */
-	
+	@FXML
 	public void addBtnAction(ActionEvent e) {
 			String name = ingredientCb.getSelectionModel().getSelectedItem().toString();
 			boolean isAdded = false;
@@ -130,26 +169,7 @@ public class EditViewController implements Initializable {
 				String processMethod = processTxtField.getText();
 				Ingredient newIngredient = new Ingredient(name, amount, unit, processMethod);
 				this.addedIngredients.add(newIngredient);
-				
-				String ingredientDesc = null;
-
-				if(!processMethod.equals("")) 
-					ingredientDesc = name+" * "+amount+" "+unit+" : "+processMethod;
-				else 
-					ingredientDesc = name+" * "+amount+" "+unit;
-				
-				HBox item = new HBox();
-				Label ingredientTxt = new Label(ingredientDesc);
-				Button removeBtn = new Button("REMOVE");
-				item.getChildren().add(ingredientTxt);
-				item.getChildren().add(removeBtn);
-				
-				ingredientVBox.getChildren().add(item);
-				//Listen to every remove buttons
-				removeBtn.setOnAction(ActionEvent->{
-					ingredientVBox.getChildren().remove(item);
-					addedIngredients.remove(newIngredient);
-				});
+				addIngredientHBox(newIngredient);
 			}
 	}
 	
@@ -157,6 +177,7 @@ public class EditViewController implements Initializable {
 	 * Save the ingredient
 	 * @param e
 	 */
+	@FXML
 	public void saveBtnAction(ActionEvent e) {
 		//Retrieve info from the UI
 		String name = recipeNameTxtField.getText();
@@ -170,12 +191,16 @@ public class EditViewController implements Initializable {
 			recipe.addPreparationStep(step);
 		
 		//Insert into DB and pop up informing
-		dbProcessor.insertRecipe(recipe, 5);
+		dbProcessor.insertRecipe(recipe, currentUser.getUid());
 		
-		for(Ingredient ingredient : this.addedIngredients) {
-			recipe.addIngredient(ingredient);
-			ingredient.setRecipeId(recipe.getRecipeId());
-			dbProcessor.addIngredient(ingredient);
+		for(int i=0;i<this.addedIngredients.size();i++) {
+			recipe.addIngredient(this.addedIngredients.get(i));
+			dbProcessor.addIngredient(this.addedIngredients.get(i));
+		}
+		
+		for(int i=0;i<this.deletedIngredients.size();i++) {
+			dbProcessor.deleteIngredient(this.deletedIngredients.get(i));
+			recipe.deleteIngredient(this.deletedIngredients.get(i));
 		}
 		
 	    Alert alert = new Alert(AlertType.INFORMATION);
@@ -193,6 +218,7 @@ public class EditViewController implements Initializable {
 	 * Canceling edit and return to my recipe list
 	 * @param e
 	 */
+	@FXML
 	public void cancelBtnAction(ActionEvent e) {
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		fxmlLoader.setLocation(getClass().getResource("../MyRecipeView/MyRecipeView.fxml"));

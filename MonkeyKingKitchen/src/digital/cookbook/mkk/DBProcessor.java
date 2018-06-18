@@ -258,6 +258,25 @@ public class DBProcessor {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Delete a ingredient from recipeingredientdb in db
+	 * 
+	 * @param recipe, ingredient
+	 */
+	public void deleteIngredient(Ingredient ingredient) {
+		Connection conn = DBUtil.getConnection();
+		String sql = "delete from recipeingredientdb where ingredient_name=? and recipe_id=?";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, ingredient.getName());
+			pstmt.setInt(2, ingredient.getRecipeId());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Update the recipe if it is editted
@@ -308,6 +327,8 @@ public class DBProcessor {
 			e.printStackTrace();
 		}
 	}
+	
+
 
 	/**
 	 * Delete a Recipe from favorite in db

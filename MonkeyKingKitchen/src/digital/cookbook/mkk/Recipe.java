@@ -53,6 +53,10 @@ public class Recipe implements Serializable {
 		this.ingredients.add(ingredient);
 	}
 	
+	public void deleteIngredient(Ingredient ingredient) {
+//		ingredient.setRecipeId(0);
+		this.ingredients.remove(ingredient);
+	}
 	/**
 	 * Add steps of preparing the meal
 	 * @param preparationSetp
