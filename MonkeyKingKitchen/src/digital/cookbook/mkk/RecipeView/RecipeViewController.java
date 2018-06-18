@@ -144,7 +144,7 @@ public class RecipeViewController implements Initializable{
 		for (String str : steps) {
 			step += str;
 		}
-		this.stepsTxtArea.setText(step);
+		this.stepsTxtArea.setText(step+"\n");
 	}
     
     /**
