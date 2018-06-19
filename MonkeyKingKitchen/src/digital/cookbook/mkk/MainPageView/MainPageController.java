@@ -24,6 +24,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -94,7 +95,7 @@ public class MainPageController implements Initializable {
 		// 1.Judge which type of search
 		String content = this.searchTxtField.getText();
 		String type = this.typeBtn.getText();
-		if (type.equals("recipe name") || type.equals("--select--"))
+		if (type.equals("recipe") || type.equals("--select--"))
 			results = searchRecipeByName(content);
 		else
 			results = searchRecipeByIngredient(content);
@@ -127,7 +128,7 @@ public class MainPageController implements Initializable {
 		for (Recipe recipe : allRecipes.values()) {
 			ArrayList<Ingredient> ingredients = recipe.getIngredients();
 			for (Ingredient ingredient : ingredients) {
-				if (ingredient.getName() == ingredientName)
+				if (ingredient.getName().equals(ingredientName))
 					resultRecipes.add(recipe);
 			}
 		}
@@ -168,7 +169,6 @@ public class MainPageController implements Initializable {
 			Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 			currentStage.setScene(scene);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
@@ -187,7 +187,6 @@ public class MainPageController implements Initializable {
 			Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 			currentStage.setScene(scene);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
@@ -223,6 +222,13 @@ public class MainPageController implements Initializable {
 			Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 			currentStage.close();
 		});
+		//Listen to the menuitems to change the searching type
+		for(MenuItem menuItem : typeBtn.getItems()) {
+			menuItem.setOnAction(e -> {
+				String text = menuItem.getText();
+				typeBtn.setText(text);
+			});
+		}
 	}
 
 }

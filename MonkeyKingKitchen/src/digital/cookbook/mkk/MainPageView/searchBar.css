@@ -8,6 +8,8 @@
 	-fx-text-fill: #404040;
 	-fx-border-width: 0 0 1 0;
 	-fx-border-color: #404040;
+	-fx-font-size: 11;
+	-fx-min-width: 80;
 }
 
 .text-field{
@@ -24,5 +26,5 @@
 }
 
 .button:hover{
-	-fx-backgournd-color: #9f9f9f;
+	-fx-background-color: #9f9f9f;
 }

@@ -10,7 +10,6 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" stylesheets="@ResultView.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digital.cookbook.mkk.ResultView.ResultViewController">
    <children>
-      <TabPane layoutX="90.0" layoutY="185.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" />
       <VBox id="side-bar" prefHeight="600.0" prefWidth="207.0" style="-fx-background-color: #404040;">
          <children>
             <Label id="info-label" fx:id="userLabel" prefHeight="78.0" prefWidth="222.0" text="User1">
@@ -21,7 +20,7 @@
                   <Insets top="10.0" />
                </padding>
             </Label>
-            <Label fx:id="myRecipeLabel" prefHeight="40.0" prefWidth="194.0" text="My Recipe">
+            <Label fx:id="myRecipeLabel" onMouseClicked="#handleMyRecipeBtn" prefHeight="40.0" prefWidth="194.0" text="My Recipe">
                <font>
                   <Font name="Arial Bold" size="13.0" />
                </font>
@@ -29,7 +28,7 @@
                   <Insets left="15.0" right="15.0" top="30.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="myFavoriteLabel" layoutX="10.0" layoutY="73.0" prefHeight="40.0" prefWidth="227.0" text="My Favorite">
+            <Label fx:id="myFavoriteLabel" layoutX="10.0" layoutY="73.0" onMouseClicked="#handleMyFavoriteBtn" prefHeight="40.0" prefWidth="227.0" text="My Favorite">
                <font>
                   <Font name="Arial Bold" size="13.0" />
                </font>
@@ -45,7 +44,7 @@
                   <Insets left="15.0" right="15.0" top="300.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="mainPageLabel" layoutX="25.0" layoutY="498.0" prefHeight="40.0" prefWidth="206.0" text="Main Page">
+            <Label fx:id="mainPageLabel" layoutX="25.0" layoutY="498.0" onMouseClicked="#handleMainPageBtn" prefHeight="40.0" prefWidth="206.0" text="Main Page">
                <font>
                   <Font name="Arial Bold" size="13.0" />
                </font>
@@ -64,8 +63,8 @@
                   <Font name="Arial" size="14.0" />
                </font>
                <items>
-                  <MenuItem mnemonicParsing="false" text="recipe name" />
-                  <MenuItem mnemonicParsing="false" text="ingredient name" />
+                  <MenuItem mnemonicParsing="false" text="recipe" />
+                  <MenuItem mnemonicParsing="false" text="ingredient " />
                </items>
             </MenuButton>
             <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#handleSearchBtn" prefHeight="35.0" prefWidth="90.0" text="search" GridPane.columnIndex="2">
@@ -86,15 +85,20 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <TitledPane collapsible="false" layoutX="248.0" layoutY="85.0" minHeight="-Infinity" minWidth="-Infinity" opacity="0.84" prefHeight="483.0" prefWidth="487.0" text="Search Result" textFill="WHITE">
+      <TitledPane fx:id="titlePane" collapsible="false" layoutX="248.0" layoutY="85.0" minHeight="-Infinity" minWidth="-Infinity" opacity="0.84" prefHeight="483.0" prefWidth="487.0" text="Search Result" textFill="WHITE">
          <content>
-            <VBox id="list-vbox" fx:id="listVBox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="484.0">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <padding>
-                  <Insets left="10.0" />
-               </padding></VBox>
+            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" pannable="true" prefViewportHeight="451.0" prefViewportWidth="485.0" vbarPolicy="ALWAYS">
+               <content>
+                  <VBox id="list-vbox" fx:id="listVBox" minHeight="449.0" minWidth="-Infinity" prefWidth="484.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
          </content>
          <font>
             <Font name="System Bold" size="15.0" />

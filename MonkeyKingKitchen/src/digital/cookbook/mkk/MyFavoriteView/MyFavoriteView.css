@@ -62,3 +62,26 @@
 #main-page-button:hover, #my-recipe-button:hover{
 	-fx-background-color:derive(#404040,0.5);
 }
+
+.scroll-pane .scroll-bar{
+	-fx-background-color: transparent;
+	-fx-pref-width:5;
+}
+
+.scroll-pane .increment-button, .scroll-pane .decrement-button{
+	-fx-background-color: transparent;
+}
+
+
+.scroll-pane .scroll-bar .decrement-arrow, 
+.scroll-pane .scroll-bar .increment-arrow
+{
+	-fx-shape:" ";
+	-fx-padding:0;
+}
+
+.scroll-pane .thumb {
+	-fx-background-insets: 0, 0, 0, 0;
+	-fx-background-radius: 120;
+	-fx-background-color: derive(gray,70%);
+}

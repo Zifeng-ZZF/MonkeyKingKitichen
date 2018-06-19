@@ -64,8 +64,8 @@
 				</TextField>
 				<MenuButton fx:id="typeBtn" mnemonicParsing="false" prefHeight="30.0" text="--select--" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="RIGHT">
 					<items>
-						<MenuItem mnemonicParsing="false" text="recipe name" />
-						<MenuItem mnemonicParsing="false" text="ingredient name" />
+						<MenuItem mnemonicParsing="false" text="recipe" />
+						<MenuItem mnemonicParsing="false" text="ingredient" />
 					</items>
 					<font>
 						<Font name="Arial" size="14.0" />

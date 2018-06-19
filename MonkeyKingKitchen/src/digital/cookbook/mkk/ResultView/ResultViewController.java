@@ -10,7 +10,12 @@ import java.util.Set;
 
 import digital.cookbook.mkk.CookBook;
 import digital.cookbook.mkk.DBProcessor;
+import digital.cookbook.mkk.Ingredient;
 import digital.cookbook.mkk.Recipe;
+import digital.cookbook.mkk.User;
+import digital.cookbook.mkk.MainPageView.MainPageController;
+import digital.cookbook.mkk.MyFavoriteView.MyFavoriteController;
+import digital.cookbook.mkk.MyRecipeView.MyRecipeController;
 import digital.cookbook.mkk.RecipeView.RecipeViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,7 +27,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -33,6 +43,10 @@ public class ResultViewController implements Initializable {
 	private Map<Integer, Recipe> allRecipes;
 	private DBProcessor dbProcessor = new DBProcessor();
 	private Map<Button, Recipe> itemAcesses;
+	private User currentUser = CookBook.getCurrentUser();
+	
+	@FXML
+	private TitledPane titlePane;
 
 	@FXML
 	private Label userLabel;
@@ -75,6 +89,9 @@ public class ResultViewController implements Initializable {
 
 	@FXML
 	private Label exitLabel;
+	
+	@FXML
+	private ScrollPane scrollPane;
 
 	/**
 	 * Get searching result from main page and list it
@@ -125,7 +142,6 @@ public class ResultViewController implements Initializable {
 		}
 	}
 
-	//sdsd
 	/**
 	 * Search in the result UI
 	 * After searching in the main page, user can continue to search
@@ -137,31 +153,88 @@ public class ResultViewController implements Initializable {
 		
 		String name = searchTxtField.getText();
 		ArrayList<Recipe> newResults = new ArrayList<>();
-
-		Set recipeIds = allRecipes.keySet();
-		for (Object recipeIdObj : recipeIds) {
-			int id = (Integer) recipeIdObj;
-			String recipeName = allRecipes.get(id).getName();
-			if (recipeName.equals(name)) {
-				newResults.add(allRecipes.get(id));
+		String type = this.typeBtn.getText();
+		
+		if (type.equals("recipe") || type.equals("--select--")) {
+			Set recipeIds = allRecipes.keySet();
+			for (Object recipeIdObj : recipeIds) {
+				int id = (Integer) recipeIdObj;
+				String recipeName = allRecipes.get(id).getName();
+				if (recipeName.equals(name)) {
+					newResults.add(allRecipes.get(id));
+				}
 			}
 		}
+		else {
+			for (Recipe recipe : allRecipes.values()) {
+				ArrayList<Ingredient> ingredients = recipe.getIngredients();
+				for (Ingredient ingredient : ingredients) {
+					if (ingredient.getName().equals(name))
+						newResults.add(recipe);
+				}
+			}
+		}
+			
 		
-		for (Recipe recipe : newResults) {
-			itemName = new Label(recipe.getName());
-			itemDesc = new Label(recipe.getType() + ", Cooking time: " + recipe.getCookingTime() + ", Preparing time: "
-					+ recipe.getPreparationTime() + ", Servings: " + recipe.getServings());
-			itemOpenBtn = new Button("OPEN");
-
-			item = new HBox();
-			item.getChildren().add(itemName);
-			item.getChildren().add(itemDesc);
-			item.getChildren().add(itemOpenBtn);
-
-			listVBox.getChildren().add(item);
+		intializeResult(newResults);
+	}
+	
+	/**
+	 * Jump to main page
+	 * @param e
+	 */
+	@FXML
+	public void handleMainPageBtn(MouseEvent e) {
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		fxmlLoader.setLocation(getClass().getResource("../MainPageView/MainPageView.fxml"));
+		try {
+			Scene scene = new Scene(fxmlLoader.load());
+			// set the name tag
+			MainPageController controller = fxmlLoader.getController();
+			controller.setUserTag(currentUser.getName());
+			Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+			currentStage.setScene(scene);
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * Jump to my recipe list
+	 * @param e
+	 */
+	@FXML
+	public void handleMyRecipeBtn(MouseEvent e) {
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		fxmlLoader.setLocation(getClass().getResource("../MyRecipeView/MyRecipeView.fxml"));
+		try {
+			Parent parent = fxmlLoader.load();
+			Scene scene = new Scene(parent);
+			Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+			currentStage.setScene(scene);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Jump to my favorite recipe list
+	 * @param e
+	 */
+	@FXML
+	public void handleMyFavoriteBtn(MouseEvent e) {
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		fxmlLoader.setLocation(getClass().getResource("../MyFavoriteView/MyFavoriteView.fxml"));
+		try {
+			Parent parent = fxmlLoader.load();
+			Scene scene = new Scene(parent);
+			Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+			currentStage.setScene(scene);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Initialize the variables for this UI
 	 */
@@ -175,6 +248,14 @@ public class ResultViewController implements Initializable {
 			currentStage.close();
 		});
 		
+		//Listen to the menuitems to change the searching type
+		for(MenuItem menuItem : typeBtn.getItems()) {
+			menuItem.setOnAction(e -> {
+				String text = menuItem.getText();
+				typeBtn.setText(text);
+			});
+		}
+
 	}
 
 }

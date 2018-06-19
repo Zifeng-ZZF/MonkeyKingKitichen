@@ -28,6 +28,8 @@
 	-fx-text-fill: #404040;
 	-fx-border-width: 0 0 1 0;
 	-fx-border-color: #404040;
+	-fx-font-size: 11;
+	-fx-min-width: 80;
 }
 
 .text-field{
@@ -41,6 +43,10 @@
 	-fx-background-color:#404040;
 	-fx-background-radius : 0;
 	-fx-text-fill: #ffffff;
+}
+
+.button:hover{
+	-fx-background-color: #9f9f9f;
 }
 
 #list-vbox{
@@ -66,7 +72,7 @@
 }
 
 #list-vbox .label{
-	-fx-min-width: 100;
+	-fx-min-width: 120;
 }
 
 #list-vbox .button{
@@ -92,5 +98,27 @@
 	
 }
 
+.scroll-pane .scroll-bar{
+	-fx-background-color: transparent;
+	-fx-pref-width:5;
+}
+
+.scroll-pane .increment-button, .scroll-pane .decrement-button{
+	-fx-background-color: transparent;
+}
+
+
+.scroll-pane .scroll-bar .decrement-arrow, 
+.scroll-pane .scroll-bar .increment-arrow
+{
+	-fx-shape:" ";
+	-fx-padding:0;
+}
+
+.scroll-pane .thumb {
+	-fx-background-insets: 0, 0, 0, 0;
+	-fx-background-radius: 120;
+	-fx-background-color: derive(gray,70%);
+}
 
 

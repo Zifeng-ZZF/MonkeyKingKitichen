@@ -40,14 +40,18 @@
 		</Pane>
 		<TitledPane collapsible="false" layoutX="72.0" layoutY="130.0" minHeight="-Infinity" minWidth="-Infinity" opacity="0.84" prefHeight="358.0" prefWidth="471.0" text="favorite" textFill="WHITE">
 			<content>
-				<VBox id="list-vbox" fx:id="listVBox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="286.0" prefWidth="468.0">
-					<opaqueInsets>
-						<Insets />
-					</opaqueInsets>
-					<padding>
-						<Insets left="10.0" />
-					</padding>
-				</VBox>
+            <ScrollPane hbarPolicy="NEVER" pannable="true" prefViewportHeight="326.0" prefViewportWidth="469.0" vbarPolicy="ALWAYS">
+               <content>
+      				<VBox id="list-vbox" fx:id="listVBox" minHeight="327.0" minWidth="-Infinity" prefWidth="468.0">
+      					<opaqueInsets>
+      						<Insets />
+      					</opaqueInsets>
+      					<padding>
+      						<Insets left="10.0" />
+      					</padding>
+      				</VBox>
+               </content>
+            </ScrollPane>
 			</content>
 			<effect>
 				<DropShadow radius="15.465" width="42.86" />

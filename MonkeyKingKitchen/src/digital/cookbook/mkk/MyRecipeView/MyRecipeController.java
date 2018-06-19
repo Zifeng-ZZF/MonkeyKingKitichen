@@ -28,7 +28,7 @@ import digital.cookbook.mkk.RecipeView.RecipeViewController;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.Label;
-
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -79,6 +79,8 @@ public class MyRecipeController implements Initializable {
 	private VBox buttonItem;
 	@FXML
 	private Button itemEditBtn;
+	@FXML
+	private ScrollPane scrollPane;
 
 	@FXML
 	public void deleteEvent(ActionEvent event) {

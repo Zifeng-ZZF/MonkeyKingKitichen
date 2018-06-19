@@ -34,6 +34,7 @@ public class DBProcessor {
 				userInDB.setUid(rSet.getInt(1));
 				userlist.add(userInDB);
 			}
+			rSet.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -85,6 +86,8 @@ public class DBProcessor {
 				recipeList.put(recipe.getRecipeId(), recipe);
 
 			}
+			
+			rSet.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -111,6 +114,7 @@ public class DBProcessor {
 				System.out.println("666" + rs.getString(1));
 			}
 
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -159,9 +163,12 @@ public class DBProcessor {
 							ingredientRS.getString(3), ingredientRS.getString(4));
 					recipe.addIngredient(ingredient);
 				}
-
+				ingredientRS.close();
+				
 				favoriteList.add(recipe);
 			}
+			
+			recipeRS.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -188,6 +195,8 @@ public class DBProcessor {
 				maxID = resultSet.getInt(1);
 			else
 				maxID = 0;
+			
+			resultSet.close();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
@@ -410,6 +419,8 @@ public class DBProcessor {
 			updatePStmt.setInt(2, recipe.getRecipeId());
 			updatePStmt.executeUpdate();
 			recipe.setRate(aveRate);
+			
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -436,6 +447,9 @@ public class DBProcessor {
 					statementClean.executeUpdate(cleanAutoIncreaseSql);
 				}
 			}
+			
+			resultSet.close();
+			
 		} catch (
 
 		SQLException e1) {
@@ -481,6 +495,9 @@ public class DBProcessor {
 					recipe.addIngredient(ingredient);
 				}
 			}
+			
+			rSet.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -508,7 +525,7 @@ public class DBProcessor {
 				rate = rs.getInt("rate");
 				rs.previous();
 			}
-
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
