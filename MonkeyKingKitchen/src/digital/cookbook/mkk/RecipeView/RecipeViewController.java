@@ -84,7 +84,10 @@ public class RecipeViewController implements Initializable{
 	
     @FXML
     private Label rateOnLb;
-
+    
+    @FXML
+    private Button confirmrateBtn;
+    
 
 	/**
 	 * Button to export the pdf
@@ -234,9 +237,11 @@ public class RecipeViewController implements Initializable{
 	 * Rate on the recipe
 	 */
 	public void rateAction() {
+		
 		double rate = rateSlider.getValue();
 		dbProcessor.insertRate(currentRecipe,currentUser.getUid(),rate);
-		rateLb.setText(String.valueOf(currentRecipe.getRate()));
+		confirmrateBtn.setVisible(false);
+		
 	}
 	
 	@Override
@@ -244,5 +249,11 @@ public class RecipeViewController implements Initializable{
 		pdfProcessor = new PdfProcess();
 		currentRecipe = CookBook.getCurrentRecipe();
 		currentUser = CookBook.getCurrentUser();
+		int rate = dbProcessor.getTheRate(currentRecipe,currentUser.getUid());
+		if (rate != 0) {
+			confirmrateBtn.setVisible(false);
+			rateSlider.setValue(rate);
+		}
 	}
+
 }

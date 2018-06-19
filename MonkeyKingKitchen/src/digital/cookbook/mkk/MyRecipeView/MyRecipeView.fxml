@@ -14,16 +14,6 @@
             <Font name="Berlin Sans FB Demi Bold" size="55.0" />
          </font>
       </Text>
-      <Button fx:id="deleteButton" layoutX="417.0" layoutY="509.0" mnemonicParsing="false" onAction="#deleteEvent" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #404040;" text="Delete" textFill="WHITE">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Button>
-      <Button fx:id="openButton" layoutX="66.0" layoutY="509.0" mnemonicParsing="false" onAction="#openEvent" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #404040;" text="Open" textFill="WHITE">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
       <Pane fx:id="rightPane" layoutX="595.0" layoutY="-2.0" prefHeight="603.0" prefWidth="205.0" style="-fx-background-color: #404040;" stylesheets="@MyRecipeView.css">
          <children>
             <Label fx:id="userNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="43.0" prefHeight="76.0" prefWidth="169.0" text="User" textFill="WHITE">
@@ -48,12 +38,7 @@
             </Label>
          </children>
       </Pane>
-      <Button fx:id="editButton" layoutX="183.0" layoutY="509.0" mnemonicParsing="false" onAction="#editEvent" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #404040;" text="Edit" textFill="WHITE">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-      <Button fx:id="createButton" layoutX="300.0" layoutY="509.0" mnemonicParsing="false" onAction="#createEvent" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #404040;" text="Create" textFill="WHITE">
+      <Button fx:id="createButton" layoutX="59.0" layoutY="509.0" mnemonicParsing="false" onAction="#createEvent" prefHeight="50.0" prefWidth="482.0" style="-fx-background-color: #3d85c6;" text="Create a new one !!" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>

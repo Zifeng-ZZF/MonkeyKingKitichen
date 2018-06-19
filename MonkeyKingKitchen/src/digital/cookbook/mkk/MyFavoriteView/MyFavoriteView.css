@@ -11,17 +11,32 @@
 	-fx-pref-width: 484;
 }
 
-#list-vbox .label, #list-vbox .button{
+#list-vbox .button{
 	-fx-text-fill: #ffffff;
 	-fx-border-width:0 0 0 0;
-	-fx-background-color: rgba(0,0,0,0.6);
-	-fx-padding: 10;
+	-fx-background-color: rgba(0,0,0,0.8);
 	-fx-font-size: 11;
-	-fx-pref-height: 80;
+	-fx-min-height: 35;
+	-fx-min-width: 80;
+	-fx-background-radius : 0;
+	-fx-background-insets: 0 0 0.1 0;
+
+}
+
+#list-vbox .hbox .vbox{
+	-fx-pref-height:65
+}
+
+#list-vbox .button:hover{
+	-fx-background-color: rgba(0,0,0,0.5);
 }
 
 #list-vbox .label{
-	-fx-min-width: 100;
+	-fx-min-width: 120;
+	-fx-min-height: 70;
+	-fx-padding: 0 10 0 15;
+	-fx-background-color: rgba(0,0,0,0.6);
+	-fx-text-fill: #ffffff;
 }
 
 .titled-pane .title{
@@ -35,4 +50,15 @@
 	-fx-border-width: 0 0 0 0;
 	-fx-background-color: #ffffff;
 	
+}
+
+#main-page-button, #my-recipe-button{
+	-fx-background-color:transparent;
+	-fx-border-width:0 0 1 0;
+	-fx-border-color:#ffffff;
+	-fx-text-fill:#ffffff;
+}
+
+#main-page-button:hover, #my-recipe-button:hover{
+	-fx-background-color:derive(#404040,0.5);
 }

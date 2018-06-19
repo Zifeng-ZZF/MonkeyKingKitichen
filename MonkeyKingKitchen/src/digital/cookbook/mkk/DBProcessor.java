@@ -97,26 +97,26 @@ public class DBProcessor {
 	 * 
 	 * @return ArrayList contains all ingredients
 	 */
-	public ArrayList<String> fetchIngredients(){
+	public ArrayList<String> fetchIngredients() {
 		Connection conn = DBUtil.getConnection();
 		ArrayList<String> allIngredients = new ArrayList<String>();
 		String sql = "select*from ingredienttb";
-		
+
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				allIngredients.add(rs.getString(1));
-				System.out.println("666"+rs.getString(1));
+				System.out.println("666" + rs.getString(1));
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return allIngredients;
 	}
-	
+
 	/**
 	 * Fetch all the MyFavouriteRecipe from the db to the ArrayList MyFavouriteList
 	 * 
@@ -258,22 +258,21 @@ public class DBProcessor {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Delete a ingredient from recipeingredientdb in db
 	 * 
-	 * @param recipe, ingredient
+	 * @param recipe,
+	 *            ingredient
 	 */
-	public void deleteIngredient(Ingredient ingredient) {
+	public void deleteIngredient(int recipeId) {
 		Connection conn = DBUtil.getConnection();
-		String sql = "delete from recipeingredientdb where ingredient_name=? and recipe_id=?";
+		String sql = "delete from recipeingredientdb where recipe_id=?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, ingredient.getName());
-			pstmt.setInt(2, ingredient.getRecipeId());
+			pstmt.setInt(1, recipeId);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -287,7 +286,7 @@ public class DBProcessor {
 		Connection connection = DBUtil.getConnection();
 		String sql = "update recipetb set recipe_name = ?, recipe_preparation_time = ?,"
 				+ "recipe_cooking_time = ?, recipe_averate = ?,"
-				+ "recipe_serving = ?, recipe_type = ?, recipe_steps = ? " + "where recipe_id = ?;";
+				+ "recipe_servings = ?, recipe_type = ?, recipe_steps = ? " + "where recipe_id = ?;";
 
 		try {
 			PreparedStatement pStatement = connection.prepareStatement(sql);
@@ -305,6 +304,8 @@ public class DBProcessor {
 				steps += step;
 			}
 			pStatement.setString(7, steps);
+
+			pStatement.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -327,8 +328,6 @@ public class DBProcessor {
 			e.printStackTrace();
 		}
 	}
-	
-
 
 	/**
 	 * Delete a Recipe from favorite in db
@@ -399,16 +398,16 @@ public class DBProcessor {
 			ResultSet rs = queryPStmt.executeQuery();
 			int Rate = 0;
 			int amount = 0;
-			
+
 			while (rs.next()) {
 				Rate = Rate + rs.getInt(3);
 				amount = amount + 1;
 				aveRate = Rate / amount;
 			}
-			
+
 			PreparedStatement updatePStmt = conn.prepareStatement(updatesql);
 			updatePStmt.setDouble(1, aveRate);
-			updatePStmt.setInt(2,recipe.getRecipeId());
+			updatePStmt.setInt(2, recipe.getRecipeId());
 			updatePStmt.executeUpdate();
 			recipe.setRate(aveRate);
 		} catch (SQLException e) {
@@ -447,6 +446,7 @@ public class DBProcessor {
 
 	/**
 	 * Get the recommending Recipe
+	 * 
 	 * @return
 	 */
 	public Recipe getRecommendRecipe() {
@@ -454,7 +454,7 @@ public class DBProcessor {
 		String sql1 = "select * from recipetb order by recipe_averate desc limit 1";
 		String sql2 = "select*from recipeingredientdb where recipe_id=?";
 		Recipe recipe = null;
-		
+
 		try {
 			Statement statement = connection.createStatement();
 			PreparedStatement pStatement = connection.prepareStatement(sql2);
@@ -472,18 +472,47 @@ public class DBProcessor {
 				for (String step : steps) {
 					recipe.addPreparationStep(step);
 				}
-		
+
 				pStatement.setInt(1, recipe.getRecipeId());
 				ResultSet ingredientRSet = pStatement.executeQuery();
 				while (ingredientRSet.next()) {
 					Ingredient ingredient = new Ingredient(ingredientRSet.getString(1), ingredientRSet.getDouble(5),
 							ingredientRSet.getString(3), ingredientRSet.getString(4));
 					recipe.addIngredient(ingredient);
-				}	
+				}
 			}
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return recipe;
 	}
+
+	/**
+	 * 
+	 * @param recipe
+	 * @param userID
+	 * @return
+	 */
+	public int getTheRate(Recipe recipe, int userID) {
+
+		int rate = 0;
+		Connection conn = DBUtil.getConnection();
+		String sql = "select rate from ratetb where user_id=? and recipe_id=?;";
+
+		try {
+			PreparedStatement queryPStmt = conn.prepareStatement(sql);
+			queryPStmt.setInt(1, userID);
+			queryPStmt.setInt(2, recipe.getRecipeId());
+			ResultSet rs = queryPStmt.executeQuery();
+			if (rs.first()) {
+				rate = rs.getInt("rate");
+				rs.previous();
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rate;
+	}
+
 }

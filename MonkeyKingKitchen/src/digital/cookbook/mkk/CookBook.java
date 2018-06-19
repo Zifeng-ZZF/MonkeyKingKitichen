@@ -16,7 +16,7 @@ import java.util.Set;
 public class CookBook {
 
 	private String cookBookTitle;
-	private Map<Integer, Recipe> recipes;
+	private static Map<Integer, Recipe> recipes;
 	private ArrayList<User> users;
 	private DBProcessor dbProcessor = new DBProcessor();
 	private static User currentUser;
@@ -107,8 +107,8 @@ public class CookBook {
 	 * 
 	 * @return the recipes list
 	 */
-	public Map<Integer, Recipe> getRecipesList() {
-		return this.recipes;
+	public static Map<Integer, Recipe> getRecipesList() {
+		return recipes;
 	}
 
 	

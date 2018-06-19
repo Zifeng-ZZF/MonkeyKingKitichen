@@ -8,63 +8,53 @@
 <?import javafx.scene.layout.*?>
 
 <Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" stylesheets="@MyFavoriteView.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digital.cookbook.mkk.MyFavoriteView.MyFavoriteController">
-   <children>
-      <Text fx:id="myFavor" fill="#363c40" layoutX="77.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Favorite Recipe" wrappingWidth="481.6888122558594">
-         <font>
-            <Font name="Berlin Sans FB Demi Bold" size="55.0" />
-         </font>
-      </Text>
-      <Button fx:id="deleteButton" layoutX="343.0" layoutY="517.0" mnemonicParsing="false" onAction="#deleteRecipeEvent" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #404040;" text="Delete" textFill="WHITE">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Button>
-      <Button fx:id="openButton" layoutX="72.0" layoutY="517.0" mnemonicParsing="false" onAction="#openRecipeEvent" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #404040;" text="Open" textFill="WHITE">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Button>
-      <Pane fx:id="rightPane" layoutX="595.0" layoutY="-2.0" prefHeight="603.0" prefWidth="205.0" style="-fx-background-color: #404040;">
-         <children>
-            <Label fx:id="userNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="43.0" prefHeight="76.0" prefWidth="169.0" text="User" textFill="WHITE">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Label>
-            <Button fx:id="myRecipeButton" layoutX="44.0" layoutY="170.0" mnemonicParsing="false" onAction="#jumpToMyRecipeEvent" prefHeight="76.0" prefWidth="127.0" style="-fx-background-color: #ffffff;" text="My Recipe">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button fx:id="mainPageButton" layoutX="41.0" layoutY="289.0" mnemonicParsing="false" onAction="#jumpToMainPageEvent" prefHeight="76.0" prefWidth="134.0" style="-fx-background-color: #ffffff;" text="Main Page">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Label fx:id="mkkLogoLabel" layoutX="58.0" layoutY="487.0" prefHeight="67.0" prefWidth="101.0" text="MKK" textFill="WHITE">
-               <font>
-                  <Font name="Berlin Sans FB Demi Bold" size="39.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <TitledPane collapsible="false" layoutX="72.0" layoutY="130.0" minHeight="-Infinity" minWidth="-Infinity" opacity="0.84" prefHeight="358.0" prefWidth="471.0" text="favorite" textFill="WHITE">
-         <content>
-            <VBox id="list-vbox" fx:id="listVBox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="484.0">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-            </VBox>
-         </content>
-         <effect>
-            <DropShadow radius="15.465" width="42.86" />
-         </effect>
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </TitledPane>
-   </children>
+	<children>
+		<Text fx:id="myFavor" fill="#363c40" layoutX="77.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Favorite Recipe" wrappingWidth="481.6888122558594">
+			<font>
+				<Font name="Berlin Sans FB Demi Bold" size="55.0" />
+			</font>
+		</Text>
+		<Pane fx:id="rightPane" layoutX="595.0" layoutY="-2.0" prefHeight="603.0" prefWidth="205.0" style="-fx-background-color: #404040;">
+			<children>
+				<Label fx:id="userNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="43.0" prefHeight="76.0" prefWidth="169.0" text="User" textFill="WHITE">
+					<font>
+						<Font size="30.0" />
+					</font>
+				</Label>
+				<Button id="my-recipe-button" fx:id="myRecipeButton" layoutX="12.0" layoutY="170.0" mnemonicParsing="false" onAction="#jumpToMyRecipeEvent" prefHeight="50.0" prefWidth="180.0" text="My Recipe">
+					<font>
+						<Font size="18.0" />
+					</font>
+				</Button>
+				<Button id="main-page-button" fx:id="mainPageButton" layoutX="11.0" layoutY="245.0" mnemonicParsing="false" onAction="#jumpToMainPageEvent" prefHeight="50.0" prefWidth="180.0" text="Main Page">
+					<font>
+						<Font size="18.0" />
+					</font>
+				</Button>
+				<Label fx:id="mkkLogoLabel" layoutX="58.0" layoutY="487.0" prefHeight="67.0" prefWidth="101.0" text="MKK" textFill="WHITE">
+					<font>
+						<Font name="Berlin Sans FB Demi Bold" size="39.0" />
+					</font>
+				</Label>
+			</children>
+		</Pane>
+		<TitledPane collapsible="false" layoutX="72.0" layoutY="130.0" minHeight="-Infinity" minWidth="-Infinity" opacity="0.84" prefHeight="358.0" prefWidth="471.0" text="favorite" textFill="WHITE">
+			<content>
+				<VBox id="list-vbox" fx:id="listVBox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="286.0" prefWidth="468.0">
+					<opaqueInsets>
+						<Insets />
+					</opaqueInsets>
+					<padding>
+						<Insets left="10.0" />
+					</padding>
+				</VBox>
+			</content>
+			<effect>
+				<DropShadow radius="15.465" width="42.86" />
+			</effect>
+			<font>
+				<Font name="System Bold" size="15.0" />
+			</font>
+		</TitledPane>
+	</children>
 </Pane>
