@@ -120,7 +120,7 @@
 						</Label>
             <TextArea id="ingredient-text-area" fx:id="ingredientsTxtArea" editable="false" prefHeight="238.0" prefWidth="227.0" text="cornstarch * 1 tablespoon&#10;soy sauce * 4 tablespoon&#10;chicken breast * 0.5 kg&#10;Shaoxin rice wine * 3 tablespoon&#10;sugar * 4 tablespoon&#10;chicken stock * 4 tablespoon&#10;cornstarch * 4 tablespoon&#10;cornstarch * 4 tablespoon&#10;" wrapText="true" GridPane.rowIndex="1">
                <font>
-                  <Font name="Arial Rounded MT Bold" size="12.0" />
+                  <Font name="Microsoft Tai Le" size="12.0" />
                </font>
             </TextArea>
 					</children>
@@ -159,13 +159,13 @@
             </TextArea>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                <children>
-						<Label fx:id="rateOnLb" prefHeight="50.0" prefWidth="76.0" text="Rate" textFill="#61a0a4">
+						<Label fx:id="rateOnLb" minWidth="50.0" prefHeight="50.0" text="Rate" textFill="#9ac7c9">
 							<font>
-								<Font name="Arial Bold" size="14.0" />
+								<Font name="Arial Bold" size="12.0" />
 							</font>
 						</Label>
 						<Slider id="slide" fx:id="rateSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="50.0" prefWidth="266.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-                  <Button id="rate-confirm-button" fx:id="confirmrateBtn" mnemonicParsing="false" onAction="#rateAction" prefHeight="53.0" prefWidth="63.0" text="Button">
+                  <Button id="rate-confirm-button" fx:id="confirmrateBtn" mnemonicParsing="false" onAction="#rateAction" prefHeight="53.0" prefWidth="63.0" text="confirm">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
