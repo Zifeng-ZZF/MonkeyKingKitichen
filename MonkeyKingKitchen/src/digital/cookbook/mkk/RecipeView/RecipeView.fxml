@@ -9,11 +9,11 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@recipe.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digital.cookbook.mkk.RecipeView.RecipeViewController">
 	<children>
-      <Pane>
+      <Pane prefHeight="134.0" prefWidth="801.0">
          <children>
-      				<Label id="recipe-name-label" fx:id="recipeNameLb" prefHeight="175.0" prefWidth="567.0" text="Gong Bao Jiding" textFill="#16858d">
+      				<Label id="recipe-name-label" fx:id="recipeNameLb" prefHeight="128.0" prefWidth="567.0" text="Gong Bao Jiding" textFill="#404040">
       					<font>
-      						<Font name="Microsoft YaHei Light" size="52.0" />
+      						<Font name="Palatino Linotype Bold" size="35.0" />
       					</font>
       					<opaqueInsets>
       						<Insets />
@@ -22,7 +22,7 @@
                   <Insets left="30.0" />
                </padding>
       				</Label>
-      				<GridPane id="info-pane" layoutX="561.0" prefHeight="175.0" prefWidth="240.0">
+      				<GridPane id="info-pane" layoutX="561.0" prefHeight="128.0" prefWidth="240.0">
       					<columnConstraints>
       						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       					</columnConstraints>
@@ -83,88 +83,99 @@
             <DropShadow blurType="ONE_PASS_BOX" radius="11.557500000000001" width="27.23" />
          </effect>
       </Pane>
-		<Pane layoutY="175.0" prefHeight="425.0" prefWidth="209.0">
-			<children>
-      						<GridPane id="btn-grid-pane" layoutX="13.0" layoutY="290.0" prefHeight="121.0" prefWidth="209.0">
-      							<columnConstraints>
-      								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      							</columnConstraints>
-      							<rowConstraints>
-      								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      							</rowConstraints>
-      							<children>
-      								<Button fx:id="exportPdfBtn" mnemonicParsing="false" onAction="#exportPDF" prefHeight="30.0" prefWidth="173.0" text="Export PDF" textFill="WHITE" GridPane.halignment="CENTER" />
-      								<Button fx:id="toHomepageBtn" mnemonicParsing="false" onAction="#returnToHomepage" style="-fx-background-color: #003366;" text="Homepage" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-      								<Button fx:id="addToFavoriteBtn" mnemonicParsing="false" onAction="#addToFavoriteAction" prefHeight="85.0" prefWidth="194.0" text="Add to Favoirte" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      							</children>
-      							<padding>
-      								<Insets bottom="10.0" left="5.0" />
-      							</padding>
-      						</GridPane>
-      				<GridPane layoutX="7.0" layoutY="7.0" prefHeight="266.0" prefWidth="240.0">
-      					<columnConstraints>
-      						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      					</columnConstraints>
-      					<rowConstraints>
-      						<RowConstraints maxHeight="136.0" minHeight="0.0" prefHeight="55.0" vgrow="SOMETIMES" />
-      						<RowConstraints maxHeight="373.0" minHeight="10.0" prefHeight="211.0" vgrow="SOMETIMES" />
-      					</rowConstraints>
-      					<children>
-      						<Label text="Ingredients" textFill="#61a0a4">
-      							<font>
-      								<Font name="Microsoft YaHei Light" size="28.0" />
-      							</font>
-      							<GridPane.margin>
-      								<Insets left="20.0" />
-      							</GridPane.margin>
-      						</Label>
-                  <TextArea id="ingredient-text-area" fx:id="ingredientsTxtArea" editable="false" prefHeight="238.0" prefWidth="227.0" text="cornstarch * 1 tablespoon&#10;soy sauce * 4 tablespoon&#10;chicken breast * 0.5 kg&#10;Shaoxin rice wine * 3 tablespoon&#10;sugar * 4 tablespoon&#10;chicken stock * 4 tablespoon&#10;cornstarch * 4 tablespoon&#10;cornstarch * 4 tablespoon&#10;" wrapText="true" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="12.0" />
-                     </font>
-                  </TextArea>
-      					</children>
-      					<padding>
-      						<Insets left="5.0" />
-      					</padding>
-      				</GridPane>
-			</children>
-		</Pane>
-		<Pane layoutX="238.0" layoutY="176.0" prefHeight="425.0" prefWidth="560.0">
-			<children>
-				<GridPane layoutX="99.0" layoutY="8.0" prefHeight="404.0" prefWidth="428.0">
+						<GridPane id="btn-grid-pane" layoutX="25.0" layoutY="439.0" prefHeight="128.0" prefWidth="232.0">
+							<columnConstraints>
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="227.0" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+							</rowConstraints>
+							<children>
+								<Button fx:id="exportPdfBtn" mnemonicParsing="false" onAction="#exportPDF" prefHeight="30.0" prefWidth="173.0" text="Export PDF" textFill="WHITE" GridPane.halignment="CENTER" />
+								<Button fx:id="toHomepageBtn" mnemonicParsing="false" onAction="#returnToHomepage" text="Homepage" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+								<Button fx:id="addToFavoriteBtn" mnemonicParsing="false" onAction="#addToFavoriteAction" prefHeight="85.0" prefWidth="194.0" text="Add to Favoirte" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+							</children>
+							<padding>
+								<Insets bottom="10.0" left="5.0" />
+							</padding>
+						</GridPane>
+				<GridPane layoutX="25.0" layoutY="143.0" prefHeight="266.0" prefWidth="232.0">
 					<columnConstraints>
 						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
 					</columnConstraints>
 					<rowConstraints>
-						<RowConstraints maxHeight="379.0" minHeight="10.0" prefHeight="354.0" vgrow="SOMETIMES" />
-						<RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+						<RowConstraints maxHeight="136.0" minHeight="0.0" prefHeight="55.0" vgrow="SOMETIMES" />
+						<RowConstraints maxHeight="373.0" minHeight="10.0" prefHeight="211.0" vgrow="SOMETIMES" />
 					</rowConstraints>
 					<children>
-                  <TextArea id="steps-text-area" fx:id="stepsTxtArea" editable="false" prefHeight="353.0" prefWidth="426.0" text="1. Mix together cornstarch and 1 tbsp. of the soy sauce in a medium bowl.&#10;2. Add chicken, toss well, and set aside to marinate for 30 minutes.&#10;3. Meanwhile, mix together the remaining 3 tbsp. soy sauce, rice wine, sugar, stock, vinegar, sesame oil, and dark soy sauce.&#10;4. Set aside.&#10;5. Heat peanut oil in a wok or large nonstick skillet over high heat until just beginning to smoke.&#10;6. Add chilis, half the scallions, garlic, ginger, and chicken and stir-fry until chicken is golden, 3-5 minutes.&#10;7. Add soy sauce mixture and stir-fry until sauce thickens, about 2 minutes.&#10;8.  Stir in peanuts.&#10;9. Garnish with remaining scallions." wrapText="true">
-                     <padding>
-                        <Insets bottom="20.0" top="20.0" />
-                     </padding>
+						<Label prefHeight="61.0" prefWidth="207.0" text="Ingredients" textFill="#61a0a4">
+							<font>
+								<Font name="Microsoft YaHei Light" size="28.0" />
+							</font>
+							<GridPane.margin>
+								<Insets left="20.0" />
+							</GridPane.margin>
+						</Label>
+            <TextArea id="ingredient-text-area" fx:id="ingredientsTxtArea" editable="false" prefHeight="238.0" prefWidth="227.0" text="cornstarch * 1 tablespoon&#10;soy sauce * 4 tablespoon&#10;chicken breast * 0.5 kg&#10;Shaoxin rice wine * 3 tablespoon&#10;sugar * 4 tablespoon&#10;chicken stock * 4 tablespoon&#10;cornstarch * 4 tablespoon&#10;cornstarch * 4 tablespoon&#10;" wrapText="true" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </TextArea>
+					</children>
+					<padding>
+						<Insets left="5.0" />
+					</padding>
+				</GridPane>
+				<GridPane layoutX="324.0" layoutY="143.0" prefHeight="437.0" prefWidth="428.0">
+					<columnConstraints>
+						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+					</columnConstraints>
+					<rowConstraints>
+            <RowConstraints maxHeight="379.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
+						<RowConstraints maxHeight="379.0" minHeight="10.0" prefHeight="331.0" vgrow="SOMETIMES" />
+						<RowConstraints maxHeight="148.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+					</rowConstraints>
+					<children>
+            <Label prefHeight="60.0" prefWidth="428.0" text="Steps:" textFill="#61a0a4">
+               <font>
+                  <Font name="Microsoft YaHei Light" size="28.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Label>
+            <TextArea id="steps-text-area" fx:id="stepsTxtArea" editable="false" prefHeight="319.0" prefWidth="428.0" text="1. Mix together cornstarch and 1 tbsp. of the soy sauce in a medium bowl.&#10;2. Add chicken, toss well, and set aside to marinate for 30 minutes.&#10;3. Meanwhile, mix together the remaining 3 tbsp. soy sauce, rice wine, sugar, stock, vinegar, sesame oil, and dark soy sauce.&#10;4. Set aside.&#10;5. Heat peanut oil in a wok or large nonstick skillet over high heat until just beginning to smoke.&#10;6. Add chilis, half the scallions, garlic, ginger, and chicken and stir-fry until chicken is golden, 3-5 minutes.&#10;7. Add soy sauce mixture and stir-fry until sauce thickens, about 2 minutes.&#10;8.  Stir in peanuts.&#10;9. Garnish with remaining scallions." wrapText="true" GridPane.rowIndex="1">
+               <padding>
+                  <Insets bottom="20.0" />
+               </padding>
+               <font>
+                  <Font name="Microsoft Tai Le" size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="20.0" />
+               </GridPane.margin>
+            </TextArea>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <children>
+						<Label fx:id="rateOnLb" prefHeight="50.0" prefWidth="76.0" text="Rate" textFill="#61a0a4">
+							<font>
+								<Font name="Arial Bold" size="14.0" />
+							</font>
+						</Label>
+						<Slider id="slide" fx:id="rateSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="50.0" prefWidth="266.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                  <Button id="rate-confirm-button" fx:id="confirmrateBtn" mnemonicParsing="false" onAction="#rateAction" prefHeight="53.0" prefWidth="63.0" text="Button">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
                      <font>
-                        <Font name="Arial Rounded MT Bold" size="17.0" />
+                        <Font size="12.0" />
                      </font>
-                  </TextArea>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-                     <children>
-      						<Label fx:id="rateOnLb" prefHeight="92.0" prefWidth="166.0" text="Rate" textFill="#61a0a4">
-      							<font>
-      								<Font name="Arial Bold" size="14.0" />
-      							</font>
-      						</Label>
-      						<Slider fx:id="rateSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="50.0" prefWidth="384.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-                        <Button fx:id="confirmrateBtn" mnemonicParsing="false" onAction="#rateAction" text="Button" />
-                     </children>
-                  </HBox>
+                  </Button>
+               </children>
+            </HBox>
 					</children>
 				</GridPane>
-			</children>
-		</Pane>
 	</children>
 </Pane>

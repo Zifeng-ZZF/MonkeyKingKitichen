@@ -1,16 +1,15 @@
 #ingredient-text-area{
 	-fx-background-color: #ffffff;
-	-fx-border-width: 1 0 0 0;
-	-fx-border-color: #61a0a4;
+	-fx-border-color: #a0e8d9;
 }
 
 #recipe-name-label{
-	-fx-background-color: #16858d;
-	-fx-text-fill: #ffffff;
+	-fx-background-color: #404040;
+	-fx-text-fill: #a0e8d9;
 }
 
 #info-pane{
-	-fx-background-color: #16858d;
+	-fx-background-color: #404040;
 	-fx-text-fill: #ffffff;
 }
 
@@ -20,28 +19,44 @@
 
 #steps-text-area{
 	-fx-background-color: #ffffff;
+	-fx-border-color: #a0e8d9;
 }
 
-#steps-text-area .scroll-bar{
+.scroll-pane .scroll-bar{
+	-fx-background-color: transparent;
+	-fx-pref-width:5;
+}
+
+.scroll-pane .increment-button, .scroll-pane .decrement-button{
 	-fx-background-color: transparent;
 }
 
-#steps-text-area .increment-button, .decrement-button{
-	-fx-background-color: #ffffff;
+
+.scroll-pane .scroll-bar .decrement-arrow, 
+.scroll-pane .scroll-bar .increment-arrow
+{
+	-fx-shape:" ";
+	-fx-padding:0;
 }
 
-#steps-text-area .thumb {
-	-fx-background-insets: 0, 0, 0;
+.scroll-pane .thumb {
+	-fx-background-insets: 0, 0, 0, 0;
 	-fx-background-radius: 120;
 	-fx-background-color: derive(gray,70%);
 }
 
+
 #btn-grid-pane .button{
 	-fx-pref-width: 170;
 	-fx-pref-height: 30;
-	-fx-text-fill: #ffffff;
-	-fx-background-color: #404040;
-	-fx-border-width: 0 0 0 0;
+	-fx-text-fill: #25c3a1;
+	-fx-background-color: transparent;
+	-fx-border-width: 0 0 1 0;
+	-fx-border-color:#25c3a1;
+	}
+	
+#btn-grid-pane .button:hover{
+	-fx-background-color: derive(gray,70%);
 }
 
 #servings-textfield{
@@ -49,4 +64,28 @@
 	-fx-border-width: 0 0 0 0;
 	-fx-text-fill: #ffffff;
 	-fx-focus-color: transparent;
+}
+
+#slide{
+	-fx-background-color:transparent;
+}
+#slide .thumb{
+	-fx-background-color:#25c3a1;
+	-fx-pref-height: 20;
+    -fx-pref-width: 20;
+}
+#slide .track{
+	-fx-control-inner-background:#a0e8d9;
+	-fx-pref-height: 5;
+	-fx-border-color:transparent;
+}
+
+#rate-confirm-button{
+	-fx-border-width:0;
+	-fx-background-color:transparent;
+	-fx-text-fill:#25c3a1;
+}
+
+#rate-confirm-button:hover{
+	-fx-text-fill:derive(#25c3a1,0.7);
 }
