@@ -135,7 +135,6 @@ public class ResultViewController implements Initializable {
 					Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 					currentStage.setScene(scene);
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			});

@@ -83,26 +83,26 @@
 		</GridPane>
 		<VBox id="recommend-vbox" layoutX="268.0" layoutY="134.0" prefHeight="316.0" prefWidth="437.0" stylesheets="@recommandation.css">
 			<children>
-				<Pane prefHeight="221.0" prefWidth="500.0">
+				<Pane id="recommend-pane" prefHeight="221.0" prefWidth="500.0">
 					<children>
-						<ImageView fx:id="recommendImg" fitHeight="302.0" fitWidth="437.0" pickOnBounds="true" preserveRatio="true">
+						<ImageView id="image" fx:id="recommendImg" fitHeight="316.0" fitWidth="437.0" onMouseClicked="#handleRecommendation" pickOnBounds="true" preserveRatio="true">
 							<image>
 								<Image url="@img_0177.jpg" />
 							</image>
 						</ImageView>
-						<Label id="title-label" fx:id="recommendNameLabel" layoutY="59.0" prefHeight="161.0" prefWidth="487.0" style="-fx-text-alignment: center;" text="                Gong Bao Jiding " textAlignment="RIGHT" textFill="WHITE">
+						<Label id="title-label" fx:id="recommendNameLabel" layoutY="-4.0" onMouseClicked="#handleRecommendation" prefHeight="224.0" prefWidth="437.0" style="-fx-text-alignment: center;" text="           Gong Bao Jiding " textAlignment="RIGHT" textFill="WHITE">
 							<font>
 								<Font name="Arial Black" size="33.0" />
 							</font>
 						</Label>
-						<Label id="title-label" layoutX="-29.0" layoutY="30.0" prefHeight="23.0" prefWidth="495.0" style="-fx-text-alignment: left;" text="Recommandation" textFill="WHITE">
+						<Label layoutX="-29.0" layoutY="30.0" prefHeight="23.0" prefWidth="495.0" style="-fx-text-alignment: left;" text="Recommandation" textFill="WHITE">
 							<font>
 								<Font name="Arial Black" size="39.0" />
 							</font>
 						</Label>
 					</children>
 				</Pane>
-				<Label id="desc-label" fx:id="briefStepLabel" prefHeight="106.0" prefWidth="467.0" text="1. Cut potatoes into pieces.  2. Wash ...">
+				<Label id="desc-label" fx:id="briefStepLabel" prefHeight="106.0" prefWidth="467.0" text="1. Cut potatoes into pieces.  2. Wash ..." wrapText="true">
 					<padding>
 						<Insets left="20.0" />
 					</padding>

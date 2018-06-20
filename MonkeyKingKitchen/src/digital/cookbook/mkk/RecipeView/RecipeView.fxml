@@ -143,14 +143,6 @@
 						<RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
 					</rowConstraints>
 					<children>
-						<Label fx:id="rateOnLb" text="Rate" textFill="#61a0a4" GridPane.rowIndex="1">
-							<font>
-								<Font name="Arial Bold" size="14.0" />
-							</font>
-							<GridPane.margin>
-								<Insets left="10.0" />
-							</GridPane.margin>
-						</Label>
                   <TextArea id="steps-text-area" fx:id="stepsTxtArea" editable="false" prefHeight="353.0" prefWidth="426.0" text="1. Mix together cornstarch and 1 tbsp. of the soy sauce in a medium bowl.&#10;2. Add chicken, toss well, and set aside to marinate for 30 minutes.&#10;3. Meanwhile, mix together the remaining 3 tbsp. soy sauce, rice wine, sugar, stock, vinegar, sesame oil, and dark soy sauce.&#10;4. Set aside.&#10;5. Heat peanut oil in a wok or large nonstick skillet over high heat until just beginning to smoke.&#10;6. Add chilis, half the scallions, garlic, ginger, and chicken and stir-fry until chicken is golden, 3-5 minutes.&#10;7. Add soy sauce mixture and stir-fry until sauce thickens, about 2 minutes.&#10;8.  Stir in peanuts.&#10;9. Garnish with remaining scallions." wrapText="true">
                      <padding>
                         <Insets bottom="20.0" top="20.0" />
@@ -161,6 +153,11 @@
                   </TextArea>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
+      						<Label fx:id="rateOnLb" prefHeight="92.0" prefWidth="166.0" text="Rate" textFill="#61a0a4">
+      							<font>
+      								<Font name="Arial Bold" size="14.0" />
+      							</font>
+      						</Label>
       						<Slider fx:id="rateSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="50.0" prefWidth="384.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
                         <Button fx:id="confirmrateBtn" mnemonicParsing="false" onAction="#rateAction" text="Button" />
                      </children>

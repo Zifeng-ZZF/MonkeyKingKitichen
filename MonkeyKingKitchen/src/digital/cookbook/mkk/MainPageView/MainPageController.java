@@ -198,14 +198,14 @@ public class MainPageController implements Initializable {
 	 */
 	@FXML
 	public void handleRecommendation(MouseEvent e) {
+		CookBook.setCurrentRecipe(CookBook.getRecommandRecipe());
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		fxmlLoader.setLocation(getClass().getResource("../RecipeView/RecipeView.fxml"));
 		try {
 			Scene scene = new Scene(fxmlLoader.load());
 			RecipeViewController controller = fxmlLoader.getController();
 			//set up the recommend recipe
-			controller.setRecipeDetail(CookBook.getRecommandRecipe());
-			
+			controller.setRecipeDetail(CookBook.getCurrentRecipe());
 			Stage currentStage = (Stage) ((Node)e.getSource()).getScene().getWindow();
 			currentStage.setScene(scene);
 		} catch (IOException e1) {
@@ -222,6 +222,7 @@ public class MainPageController implements Initializable {
 			Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 			currentStage.close();
 		});
+		
 		//Listen to the menuitems to change the searching type
 		for(MenuItem menuItem : typeBtn.getItems()) {
 			menuItem.setOnAction(e -> {
@@ -229,6 +230,12 @@ public class MainPageController implements Initializable {
 				typeBtn.setText(text);
 			});
 		}
+		
+		//Initialize the recommendation
+		recommendNameLabel.setText(CookBook.getRecommandRecipe().getName());
+		briefStepLabel.setText(CookBook.getRecommandRecipe().getPreparationSetps().get(0)
+				+ CookBook.getRecommandRecipe().getPreparationSetps().get(1));
+		briefStepLabel.setWrapText(true);
 	}
 
 }

@@ -252,7 +252,8 @@ public class RecipeViewController implements Initializable{
 		int rate = dbProcessor.getTheRate(currentRecipe,currentUser.getUid());
 		if (rate != 0) {
 			confirmrateBtn.setVisible(false);
-			rateSlider.setValue(rate);
+			rateSlider.setVisible(false);
+			rateOnLb.setText("You have rated this recipe!");
 		}
 	}
 
