@@ -94,6 +94,7 @@ public class LoginViewController implements Initializable {
 		
 		String username = loginUsernameTxtField.getText();
 		String passwd = loginPasswdTxtField.getText();
+		boolean matched = false;
 		
 		ArrayList<Recipe> myRecipes = new ArrayList<>();
 
@@ -131,11 +132,15 @@ public class LoginViewController implements Initializable {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-			} else {
-				Alert alert = new Alert(AlertType.WARNING);
-				alert.setContentText("The password or username you entered is incorrect. Please check again!");
-				alert.show();
-			}
+				
+				matched = true;
+			} 
+		}
+		
+		if(!matched) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setContentText("The password or username you entered is incorrect. Please check again!");
+			alert.showAndWait();
 		}
 	}
 
