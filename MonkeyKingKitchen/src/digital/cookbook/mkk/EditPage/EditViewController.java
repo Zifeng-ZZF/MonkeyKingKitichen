@@ -3,6 +3,7 @@ package digital.cookbook.mkk.EditPage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -12,6 +13,7 @@ import digital.cookbook.mkk.DBProcessor;
 import digital.cookbook.mkk.Ingredient;
 import digital.cookbook.mkk.Recipe;
 import digital.cookbook.mkk.User;
+import digital.cookbook.mkk.MyRecipeView.MyRecipeController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,10 +43,10 @@ public class EditViewController implements Initializable {
 
 	private DBProcessor dbProcessor = new DBProcessor();
 	private User currentUser = CookBook.getCurrentUser();
-	private Recipe currentRecipe = CookBook.getCurrentRecipe();
 	private ArrayList<Ingredient> recipeIngredients = new ArrayList<>();
 	private Map<Button, HBox> itemAcess = new HashMap<>();
 	private Map<HBox, Ingredient> ingredientAccess = new HashMap<>();
+	private ArrayList<Recipe> myRecipes = new ArrayList<>();
 
 	@FXML
 	private Label EditLb;
@@ -311,6 +313,13 @@ public class EditViewController implements Initializable {
 		ArrayList<String> allIngredients = dbProcessor.fetchIngredients();
 		for (String ingredientName : allIngredients)
 			ingredientCb.getItems().add(ingredientName);
+		
+		
+		Collection<Recipe> allRecipes = CookBook.getRecipesList().values();
+		for(Recipe recipe : allRecipes) {
+			if(recipe.getUid() == currentUser.getUid())
+				myRecipes.add(recipe);
+		}
 	}
 
 }

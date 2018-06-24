@@ -5,22 +5,13 @@
     -fx-padding:0 0 0 0;
 }
 
-
-#list-vbox .hbox{
-	-fx-padding:0 0 0 0;
-	-fx-pref-width: 484;
-	-fx-max-height: 90;
-}
-
-
-
 #list-vbox .button{
 	-fx-text-fill: #ffffff;
 	-fx-border-width:0 0 0 0;
 	-fx-background-color: rgba(0,0,0,0.8);
 	-fx-font-size: 10;
-	-fx-max-height: 30;
-	-fx-min-height: 30;
+	-fx-max-height: 28;
+	-fx-min-height: 28;
 	-fx-min-width: 80;
 	-fx-background-radius : 0;
 	-fx-background-insets:0 0 0.2 0;
@@ -61,7 +52,7 @@
 
 #list-vbox .label{
 	-fx-min-width: 120;
-	-fx-max-height: 90;
+	-fx-max-height: 84;
 	-fx-padding: 0 10 0 15;
 	-fx-background-color: rgba(0,0,0,0.6);
 	-fx-text-fill: #ffffff;
@@ -79,6 +70,26 @@
 	-fx-border-width: 0 0 0 0;
 	-fx-background-color: #ffffff;
 	
+}
+
+#right-pane .button{
+	-fx-text-fill: #ffffff;
+	-fx-border-width:0 0 1 0;
+	-fx-border-color: #ffffff;
+	-fx-background-color: #404040;
+}
+
+#right-pane .button:hover{
+	-fx-background-color: derive(#404040,0.7);
+}
+
+#create-button{
+	-fx-background-color: #3d85c6;
+}
+
+
+#create-button:hover{
+	-fx-background-color: derive( #3d85c6,0.7);
 }
 
 

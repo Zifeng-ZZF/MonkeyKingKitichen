@@ -8,7 +8,10 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,6 +36,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
+/**
+ * 
+ * @author Zhibin Xin, Zifeng Zhang
+ *
+ */
 public class MyRecipeController implements Initializable {
 	
 	private ArrayList<Recipe> myRecipes = new ArrayList<>();
@@ -151,7 +159,7 @@ public class MyRecipeController implements Initializable {
 	}
 	
 	/**
-	 * Get my recipes from main page and list it
+	 * setup recipe list
 	 * 
 	 * @param results
 	 */
@@ -168,6 +176,7 @@ public class MyRecipeController implements Initializable {
 			itemEditBtn = new Button("EDIT");
 
 			item = new HBox();
+			item.setStyle("-fx-pref-height:85;");
 			buttonItem = new VBox();
 			item.getChildren().add(itemName);
 			item.getChildren().add(itemDesc);
@@ -227,14 +236,14 @@ public class MyRecipeController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		
-		
 		//Get the user's own recipes
-		Collection<Recipe> allRecipes = CookBook.getRecipesList().values();
+		Collection<Recipe> allRecipes = dBProcessor.fetchRecipe().values();
 		for (Recipe recipe : allRecipes) {
 			if(recipe.getUid() == currentUser.getUid())
 				myRecipes.add(recipe);
 		}
+		
+		//set up the list
 		setMyRecipeList(myRecipes);
 		
 		//Add delete listener to the delete button
@@ -242,9 +251,16 @@ public class MyRecipeController implements Initializable {
 			HBox item = itemAccess.get(itemDeleteBtn);
 			Recipe recipe = recipeAccess.get(item);
 			itemDeleteBtn.setOnAction(e -> {
-				listVBox.getChildren().remove(item);
-				myRecipes.remove(recipe);
-				dBProcessor.deleteRecipe(currentUser.getUid());
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setContentText("The recipe will be deleted. Do you want to proceed?");
+				alert.setHeaderText("Warning");
+				alert.showAndWait().ifPresent(response -> {
+					if(response == ButtonType.OK) {
+						listVBox.getChildren().remove(item);
+						myRecipes.remove(recipe);
+						dBProcessor.deleteRecipe(recipe.getRecipeId());
+					}
+				});
 			});
 		}
 	}
