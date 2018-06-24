@@ -32,7 +32,7 @@ import javafx.stage.Stage;
 
 /**
  * View Controller for main page
- * @author Zifeng Zhang, Xinyue Shi, Sheng Ji
+ * @author Zifeng Zhang, Xinyue Shi, Zhibin Xin, Sheng Ji
  *
  */
 public class MainPageController implements Initializable {
@@ -142,14 +142,13 @@ public class MainPageController implements Initializable {
 	 * @return
 	 */
 	public ArrayList<Recipe> searchRecipeByName(String recipeName) {
-		ArrayList<Recipe> results = new ArrayList<>();
-		// Find all the results with given name
-		Set recipeIds = allRecipes.keySet();
-		for (Object recipeIdObj : recipeIds) {
-			int id = (Integer) recipeIdObj;
-			String name = allRecipes.get(id).getName();
-			if (name.equals(recipeName)) {
-				results.add(allRecipes.get(id));
+		//get the recipe_id with given name
+		ArrayList<Integer> recipeIds = dbProcessor.matchRecipeName(recipeName);
+		
+		ArrayList<Recipe> results = new ArrayList<Recipe>();
+		if(!recipeIds.isEmpty()) {
+			for(Integer recipeId : recipeIds) {
+				results.add(allRecipes.get(recipeId));
 			}
 		}
 		return results;
@@ -213,6 +212,7 @@ public class MainPageController implements Initializable {
 		}
 	}
 	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		allRecipes = dbProcessor.fetchRecipe();

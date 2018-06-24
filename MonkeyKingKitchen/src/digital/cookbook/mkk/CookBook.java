@@ -65,43 +65,6 @@ public class CookBook {
 		}
 	}
 
-
-	/**
-	 * Use name to get the recipe with the same name
-	 * 
-	 * @param name
-	 * @return null if no result, otherwise return the name-matched recipes
-	 */
-	public Recipe getRecipe(String name) {
-		Set recipeIds = recipes.keySet();
-		for (Object recipeIdObj : recipeIds) {
-			int id = (Integer) recipeIdObj;
-			String recipeName = recipes.get(id).getName();
-			if (recipeName.equals(name)) {
-				return recipes.get(id);
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * Use name to get the recipe with the same name
-	 * 
-	 * @param name
-	 * @return null if no result, otherwise return the name-matched recipes
-	 */
-	public Recipe searchByName(String name) {
-		Set recipeIds = recipes.keySet();
-		for (Object recipeIdObj : recipeIds) {
-			int id = (Integer) recipeIdObj;
-			String recipeName = recipes.get(id).getName();
-			if (recipeName.equals(name)) {
-				return recipes.get(id);
-			}
-		}
-		return null;
-	}
-
 	/**
 	 * Get the total recipes of the cook book.
 	 * 

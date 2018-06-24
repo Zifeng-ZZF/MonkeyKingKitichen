@@ -10,7 +10,7 @@ import javafx.scene.control.Alert.AlertType;
 /**
  * Retrieve information from the DB
  * 
- * @author Zifeng Zhang, Xinyue Shi, Zhibin Xin
+ * @author Zifeng Zhang, Xinyue Shi, Sheng Ji, Zhibin Xin
  * 
  */
 public class DBProcessor {
@@ -86,7 +86,7 @@ public class DBProcessor {
 				recipeList.put(recipe.getRecipeId(), recipe);
 
 			}
-			
+
 			rSet.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -164,10 +164,10 @@ public class DBProcessor {
 					recipe.addIngredient(ingredient);
 				}
 				ingredientRS.close();
-				
+
 				favoriteList.add(recipe);
 			}
-			
+
 			recipeRS.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -195,7 +195,7 @@ public class DBProcessor {
 				maxID = resultSet.getInt(1);
 			else
 				maxID = 0;
-			
+
 			resultSet.close();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -419,7 +419,7 @@ public class DBProcessor {
 			updatePStmt.setInt(2, recipe.getRecipeId());
 			updatePStmt.executeUpdate();
 			recipe.setRate(aveRate);
-			
+
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -447,9 +447,9 @@ public class DBProcessor {
 					statementClean.executeUpdate(cleanAutoIncreaseSql);
 				}
 			}
-			
+
 			resultSet.close();
-			
+
 		} catch (
 
 		SQLException e1) {
@@ -495,9 +495,9 @@ public class DBProcessor {
 					recipe.addIngredient(ingredient);
 				}
 			}
-			
+
 			rSet.close();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -530,6 +530,30 @@ public class DBProcessor {
 			e.printStackTrace();
 		}
 		return rate;
+	}
+
+	/**
+	 * Search recipe in the DB by name 
+	 * @param name
+	 * @return
+	 */
+	public ArrayList<Integer> matchRecipeName(String name) {
+
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		Connection conn = DBUtil.getConnection();
+		String sql = "select recipe_id from recipetb where recipe_name like ?;";
+
+		try {
+			PreparedStatement queryPStmt = conn.prepareStatement(sql);
+			queryPStmt.setString(1, "%" + name + "%");
+			ResultSet rSet = queryPStmt.executeQuery();
+			while (rSet.next()) {
+				result.add(rSet.getInt(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }

@@ -37,6 +37,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author Zifeng Zhang, Sheng Ji, Xinyue Shi
+ *
+ */
 public class ResultViewController implements Initializable {
 
 	private ArrayList<Recipe> results;
@@ -155,12 +160,11 @@ public class ResultViewController implements Initializable {
 		String type = this.typeBtn.getText();
 		
 		if (type.equals("recipe") || type.equals("--select--")) {
-			Set recipeIds = allRecipes.keySet();
-			for (Object recipeIdObj : recipeIds) {
-				int id = (Integer) recipeIdObj;
-				String recipeName = allRecipes.get(id).getName();
-				if (recipeName.equals(name)) {
-					newResults.add(allRecipes.get(id));
+			//get the recipe_id with given name
+			ArrayList<Integer> recipeIds = dbProcessor.matchRecipeName(name);
+			if(!recipeIds.isEmpty()) {
+				for(Integer recipeId : recipeIds) {
+					newResults.add(allRecipes.get(recipeId));
 				}
 			}
 		}
@@ -173,7 +177,6 @@ public class ResultViewController implements Initializable {
 				}
 			}
 		}
-			
 		
 		intializeResult(newResults);
 	}
