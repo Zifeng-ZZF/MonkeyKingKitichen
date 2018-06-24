@@ -95,7 +95,7 @@
 							<children>
 								<Button fx:id="exportPdfBtn" mnemonicParsing="false" onAction="#exportPDF" prefHeight="30.0" prefWidth="173.0" text="Export PDF" textFill="WHITE" GridPane.halignment="CENTER" />
 								<Button fx:id="toHomepageBtn" mnemonicParsing="false" onAction="#returnToHomepage" text="Homepage" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-								<Button fx:id="addToFavoriteBtn" mnemonicParsing="false" onAction="#addToFavoriteAction" prefHeight="85.0" prefWidth="194.0" text="Add to Favoirte" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+								<Button fx:id="addToFavoriteBtn" mnemonicParsing="false" onAction="#handleFavoriteBtn" prefHeight="85.0" prefWidth="194.0" text="Add to Favoirte" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
 							</children>
 							<padding>
 								<Insets bottom="10.0" left="5.0" />

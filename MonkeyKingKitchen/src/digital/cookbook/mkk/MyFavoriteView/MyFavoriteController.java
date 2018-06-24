@@ -30,6 +30,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
+/**
+ * 
+ * @author Zhibin Xin, Zifeng Zhang
+ *
+ */
 public class MyFavoriteController implements Initializable {
 
 	private ArrayList<Recipe> myFavorites;
@@ -70,16 +75,6 @@ public class MyFavoriteController implements Initializable {
 	private Button itemDeleteBtn;
 	@FXML
 	private VBox buttonItem;
-
-	@FXML
-	public void deleteRecipeEvent(ActionEvent event) {
-
-	}
-
-	@FXML
-	public void openRecipeEvent(ActionEvent event) {
-
-	}
 
 	/**
 	 * Jump to my recipe list

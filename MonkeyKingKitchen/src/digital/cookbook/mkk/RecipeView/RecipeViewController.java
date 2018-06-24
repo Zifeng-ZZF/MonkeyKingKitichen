@@ -28,6 +28,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
@@ -177,34 +178,33 @@ public class RecipeViewController implements Initializable{
     
 
     /**
-     * Add recipe to favorite
+     * Add recipe to favorite or cancel the favorite
      * @param e
      */
-	public void addToFavoriteAction(ActionEvent e) {
-    	ArrayList<Recipe> recipes = currentUser.getMyFavoriteList();
-    	if(recipes.isEmpty()==true) {
-    		System.out.println("success");
-			dbProcessor.insertIntoFavorite(currentRecipe, currentUser.getUid());
+	public void handleFavoriteBtn(ActionEvent e) {
+   		if(addToFavoriteBtn.getText().equals("Remove from Favorite")) {
+    		dbProcessor.deleteFavoriteRecipe(currentRecipe.getRecipeId(), currentUser.getUid());
+    		Alert alert = new Alert(AlertType.INFORMATION);
+			alert.titleProperty().set("Success");
+			alert.headerTextProperty().set("Remove Action");
+			alert.contentTextProperty().set("You have successfully removed this recipe from your favorite list!");
+			alert.showAndWait().ifPresent(response->{
+				if (response == ButtonType.OK) {
+					this.addToFavoriteBtn.setText("Add to Favoirte");
+				}
+			});
     	}
     	else {
-    		for(Recipe recipe : recipes) {
-    			
-    			/**
-    			 * check if user has added this recipe
-    			 * to the favorite list
-    			 */
-    			if(recipe.getRecipeId() == currentRecipe.getRecipeId()) {
-    				Alert alert = new Alert(AlertType.WARNING);
-    				alert.setTitle("Alert");
-    				alert.setHeaderText("Duplicate Action");
-    				alert.setContentText("You have already added this recipe to your favorite list!");
-    				alert.showAndWait();
-    			}
-    			else {
-    				System.out.println("success");
-    				dbProcessor.insertIntoFavorite(currentRecipe, currentUser.getUid());
-    			}
-    		}
+    		dbProcessor.insertIntoFavorite(currentRecipe, currentUser.getUid());
+    		Alert alert = new Alert(AlertType.INFORMATION);
+			alert.titleProperty().set("Success");
+			alert.headerTextProperty().set("Add Action");
+			alert.contentTextProperty().set("You have successfully added this recipe to your favorite list!");
+			alert.showAndWait().ifPresent(response->{
+				if (response == ButtonType.OK) {
+					this.addToFavoriteBtn.setText("Remove from Favorite");
+				}
+			});
     	}
     }
     
@@ -237,11 +237,9 @@ public class RecipeViewController implements Initializable{
 	 * Rate on the recipe
 	 */
 	public void rateAction() {
-		
 		double rate = rateSlider.getValue();
 		dbProcessor.insertRate(currentRecipe,currentUser.getUid(),rate);
 		confirmrateBtn.setVisible(false);
-		
 	}
 	
 	@Override
@@ -249,12 +247,20 @@ public class RecipeViewController implements Initializable{
 		pdfProcessor = new PdfProcess();
 		currentRecipe = CookBook.getCurrentRecipe();
 		currentUser = CookBook.getCurrentUser();
+		
 		int rate = dbProcessor.getTheRate(currentRecipe,currentUser.getUid());
 		if (rate != 0) {
 			confirmrateBtn.setVisible(false);
 			rateSlider.setVisible(false);
 			rateOnLb.setText("You have rated this recipe!");
 		}
+		
+		ArrayList<Recipe> recipes = currentUser.getMyFavoriteList();
+    	for(int i=0; i<recipes.size();i++) {
+       		if(recipes.get(i).getRecipeId() == currentRecipe.getRecipeId()) {
+        		this.addToFavoriteBtn.setText("Remove from Favorite");
+        	}
+    	}
 	}
 
 }
