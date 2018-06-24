@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
@@ -37,8 +38,8 @@ public class LoginViewController implements Initializable {
 	private ArrayList<User> users;
 	private Map<Integer, Recipe> recipes;
 	private boolean isLoginNameValid;
-	private boolean isRegisterNameValid;
 	private boolean isPasswordValid;
+	private boolean isPasswordPaired;
 
 	@FXML
 	private Button registerBtn;
@@ -63,21 +64,36 @@ public class LoginViewController implements Initializable {
 
 	@FXML
 	private PasswordField loginPasswdTxtField;
-	
+
 	@FXML
 	private PasswordField confirmPasswdTxtField;
 
+	@FXML
+	private Label loginReminderLabel;
+	
+	@FXML
+	private Label registerNameRemindLb;
+	
+	@FXML
+	private Label registerPasswdRemindLb;
+	
+	@FXML
+	private Label pairedLabel;
+	
 	/**
 	 * To realize the login function Compare info from the view's textfields with
-	 * the info retrieved from DB If matched, then open the main page and set up the
+	 * the info retrieved from DB 
+	 * If matched, then open the main page and set up the
 	 * user and recipe data
 	 * 
 	 * @param e
 	 */
 	@FXML
 	private void handleLoginButtonAction(ActionEvent e) {
+		
 		String username = loginUsernameTxtField.getText();
 		String passwd = loginPasswdTxtField.getText();
+		
 		ArrayList<Recipe> myRecipes = new ArrayList<>();
 
 		System.out.println(username + passwd);
@@ -114,13 +130,17 @@ public class LoginViewController implements Initializable {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
+			} else {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setContentText("The password or username you entered is incorrect. Please check again!");
+				alert.show();
 			}
 		}
 	}
 
 	/**
-	 * Register a new account
-	 * After which will directily jump to login interface
+	 * Register a new account After which will directily jump to login interface
+	 * 
 	 * @param e
 	 */
 	@FXML
@@ -154,47 +174,80 @@ public class LoginViewController implements Initializable {
 	}
 
 	/**
-	 * Test the username's validity
-	 * @param e
+	 * Grap needed info Add properties listeners
 	 */
-	@FXML
-	private void handleUsernameLength(ActionEvent e) {
-		String username = registerUsernameTxtField.getText();
-		if (username.length() < 8) {
-			registerUsernameTxtField.setStyle("-fx-focus-color:red; -fx-text-box-border:red;");
-		} else {
-			this.isRegisterNameValid = true;
-		}
-	}
-	
-	/**
-	 * Judge the validity and compatibility of the registering password
-	 * @param e
-	 */
-	@FXML
-	private void handlePasswordConfirm(ActionEvent e) {
-		String fisrtPasswd = registerPasswdTxtField.getText();
-		String confirmPasswd = confirmPasswdTxtField.getText();
-		if(fisrtPasswd.length() < 6)
-			registerPasswdTxtField.setStyle("-fx-effect: innershadow( one-pass-box , red , 8 , 0.0 , 2 , 0 )");
-		if(!fisrtPasswd.equals(confirmPasswd))
-			registerPasswdTxtField.setStyle("-fx-effect: innershadow( one-pass-box , red , 8 , 0.0 , 2 , 0 )");
-	}
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		users = dbProcessor.fetchUserInfo();
 		recipes = dbProcessor.fetchRecipe();
 
-		loginUsernameTxtField.focusedProperty().addListener((obs, newVal, oldVal)->{
+		// Login username length listener
+		loginUsernameTxtField.focusedProperty().addListener((obs, oldVal, newVal) -> {
 			String loginName = loginUsernameTxtField.getText();
-			if(newVal) {
+			if (oldVal) {
 				System.out.println("Un Focused");
-				if(loginName.length() < 8) {
-					
+				if (loginName.length() < 8) {
+					loginReminderLabel.setVisible(true);
+					isLoginNameValid = false;
+				}else {
+					loginReminderLabel.setVisible(false);
+					isLoginNameValid = true;
 				}
-			}else {
-				System.out.println("Focused");
+			}
+			
+			if(isLoginNameValid && isPasswordValid)
+				loginBtn.setDisable(false);
+			
+		});
+		
+		// Login password empty listener
+		loginPasswdTxtField.setOnKeyPressed(e -> {
+			if(loginPasswdTxtField.getText().length() != 0)
+				isPasswordValid = true;
+			else
+				isPasswordValid = false;
+			
+			if(isLoginNameValid && isPasswordValid)
+				loginBtn.setDisable(false);
+		});
+		
+		// register username length listener
+		registerUsernameTxtField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			String registerName = registerUsernameTxtField.getText();
+			if (oldVal) {
+				System.out.println("Un Focused");
+				if (registerName.length() < 8) {
+					registerNameRemindLb.setVisible(true);
+				}else {
+					registerNameRemindLb.setVisible(false);
+				}
+			}
+		});
+		
+		// register password length listener
+		registerPasswdTxtField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			String registerPasswd = registerPasswdTxtField.getText();
+			if (oldVal) {
+				System.out.println("Un Focused");
+				if (registerPasswd.length() < 6) {
+					registerPasswdRemindLb.setVisible(true);
+				}else {
+					registerPasswdRemindLb.setVisible(false);
+				}
+			}
+		});
+		
+		// register password match listener
+		confirmPasswdTxtField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			String registerPasswd = registerPasswdTxtField.getText();
+			String confirmPasswd = confirmPasswdTxtField.getText();
+			if (oldVal) {
+				System.out.println("Un Focused");
+				if (!registerPasswd.equals(confirmPasswd)) {
+					registerPasswdRemindLb.setVisible(true);
+				}else {
+					registerPasswdRemindLb.setVisible(false);
+				}
 			}
 		});
 	}

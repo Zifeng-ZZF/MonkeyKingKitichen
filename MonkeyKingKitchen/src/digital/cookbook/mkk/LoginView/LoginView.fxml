@@ -28,10 +28,10 @@
 										<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="288.0" />
 									</columnConstraints>
 									<rowConstraints>
-										<RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
-										<RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
-										<RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-										<RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
+										<RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+										<RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
+										<RowConstraints maxHeight="73.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+										<RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
 										<RowConstraints maxHeight="41.0" minHeight="10.0" prefHeight="17.0" vgrow="SOMETIMES" />
 									</rowConstraints>
 									<children>
@@ -51,14 +51,32 @@
 												<Insets right="10.0" />
 											</GridPane.margin>
 										</Label>
-										<TextField fx:id="loginUsernameTxtField" prefHeight="30.0" prefWidth="253.0" promptText="username: at least 8 characters" GridPane.columnIndex="1" GridPane.rowIndex="1">
-											<GridPane.margin>
-												<Insets left="10.0" right="30.0" />
-											</GridPane.margin>
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-										</TextField>
+                              <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="41.0" prefWidth="248.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <children>
+      										<TextField fx:id="loginUsernameTxtField" prefHeight="30.0" prefWidth="253.0" promptText="username: at least 8 characters" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      											<GridPane.margin>
+      												<Insets left="10.0" right="30.0" />
+      											</GridPane.margin>
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="15.0" />
+                                       </VBox.margin>
+      										</TextField>
+                                    <Label fx:id="loginReminderLabel" prefHeight="20.0" prefWidth="291.0" text=" less than 8 characters" textFill="#ff0808" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="2.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets left="10.0" right="30.0" />
+                                 </GridPane.margin>
+                              </VBox>
 										<PasswordField fx:id="loginPasswdTxtField" prefHeight="30.0" prefWidth="253.0" promptText="password" GridPane.columnIndex="1" GridPane.rowIndex="2">
 											<GridPane.margin>
 												<Insets left="10.0" right="30.0" />
@@ -67,7 +85,7 @@
                                     <Font size="13.0" />
                                  </font>
 										</PasswordField>
-										<Button id="login-button" fx:id="loginBtn" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="42.0" prefWidth="277.0" text="Log In" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+										<Button id="login-button" fx:id="loginBtn" disable="true" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="42.0" prefWidth="277.0" text="Log In" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
 											<font>
 												<Font name="Arial Black" size="14.0" />
 											</font>
@@ -105,14 +123,14 @@
 										<Font name="Arial Rounded MT Bold" size="38.0" />
 									</font>
 								</Label>
-								<GridPane layoutX="194.0" layoutY="206.0" prefHeight="273.0" prefWidth="412.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
+								<GridPane layoutX="194.0" layoutY="206.0" prefHeight="288.0" prefWidth="412.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
 									<children>
 										<Label text="USERNAME:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
 											<font>
 												<Font name="Arial Black" size="13.0" />
 											</font>
 											<GridPane.margin>
-												<Insets left="20.0" right="10.0" />
+												<Insets left="20.0" right="10.0" top="-45.0" />
 											</GridPane.margin>
 										</Label>
 										<Label layoutX="53.0" layoutY="87.0" text="PASSWORD:" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
@@ -120,19 +138,63 @@
 												<Font name="Arial Black" size="13.0" />
 											</font>
 											<GridPane.margin>
-												<Insets right="10.0" />
+												<Insets right="10.0" top="-10.0" />
 											</GridPane.margin>
 										</Label>
-										<TextField fx:id="registerUsernameTxtField" onAction="#handleUsernameLength" prefHeight="30.0" prefWidth="253.0" promptText="at least 8 character" GridPane.columnIndex="1" GridPane.rowIndex="1">
-											<GridPane.margin>
-												<Insets left="10.0" right="30.0" />
-											</GridPane.margin>
-										</TextField>
-										<PasswordField fx:id="registerPasswdTxtField" prefHeight="30.0" prefWidth="253.0" promptText="at least 6 characters" GridPane.columnIndex="1" GridPane.rowIndex="2">
-											<GridPane.margin>
-												<Insets left="10.0" right="30.0" />
-											</GridPane.margin>
-										</PasswordField>
+                              <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <children>
+      										<TextField fx:id="registerUsernameTxtField" onAction="#handleUsernameLength" prefHeight="30.0" prefWidth="253.0" promptText="at least 8 character" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      											<GridPane.margin>
+      												<Insets left="10.0" right="30.0" />
+      											</GridPane.margin>
+                                       <VBox.margin>
+                                          <Insets top="15.0" />
+                                       </VBox.margin>
+      										</TextField>
+                                    <Label fx:id="registerNameRemindLb1" layoutX="10.0" layoutY="58.0" prefHeight="20.0" prefWidth="250.0" text="less than 8 characters" textFill="#ff1414" visible="false">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="registerNameRemindLb" prefHeight="20.0" prefWidth="250.0" text="   ———————————————" textFill="#b5b5b5" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="30.0" top="3.0" />
+                                       </VBox.margin>
+                                       <padding>
+                                          <Insets top="-5.0" />
+                                       </padding>
+                                    </Label>
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets left="10.0" right="30.0" />
+                                 </GridPane.margin>
+                              </VBox>
+                              <VBox GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <children>
+      										<PasswordField fx:id="registerPasswdTxtField" prefHeight="30.0" prefWidth="253.0" promptText="at least 6 characters" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      											<GridPane.margin>
+      												<Insets left="10.0" right="30.0" />
+      											</GridPane.margin>
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+      										</PasswordField>
+                                    <Label fx:id="registerPasswdRemindLb2" prefHeight="20.0" prefWidth="250.0" text="less than 6 characters" textFill="#ff1414" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="3.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets left="10.0" right="30.0" />
+                                 </GridPane.margin>
+                              </VBox>
 										<Button id="register-button" fx:id="registerBtn" mnemonicParsing="false" onAction="#handleRegisterButtonAction" prefHeight="42.0" prefWidth="277.0" text="Register" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
 											<font>
 												<Font name="Arial Black" size="14.0" />
@@ -146,26 +208,44 @@
                                     <Font name="Arial Black" size="13.0" />
                                  </font>
                                  <GridPane.margin>
-                                    <Insets right="10.0" />
+                                    <Insets right="10.0" top="-10.0" />
                                  </GridPane.margin>
                               </Label>
-                              <PasswordField fx:id="confirmPasswdTxtField" prefHeight="30.0" prefWidth="253.0" promptText="confirm your password" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                              <VBox prefHeight="71.0" prefWidth="228.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <children>
+                                    <PasswordField fx:id="confirmPasswdTxtField" prefHeight="30.0" prefWidth="253.0" promptText="confirm your password" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <GridPane.margin>
+                                          <Insets left="10.0" right="30.0" />
+                                       </GridPane.margin>
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </PasswordField>
+                                    <Label fx:id="pairedLabel" text="password not matched" textFill="#f81414" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <VBox.margin>
+                                          <Insets top="3.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
                                  <GridPane.margin>
                                     <Insets left="10.0" right="30.0" />
                                  </GridPane.margin>
-                              </PasswordField>
+                              </VBox>
 									</children>
 									<columnConstraints>
 										<ColumnConstraints hgrow="SOMETIMES" maxWidth="144.0" minWidth="10.0" prefWidth="144.0" />
 										<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="268.0" />
 									</columnConstraints>
 									<rowConstraints>
-										<RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
-										<RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
-										<RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+										<RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+										<RowConstraints maxHeight="78.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
+										<RowConstraints maxHeight="57.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="71.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
 										<RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
-										<RowConstraints maxHeight="41.0" minHeight="10.0" prefHeight="17.0" vgrow="SOMETIMES" />
+										<RowConstraints maxHeight="41.0" minHeight="6.0" prefHeight="6.0" vgrow="SOMETIMES" />
 									</rowConstraints>
 								</GridPane>
 								<ImageView fitHeight="137.0" fitWidth="271.0" layoutX="560.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
