@@ -28,7 +28,7 @@ import javafx.fxml.Initializable;
 /**
  * Controller class for the login and register view
  * 
- * @author Zifeng Zhang
+ * @author Zifeng Zhang, Ji Sheng
  *
  */
 public class LoginViewController implements Initializable {
@@ -154,14 +154,14 @@ public class LoginViewController implements Initializable {
 	}
 
 	/**
-	 * Judge the username's validity
+	 * Test the username's validity
 	 * @param e
 	 */
 	@FXML
 	private void handleUsernameLength(ActionEvent e) {
 		String username = registerUsernameTxtField.getText();
 		if (username.length() < 8) {
-			registerUsernameTxtField.setStyle("-fx-effect: innershadow( one-pass-box , red , 8 , 0.0 , 2 , 0 )");
+			registerUsernameTxtField.setStyle("-fx-focus-color:red; -fx-text-box-border:red;");
 		} else {
 			this.isRegisterNameValid = true;
 		}
@@ -186,6 +186,17 @@ public class LoginViewController implements Initializable {
 		users = dbProcessor.fetchUserInfo();
 		recipes = dbProcessor.fetchRecipe();
 
+		loginUsernameTxtField.focusedProperty().addListener((obs, newVal, oldVal)->{
+			String loginName = loginUsernameTxtField.getText();
+			if(newVal) {
+				System.out.println("Un Focused");
+				if(loginName.length() < 8) {
+					
+				}
+			}else {
+				System.out.println("Focused");
+			}
+		});
 	}
 
 }
