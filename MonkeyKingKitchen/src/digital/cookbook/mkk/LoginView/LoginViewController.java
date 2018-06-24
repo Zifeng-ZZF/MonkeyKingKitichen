@@ -40,6 +40,7 @@ public class LoginViewController implements Initializable {
 	private boolean isLoginNameValid;
 	private boolean isPasswordValid;
 	private boolean isPasswordPaired;
+	private boolean isRegisterNameValid;
 
 	@FXML
 	private Button registerBtn;
@@ -168,6 +169,12 @@ public class LoginViewController implements Initializable {
 				alert.setHeaderText("Warning");
 				loginTab.getTabPane().getSelectionModel().select(loginTab);
 				alert.show();
+			}else {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setContentText("Username or password not valid. Check again.");
+				alert.setHeaderText("Warning");
+				loginTab.getTabPane().getSelectionModel().select(loginTab);
+				alert.show();
 			}
 		}
 
@@ -197,6 +204,8 @@ public class LoginViewController implements Initializable {
 			
 			if(isLoginNameValid && isPasswordValid)
 				loginBtn.setDisable(false);
+			else
+				loginBtn.setDisable(true);
 			
 		});
 		
@@ -209,6 +218,8 @@ public class LoginViewController implements Initializable {
 			
 			if(isLoginNameValid && isPasswordValid)
 				loginBtn.setDisable(false);
+			else
+				loginBtn.setDisable(true);
 		});
 		
 		// register username length listener
@@ -218,8 +229,10 @@ public class LoginViewController implements Initializable {
 				System.out.println("Un Focused");
 				if (registerName.length() < 8) {
 					registerNameRemindLb.setVisible(true);
+					isRegisterNameValid = false;
 				}else {
 					registerNameRemindLb.setVisible(false);
+					isRegisterNameValid = true;
 				}
 			}
 		});
@@ -244,9 +257,11 @@ public class LoginViewController implements Initializable {
 			if (oldVal) {
 				System.out.println("Un Focused");
 				if (!registerPasswd.equals(confirmPasswd)) {
-					registerPasswdRemindLb.setVisible(true);
+					pairedLabel.setVisible(true);
+					isPasswordPaired = false;
 				}else {
-					registerPasswdRemindLb.setVisible(false);
+					pairedLabel.setVisible(false);
+					isPasswordPaired = true;
 				}
 			}
 		});
