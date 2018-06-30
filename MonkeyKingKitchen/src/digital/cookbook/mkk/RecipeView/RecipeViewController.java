@@ -240,6 +240,8 @@ public class RecipeViewController implements Initializable{
 		double rate = rateSlider.getValue();
 		dbProcessor.insertRate(currentRecipe,currentUser.getUid(),rate);
 		confirmrateBtn.setVisible(false);
+		rateSlider.setVisible(false);
+		rateOnLb.setText("Successful!");
 	}
 	
 	@Override

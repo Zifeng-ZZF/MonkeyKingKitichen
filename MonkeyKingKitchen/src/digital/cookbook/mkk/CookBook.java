@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
-
-
 /**
  * The cookbook
  * 
@@ -50,20 +48,6 @@ public class CookBook {
 		this.recipes = dbProcessor.fetchRecipe();
 	}
 
-	/**
-	 * Add recipe to the cookBook, insert the reicpe to recipetb
-	 * Meanwhile insert the ingredient into recipeingredientdb
-	 * @param recipe
-	 */
-	public void addRecipe(Recipe recipe) {
-		//1. Insert recipes
-		this.recipes.put(recipe.getRecipeId(), recipe);
-		dbProcessor.insertRecipe(recipe, currentUser.getUid());
-		//2. Insert ingredients
-		for (Ingredient ingredient : recipe.getIngredients()) {
-			dbProcessor.addIngredient(ingredient);
-		}
-	}
 
 	/**
 	 * Get the total recipes of the cook book.
@@ -74,33 +58,6 @@ public class CookBook {
 		return recipes;
 	}
 
-	
-	/**
-	 * Delete the recipe of the current user in myRecipeList
-	 * @param recipe
-	 */
-	public void deleteTheRecipe(Recipe myRecipe) {
-		if(currentUser.getUid() == myRecipe.getUid())
-			dbProcessor.deleteRecipe(myRecipe.getRecipeId());
-	}
-	
-	/**
-	 * Over write deleteMethod
-	 * Delete the currentRecipe if it belongs to the currentUser
-	 */
-	public void deleteTheRecipe() {
-		if(currentUser.getUid() == this.currentRecipe.getUid())
-			dbProcessor.deleteRecipe(currentRecipe.getRecipeId());
-	}
-	
-	/**
-	 * Open one single recipe
-	 * @param recipe
-	 */
-	public void openRecipe(Recipe recipe) {
-		this.currentRecipe = recipe;
-		System.out.println(currentRecipe);
-	}
 	
 	/**
 	 * Get the recommendRecipe

@@ -33,44 +33,7 @@ public class User implements Serializable {
 		this.passwd = passwd;
 	}
 
-	/**
-	 * Add recipe to favorite
-	 * 
-	 * @param recipe
-	 */
-	public void addToFavorite(Recipe recipe) {
-		ArrayList<Recipe> iterateList = new ArrayList<>(this.myFavoriteList);
-		int passNum = 0;
-		if (!this.myFavoriteList.isEmpty()) {
-			for (Recipe existRecipe : myFavoriteList) {
-				if((recipe.getRecipeId() == existRecipe.getRecipeId()) &&
-						(recipe.getUid() == existRecipe.getUid())) {
-					System.out.println("Recipe already added.");
-				}else {
-					passNum++;
-				}
-			}
-			
-			if(passNum == myFavoriteList.size()) {
-				iterateList.add(recipe);
-				dbProcessor.insertIntoFavorite(recipe, this.uid);
-			}
-			
-		} else {
-			iterateList.add(recipe);
-			dbProcessor.insertIntoFavorite(recipe, this.uid);
-		}
-		this.myFavoriteList = iterateList;
-	}
 
-	/**
-	 * Delete the favorite recipe from myfavoritetb;
-	 * @param recipe
-	 */
-	public void deleteFavorite(Recipe recipe) {
-		dbProcessor.deleteFavoriteRecipe(recipe.getRecipeId(), this.uid);
-	}
-	
 	/**
 	 * Rate the recipe
 	 * 

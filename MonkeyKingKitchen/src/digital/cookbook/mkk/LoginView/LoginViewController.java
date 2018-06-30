@@ -168,10 +168,10 @@ public class LoginViewController implements Initializable {
 			if (isRegisterNameValid && isPasswordValid) {
 				User newUser = new User(username, passwd);
 				dbProcessor.insertUser(newUser);
-				users.add(newUser);
+				this.users.add(newUser);
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setContentText("Register successfully!/r/n Log in right now!");
-				alert.setHeaderText("Warning");
+				alert.setContentText("Register successfully!\r\n Log in right now!");
+				alert.setHeaderText("Information");
 				loginTab.getTabPane().getSelectionModel().select(loginTab);
 				alert.show();
 			}else {
