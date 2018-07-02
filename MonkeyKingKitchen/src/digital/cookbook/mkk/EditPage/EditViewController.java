@@ -47,6 +47,11 @@ public class EditViewController implements Initializable {
 	private Map<Button, HBox> itemAcess = new HashMap<>();
 	private Map<HBox, Ingredient> ingredientAccess = new HashMap<>();
 	private ArrayList<Recipe> myRecipes = new ArrayList<>();
+	
+	private boolean servingValid = false;
+	private boolean cookingTimeValid = false;
+	private boolean prepTimeValid = false;
+	private boolean amountValid = false;
 
 	@FXML
 	private Label EditLb;
@@ -304,12 +309,18 @@ public class EditViewController implements Initializable {
 			});
 		}
 	}
-
+	
 	/**
 	 * Handle events while openning the page
+	 * 1. Grab all the ingredients from the db
+	 * 2. Grab all the recipe from the db and match the user's own recipe
+	 * 3. Listeners from the focused properties for servings, cookingTime, preparationTime and amount
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		saveBtn.setDisable(true);
+		
 		ArrayList<String> allIngredients = dbProcessor.fetchIngredients();
 		for (String ingredientName : allIngredients)
 			ingredientCb.getItems().add(ingredientName);
@@ -320,6 +331,97 @@ public class EditViewController implements Initializable {
 			if(recipe.getUid() == currentUser.getUid())
 				myRecipes.add(recipe);
 		}
+		
+		//Focused properties listener
+		//Servings numeric input listener
+		servingsTxtField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			String content = servingsTxtField.getText().trim();
+			if(oldVal) {
+				if(content.matches("[0-9]*")) {
+					servingsTxtField.setStyle("-fx-border-color:black;"
+							+ "-fx-border-width:0 0 1 0;"
+							+ "-fx-background-color:#ffffff;");
+					servingValid = true;
+				}else {
+					servingsTxtField.setStyle("-fx-border-color:red;"
+							+ "-fx-border-width:0 0 1 0;"
+							+ "-fx-text-fill:derive(red,.3);");
+					servingValid = false;
+				}
+				
+				if(servingValid && cookingTimeValid && prepTimeValid && amountValid)
+					saveBtn.setDisable(false);
+				else
+					saveBtn.setDisable(true);
+			}
+		});
+		
+		//cookingTime numeric input listener
+		cookingTimeTxtField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			String content = cookingTimeTxtField.getText().trim();
+			if(oldVal) {
+				if(content.matches("[0-9]*")) {
+					cookingTimeTxtField.setStyle("-fx-border-color:black;"
+							+ "-fx-border-width:0 0 1 0;"
+							+ "-fx-background-color:#ffffff;");
+					cookingTimeValid = true;
+				}else {
+					cookingTimeTxtField.setStyle("-fx-border-color:red;"
+							+ "-fx-border-width:0 0 1 0;"
+							+ "-fx-text-fill:derive(red,.3);");
+					cookingTimeValid = false;
+				}
+				
+				if(servingValid && cookingTimeValid && prepTimeValid && amountValid)
+					saveBtn.setDisable(false);
+				else
+					saveBtn.setDisable(true);
+			}
+		});
+		
+		//preparation time numeric input listener
+		prepareTimeTxtField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			String content = prepareTimeTxtField.getText().trim();
+			if(oldVal) {
+				if(content.matches("[0-9]*")) {
+					prepareTimeTxtField.setStyle("-fx-border-color:black;"
+							+ "-fx-border-width:0 0 1 0;"
+							+ "-fx-background-color:#ffffff;");
+					prepTimeValid = true;
+				}else {
+					prepareTimeTxtField.setStyle("-fx-border-color:red;"
+							+ "-fx-border-width:0 0 1 0;"
+							+ "-fx-text-fill:derive(red,.3);");
+					prepTimeValid = false;
+				}
+				if(servingValid && cookingTimeValid && prepTimeValid && amountValid)
+					saveBtn.setDisable(false);
+				else
+					saveBtn.setDisable(true);
+			}
+		});
+		
+		//amount numeric input listener
+		amountTxtField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			String content = amountTxtField.getText().trim();
+			if(oldVal) {
+				if(content.matches("[0-9]*")) {
+					amountTxtField.setStyle("-fx-border-color:black;"
+							+ "-fx-border-width:0 0 1 0;"
+							+ "-fx-background-color:#ffffff;");
+					amountValid = true;
+				}else {
+					amountTxtField.setStyle("-fx-border-color:red;"
+							+ "-fx-border-width:0 0 1 0;"
+							+ "-fx-text-fill:derive(red,.3);");
+					amountValid = false;
+				}
+				if(servingValid && cookingTimeValid && prepTimeValid && amountValid)
+					saveBtn.setDisable(false);
+				else
+					saveBtn.setDisable(true);
+			}
+		});
 	}
 
 }
