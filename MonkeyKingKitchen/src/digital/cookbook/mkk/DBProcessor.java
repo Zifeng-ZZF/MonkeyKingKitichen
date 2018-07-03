@@ -111,7 +111,6 @@ public class DBProcessor {
 
 			while (rs.next()) {
 				allIngredients.add(rs.getString(1));
-				System.out.println("666" + rs.getString(1));
 			}
 
 			rs.close();
@@ -441,7 +440,6 @@ public class DBProcessor {
 			ResultSet resultSet = statement.executeQuery(idSql);
 			if (resultSet.next()) {
 				maxID = resultSet.getInt(1);
-				System.out.println("Current Max id is: " + maxID);
 				if (maxID == 0) {
 					Statement statementClean = conn.createStatement();
 					statementClean.executeUpdate(cleanAutoIncreaseSql);
@@ -455,6 +453,7 @@ public class DBProcessor {
 		SQLException e1) {
 			e1.printStackTrace();
 		}
+		System.out.println("Current Max id is: " + maxID);
 		return maxID;
 	}
 

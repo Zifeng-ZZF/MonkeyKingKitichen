@@ -233,8 +233,7 @@ public class MainPageController implements Initializable {
 		
 		//Initialize the recommendation
 		recommendNameLabel.setText(CookBook.getRecommandRecipe().getName());
-		briefStepLabel.setText(CookBook.getRecommandRecipe().getPreparationSetps().get(0)
-				+ CookBook.getRecommandRecipe().getPreparationSetps().get(1));
+		briefStepLabel.setText(CookBook.getRecommandRecipe().getPreparationSetps().get(0));
 		briefStepLabel.setWrapText(true);
 	}
 

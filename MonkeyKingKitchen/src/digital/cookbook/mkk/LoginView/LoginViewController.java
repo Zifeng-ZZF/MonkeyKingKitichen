@@ -105,6 +105,7 @@ public class LoginViewController implements Initializable {
 			// Initialize current user
 			if (user.getName().equals(username) && user.getPasswd().equals(passwd)) {
 				CookBook.setCurrentUser(user);
+				System.out.println(user.getName());
 				// Initialize myFavoriteList
 				user.setMyFavoriteList(dbProcessor.fetchFavorite(user.getUid()));
 				// Initialize myRecipeList
@@ -168,13 +169,17 @@ public class LoginViewController implements Initializable {
 		if (!isExist) {
 			if (isRegisterNameValid && isPasswordPaired && isRegisterPasswdValid) {
 				User newUser = new User(username, passwd);
+				
 				dbProcessor.insertUser(newUser);
-				this.users.add(newUser);
+				
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setContentText("Register successfully!\r\n Log in right now!");
 				alert.setHeaderText("Information");
 				loginTab.getTabPane().getSelectionModel().select(loginTab);
 				alert.show();
+				
+				this.users = dbProcessor.fetchUserInfo();
+				
 			}else {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setContentText("Username or password not valid. Check again.");

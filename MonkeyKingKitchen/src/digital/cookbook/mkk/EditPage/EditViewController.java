@@ -42,7 +42,7 @@ import javafx.stage.Stage;
 public class EditViewController implements Initializable {
 
 	private DBProcessor dbProcessor = new DBProcessor();
-	private User currentUser = CookBook.getCurrentUser();
+	private User currentUser;
 	private ArrayList<Ingredient> recipeIngredients = new ArrayList<>();
 	private Map<Button, HBox> itemAcess = new HashMap<>();
 	private Map<HBox, Ingredient> ingredientAccess = new HashMap<>();
@@ -51,7 +51,7 @@ public class EditViewController implements Initializable {
 	private boolean servingValid = false;
 	private boolean cookingTimeValid = false;
 	private boolean prepTimeValid = false;
-	private boolean amountValid = false;
+	private boolean amountValid = true;
 
 	@FXML
 	private Label EditLb;
@@ -143,7 +143,6 @@ public class EditViewController implements Initializable {
 		dbProcessor.deleteIngredient(recipe.getRecipeId());
 		recipe.getIngredients().clear();
 		
-		setUpDeleteBtn();
 	}
 
 	/**
@@ -162,11 +161,12 @@ public class EditViewController implements Initializable {
 		item.getChildren().add(deleteBtn);
 
 		ingredientVBox.getChildren().add(item);
-		// Listen to every delete buttons
 		
+		// Listen to every delete buttons
 		itemAcess.put(deleteBtn, item);
 		ingredientAccess.put(item, ingredient);
 	
+		setUpDeleteBtn();
 	}
 
 	/**
@@ -244,6 +244,7 @@ public class EditViewController implements Initializable {
 				if (response == ButtonType.OK) {
 					ingredientVBox.getChildren().clear();
 					cancelBtnAction(e);
+					CookBook.setCurrentRecipe(null);
 				}
 			});
 
@@ -291,6 +292,7 @@ public class EditViewController implements Initializable {
 			Scene scene = new Scene(parent);
 			Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 			currentStage.setScene(scene);
+			CookBook.setCurrentRecipe(null);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -319,8 +321,17 @@ public class EditViewController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		saveBtn.setDisable(true);
+		currentUser = CookBook.getCurrentUser();
 		
+		if(CookBook.getCurrentRecipe() != null) {
+			saveBtn.setDisable(false);
+			servingValid = true;
+			cookingTimeValid = true;
+			prepTimeValid = true;
+			amountValid = true;
+		}else
+			saveBtn.setDisable(true);
+			
 		ArrayList<String> allIngredients = dbProcessor.fetchIngredients();
 		for (String ingredientName : allIngredients)
 			ingredientCb.getItems().add(ingredientName);

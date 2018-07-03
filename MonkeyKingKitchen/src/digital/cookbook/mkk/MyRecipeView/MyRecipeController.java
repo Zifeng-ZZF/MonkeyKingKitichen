@@ -90,15 +90,6 @@ public class MyRecipeController implements Initializable {
 	@FXML
 	private ScrollPane scrollPane;
 
-	@FXML
-	public void deleteEvent(ActionEvent event) {
-	
-	}
-
-	@FXML
-	public void openEvent(ActionEvent event) {
-		
-	}
 
 	/**
 	 * Jump to my favorite recipe list
