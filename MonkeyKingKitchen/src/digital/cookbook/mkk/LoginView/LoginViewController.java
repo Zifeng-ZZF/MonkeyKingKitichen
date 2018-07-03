@@ -38,7 +38,8 @@ public class LoginViewController implements Initializable {
 	private ArrayList<User> users;
 	private Map<Integer, Recipe> recipes;
 	private boolean isLoginNameValid;
-	private boolean isPasswordValid;
+	private boolean isLoginPasswdValid;
+	private boolean isRegisterPasswdValid;
 	private boolean isPasswordPaired;
 	private boolean isRegisterNameValid;
 
@@ -165,7 +166,7 @@ public class LoginViewController implements Initializable {
 		}
 
 		if (!isExist) {
-			if (isRegisterNameValid && isPasswordValid) {
+			if (isRegisterNameValid && isPasswordPaired && isRegisterPasswdValid) {
 				User newUser = new User(username, passwd);
 				dbProcessor.insertUser(newUser);
 				this.users.add(newUser);
@@ -178,7 +179,6 @@ public class LoginViewController implements Initializable {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setContentText("Username or password not valid. Check again.");
 				alert.setHeaderText("Warning");
-				loginTab.getTabPane().getSelectionModel().select(loginTab);
 				alert.show();
 			}
 		}
@@ -207,7 +207,7 @@ public class LoginViewController implements Initializable {
 				}
 			}
 			
-			if(isLoginNameValid && isPasswordValid)
+			if(isLoginNameValid && isLoginPasswdValid)
 				loginBtn.setDisable(false);
 			else
 				loginBtn.setDisable(true);
@@ -217,11 +217,11 @@ public class LoginViewController implements Initializable {
 		// Login password empty listener
 		loginPasswdTxtField.setOnKeyPressed(e -> {
 			if(loginPasswdTxtField.getText().length() != 0)
-				isPasswordValid = true;
+				isLoginPasswdValid = true;
 			else
-				isPasswordValid = false;
+				isLoginPasswdValid = false;
 			
-			if(isLoginNameValid && isPasswordValid)
+			if(isLoginNameValid && isLoginPasswdValid)
 				loginBtn.setDisable(false);
 			else
 				loginBtn.setDisable(true);
@@ -249,8 +249,10 @@ public class LoginViewController implements Initializable {
 				System.out.println("Un Focused");
 				if (registerPasswd.length() < 6) {
 					registerPasswdRemindLb.setVisible(true);
+					isRegisterPasswdValid = false;
 				}else {
 					registerPasswdRemindLb.setVisible(false);
+					isRegisterPasswdValid = true;
 				}
 			}
 		});
