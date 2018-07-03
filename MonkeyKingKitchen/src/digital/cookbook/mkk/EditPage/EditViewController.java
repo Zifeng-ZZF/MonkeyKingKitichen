@@ -220,8 +220,8 @@ public class EditViewController implements Initializable {
 			currentRecipe.setName(name);
 			currentRecipe.setType(type);
 			currentRecipe.setServings(servings);
-			currentRecipe.setPreparationTime(Integer.parseInt(prepareTimeTxtField.getText()));
-			currentRecipe.setCookingTime(Integer.parseInt(cookingTimeTxtField.getText()));
+			currentRecipe.setPreparationTime(Integer.parseInt(prepareTimeTxtField.getText().trim()));
+			currentRecipe.setCookingTime(Integer.parseInt(cookingTimeTxtField.getText().trim()));
 			String[] steps = stepsTxtArea.getText().split("\n");
 			currentRecipe.getPreparationSetps().clear();
 			for (String step : steps)
