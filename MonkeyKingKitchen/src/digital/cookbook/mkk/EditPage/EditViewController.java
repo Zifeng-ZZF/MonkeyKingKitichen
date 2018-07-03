@@ -127,6 +127,7 @@ public class EditViewController implements Initializable {
 		this.servingsTxtField.setText(String.valueOf(recipe.getServings()));
 		this.servingsTxtField.setText(String.valueOf(recipe.getServings()));
 		this.cookingTimeTxtField.setText(String.valueOf(recipe.getCookingTime()));
+		this.typeTxtField.setText(recipe.getType());
 
 		String step = "";
 		for (String str : recipe.getPreparationSetps()) {
