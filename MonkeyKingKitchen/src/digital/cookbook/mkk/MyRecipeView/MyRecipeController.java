@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 
 import java.io.IOException;
+import java.lang.ModuleLayer.Controller;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,6 +28,7 @@ import digital.cookbook.mkk.DBProcessor;
 import digital.cookbook.mkk.Recipe;
 import digital.cookbook.mkk.User;
 import digital.cookbook.mkk.EditPage.EditViewController;
+import digital.cookbook.mkk.MainPageView.MainPageController;
 import digital.cookbook.mkk.RecipeView.RecipeViewController;
 import javafx.event.ActionEvent;
 
@@ -120,6 +122,9 @@ public class MyRecipeController implements Initializable {
 		fxmlLoader.setLocation(getClass().getResource("../MainPageView/MainPageView.fxml"));
 		try {
 			Parent parent = fxmlLoader.load();
+			MainPageController controller = fxmlLoader.getController();
+			controller.setUserTag(currentUser.getName());
+			
 			Scene scene = new Scene(parent);
 			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			currentStage.setScene(scene);
@@ -156,7 +161,6 @@ public class MyRecipeController implements Initializable {
 	 */
 	public void setMyRecipeList(ArrayList<Recipe> myRecipes) {
 		
-
 		// Add all the items(hbox = name label + description label + button) to the Map
 		for (Recipe recipe : myRecipes) {
 			itemName = new Label(recipe.getName());
@@ -194,7 +198,6 @@ public class MyRecipeController implements Initializable {
 					Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 					currentStage.setScene(scene);
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			});
@@ -236,7 +239,6 @@ public class MyRecipeController implements Initializable {
 		
 		//set up the list
 		setMyRecipeList(myRecipes);
-		
 		//Add delete listener to the delete button
 		for (Button itemDeleteBtn : itemAccess.keySet()) {
 			HBox item = itemAccess.get(itemDeleteBtn);

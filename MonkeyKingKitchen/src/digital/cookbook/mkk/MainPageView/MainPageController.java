@@ -216,6 +216,8 @@ public class MainPageController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		allRecipes = dbProcessor.fetchRecipe();
+		
+		setUserTag(CookBook.getCurrentUser().getName());
 
 		// Set exit label
 		exitLabel.setOnMouseClicked(e -> {

@@ -21,6 +21,7 @@ import digital.cookbook.mkk.CookBook;
 import digital.cookbook.mkk.DBProcessor;
 import digital.cookbook.mkk.Recipe;
 import digital.cookbook.mkk.User;
+import digital.cookbook.mkk.MainPageView.MainPageController;
 import digital.cookbook.mkk.RecipeView.RecipeViewController;
 import javafx.event.ActionEvent;
 

@@ -131,7 +131,6 @@ public class ResultViewController implements Initializable {
 				FXMLLoader fxmlLoader = new FXMLLoader();
 				fxmlLoader.setLocation(getClass().getResource("../RecipeView/RecipeView.fxml"));
 				CookBook.setCurrentRecipe(itemAcesses.get(button));
-				System.out.println(CookBook.getCurrentRecipe().getName());
 				
 				try {
 					Scene scene = new Scene(fxmlLoader.load());
@@ -243,6 +242,7 @@ public class ResultViewController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		allRecipes = dbProcessor.fetchRecipe();
+		this.userLabel.setText(CookBook.getCurrentUser().getName());
 		
 		//exitLabel
 		exitLabel.setOnMouseClicked(e->{
