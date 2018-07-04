@@ -268,6 +268,8 @@ public class EditViewController implements Initializable {
 			for (String step : steps)
 				recipe.addPreparationStep(step);
 			
+			dbProcessor.insertRecipe(recipe, CookBook.getCurrentUser().getUid());
+			
 			for (Ingredient ingredient : recipeIngredients) {
 				// Endow ingredient with the current recipe id;
 				recipe.addIngredient(ingredient);
@@ -358,6 +360,9 @@ public class EditViewController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		cookingTimeTxtField.setPromptText("minutes");
+		prepareTimeTxtField.setPromptText("minutes");
 
 		currentUser = CookBook.getCurrentUser();
 

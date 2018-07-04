@@ -118,8 +118,8 @@ public class RecipeViewController implements Initializable{
 	public void setRecipeDetail(Recipe recipe) {
 		this.recipeNameLb.setText(recipe.getName());
 		this.servingsTxtField.setText(""+recipe.getServings());
-		this.preparationTimeLb.setText("preparation time : " + recipe.getPreparationTime());
-		this.cookingTimeLb.setText("cooking time : " + recipe.getCookingTime());
+		this.preparationTimeLb.setText("preparation time : " + recipe.getPreparationTime() + "mins");
+		this.cookingTimeLb.setText("cooking time : " + recipe.getCookingTime() + "mins");
 		this.rateLb.setText("rate : " + recipe.getRate());
 		setIngredients(recipe);
 		setSteps(recipe);
@@ -261,5 +261,4 @@ public class RecipeViewController implements Initializable{
         	}
     	}
 	}
-
 }
