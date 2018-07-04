@@ -239,6 +239,7 @@ public class MyRecipeController implements Initializable {
 		
 		//set up the list
 		setMyRecipeList(myRecipes);
+		
 		//Add delete listener to the delete button
 		for (Button itemDeleteBtn : itemAccess.keySet()) {
 			HBox item = itemAccess.get(itemDeleteBtn);

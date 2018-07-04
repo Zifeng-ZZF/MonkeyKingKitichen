@@ -47,7 +47,7 @@ public class EditViewController implements Initializable {
 	private Map<Button, HBox> itemAcess = new HashMap<>();
 	private Map<HBox, Ingredient> ingredientAccess = new HashMap<>();
 	private ArrayList<Recipe> myRecipes = new ArrayList<>();
-	
+
 	private boolean servingValid = false;
 	private boolean cookingTimeValid = false;
 	private boolean prepTimeValid = false;
@@ -131,19 +131,18 @@ public class EditViewController implements Initializable {
 
 		String step = "";
 		for (String str : recipe.getPreparationSetps()) {
-			step += str;
+			step += str+"\n";
 		}
 		this.stepsTxtArea.setText(step + "\n");
-
+		// Put the recipe's own recipe
 		for (Ingredient ingredient : recipe.getIngredients()) {
 			addIngredientHBox(ingredient);
 			recipeIngredients.add(ingredient);
 		}
-		
-		// ingredients
+		// clear the ingredients of this recipe
 		dbProcessor.deleteIngredient(recipe.getRecipeId());
 		recipe.getIngredients().clear();
-		
+
 	}
 
 	/**
@@ -157,47 +156,56 @@ public class EditViewController implements Initializable {
 
 		HBox item = new HBox();
 		Label ingredientTxt = new Label(ingredientDesc);
+		ingredientTxt.setMaxWidth(210);
 		Button deleteBtn = new Button("DELETE");
 		item.getChildren().add(ingredientTxt);
 		item.getChildren().add(deleteBtn);
 
 		ingredientVBox.getChildren().add(item);
-		
+
 		// Listen to every delete buttons
 		itemAcess.put(deleteBtn, item);
 		ingredientAccess.put(item, ingredient);
-	
 		setUpDeleteBtn();
 	}
 
 	/**
-	 * Add an ingredient item to the recipe and show on the view
+	 * Listen to the ingredient adding button Add an ingredient item to the recipe
+	 * and show on the view
 	 * 
 	 * @param e
 	 */
 	@FXML
 	public void addBtnAction(ActionEvent e) {
-		String name = ingredientCb.getSelectionModel().getSelectedItem().toString();
-		boolean isAdded = false;
-		// Warn the user if the ingredients have been added
-		for (int i = 0; i < recipeIngredients.size(); i++) {
-			if (recipeIngredients.get(i).getName().equals(name)) {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.titleProperty().set("Alert");
-				alert.headerTextProperty().set("Duplicate Action");
-				alert.contentTextProperty().set("You have already added this ingredient!");
-				alert.showAndWait();
-				isAdded = true;
-				break;
+		if (ingredientCb.getSelectionModel().getSelectedItem() == null) {
+			//When the user does not choose the ingredient.
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setHeaderText("Empty ingredient!");
+			alert.setContentText("Please select an ingredient!");
+			alert.show();
+		} else {
+			String name = ingredientCb.getSelectionModel().getSelectedItem().toString();
+			boolean isAdded = false;
+			// Warn the user if the ingredients have been added
+			for (int i = 0; i < recipeIngredients.size(); i++) {
+				if (recipeIngredients.get(i).getName().equals(name)) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.titleProperty().set("Alert");
+					alert.headerTextProperty().set("Duplicate Action");
+					alert.contentTextProperty().set("You have already added this ingredient!");
+					alert.showAndWait();
+					isAdded = true;
+					break;
+				}
 			}
-		}
-		if (!isAdded) {
-			double amount = Double.parseDouble(amountTxtField.getText());
-			String unit = unitTxtField.getText();
-			String processMethod = processTxtField.getText();
-			Ingredient newIngredient = new Ingredient(name, amount, unit, processMethod);
-			this.recipeIngredients.add(newIngredient);
-			addIngredientHBox(newIngredient);
+			if (!isAdded) {
+				double amount = Double.parseDouble(amountTxtField.getText());
+				String unit = unitTxtField.getText();
+				String processMethod = processTxtField.getText();
+				Ingredient newIngredient = new Ingredient(name, amount, unit, processMethod);
+				recipeIngredients.add(newIngredient);
+				addIngredientHBox(newIngredient);
+			}
 		}
 	}
 
@@ -226,16 +234,17 @@ public class EditViewController implements Initializable {
 			currentRecipe.getPreparationSetps().clear();
 			for (String step : steps)
 				currentRecipe.addPreparationStep(step);
-
-			// Update the recipe in recipetb
-			dbProcessor.updateRecipe(currentRecipe);
-
-			// Insert new ingredients and add to DB
+			
+			//Insert ingredients to recipe
 			for (Ingredient ingredient : recipeIngredients) {
 				// Endow ingredient with the current recipe id;
 				currentRecipe.addIngredient(ingredient);
+				System.out.println(currentRecipe.getName());
 				dbProcessor.addIngredient(ingredient);
 			}
+
+			// Update the recipe in recipetb
+			dbProcessor.updateRecipe(currentRecipe);
 
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.titleProperty().set("Save");
@@ -244,7 +253,8 @@ public class EditViewController implements Initializable {
 			alert.showAndWait().ifPresent(response -> {
 				if (response == ButtonType.OK) {
 					ingredientVBox.getChildren().clear();
-					cancelBtnAction(e);
+					//Via canceling ingredients will be re-inserted
+					okBtnInDialog(e);
 					CookBook.setCurrentRecipe(null);
 				}
 			});
@@ -257,13 +267,11 @@ public class EditViewController implements Initializable {
 			String[] steps = stepsTxtArea.getText().split("\n");
 			for (String step : steps)
 				recipe.addPreparationStep(step);
-
-			// Insert into DB and pop up informing
-			dbProcessor.insertRecipe(recipe, currentUser.getUid());
-
+			
 			for (Ingredient ingredient : recipeIngredients) {
 				// Endow ingredient with the current recipe id;
 				recipe.addIngredient(ingredient);
+				System.out.println(recipe.getName());
 				dbProcessor.addIngredient(ingredient);
 			}
 
@@ -273,19 +281,48 @@ public class EditViewController implements Initializable {
 			alert.contentTextProperty().set("You have successfully created a recipe!");
 			alert.showAndWait().ifPresent(response -> {
 				if (response == ButtonType.OK) {
-					cancelBtnAction(e);
+					//Via canceling ingredients will be re-inserted
+					okBtnInDialog(e);
 				}
 			});
 		}
 	}
 
 	/**
-	 * Canceling edit and return to my recipe list
-	 * 
+	 * Canceling edit and return to my recipe list. For the canceling btn on the UI
+	 * Also insert the ingredients into the db
 	 * @param e
 	 */
 	@FXML
 	public void cancelBtnAction(ActionEvent e) {
+		//Even on canceling, the ingredients needs to be restored in the db
+		//because while editing, at the beginning the ingredient will be cleared.
+		for (Ingredient ingredient : recipeIngredients) {
+			// Endow ingredient with the current recipe id;
+			CookBook.getCurrentRecipe().addIngredient(ingredient);
+			System.out.println(CookBook.getCurrentRecipe().getName());
+			dbProcessor.addIngredient(ingredient);
+		}
+		
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		fxmlLoader.setLocation(getClass().getResource("../MyRecipeView/MyRecipeView.fxml"));
+		try {
+			Parent parent = fxmlLoader.load();
+			Scene scene = new Scene(parent);
+			Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+			
+			currentStage.setScene(scene);
+			CookBook.setCurrentRecipe(null);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	/**
+	 * The ok btn in the alert dialog that return to the my recipe view
+	 * @param e
+	 */
+	private void okBtnInDialog(ActionEvent e) {
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		fxmlLoader.setLocation(getClass().getResource("../MyRecipeView/MyRecipeView.fxml"));
 		try {
@@ -298,12 +335,12 @@ public class EditViewController implements Initializable {
 			e1.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Register the listeners for all the deleteBtn
 	 */
 	public void setUpDeleteBtn() {
-		for(Button deleteBtn : itemAcess.keySet()) {
+		for (Button deleteBtn : itemAcess.keySet()) {
 			HBox item = itemAcess.get(deleteBtn);
 			Ingredient ingredient = ingredientAccess.get(item);
 			deleteBtn.setOnAction(e -> {
@@ -312,123 +349,114 @@ public class EditViewController implements Initializable {
 			});
 		}
 	}
-	
+
 	/**
-	 * Handle events while openning the page
-	 * 1. Grab all the ingredients from the db
-	 * 2. Grab all the recipe from the db and match the user's own recipe
-	 * 3. Listeners from the focused properties for servings, cookingTime, preparationTime and amount
+	 * Handle events while openning the page 1. Grab all the ingredients from the db
+	 * 2. Grab all the recipe from the db and match the user's own recipe 3.
+	 * Listeners from the focused properties for servings, cookingTime,
+	 * preparationTime and amount
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 		currentUser = CookBook.getCurrentUser();
-		
-		if(CookBook.getCurrentRecipe() != null) {
+
+		if (CookBook.getCurrentRecipe() != null) {
 			saveBtn.setDisable(false);
 			servingValid = true;
 			cookingTimeValid = true;
 			prepTimeValid = true;
 			amountValid = true;
-		}else
+		} else
 			saveBtn.setDisable(true);
-			
+
 		ArrayList<String> allIngredients = dbProcessor.fetchIngredients();
 		for (String ingredientName : allIngredients)
 			ingredientCb.getItems().add(ingredientName);
-		
-		
+
 		Collection<Recipe> allRecipes = CookBook.getRecipesList().values();
-		for(Recipe recipe : allRecipes) {
-			if(recipe.getUid() == currentUser.getUid())
+		for (Recipe recipe : allRecipes) {
+			if (recipe.getUid() == currentUser.getUid())
 				myRecipes.add(recipe);
 		}
-		
-		//Focused properties listener
-		//Servings numeric input listener
+
+		// Focused properties listener
+		// Servings numeric input listener
 		servingsTxtField.focusedProperty().addListener((obs, oldVal, newVal) -> {
 			String content = servingsTxtField.getText().trim();
-			if(oldVal) {
-				if(content.matches("[0-9]*")) {
-					servingsTxtField.setStyle("-fx-border-color:black;"
-							+ "-fx-border-width:0 0 1 0;"
-							+ "-fx-background-color:#ffffff;");
+			if (oldVal) {
+				if (content.matches("[0-9]*")) {
+					servingsTxtField.setStyle(
+							"-fx-border-color:black;" + "-fx-border-width:0 0 1 0;" + "-fx-background-color:#ffffff;");
 					servingValid = true;
-				}else {
-					servingsTxtField.setStyle("-fx-border-color:red;"
-							+ "-fx-border-width:0 0 1 0;"
-							+ "-fx-text-fill:derive(red,.3);");
+				} else {
+					servingsTxtField.setStyle(
+							"-fx-border-color:red;" + "-fx-border-width:0 0 1 0;" + "-fx-text-fill:derive(red,.3);");
 					servingValid = false;
 				}
-				
-				if(servingValid && cookingTimeValid && prepTimeValid && amountValid)
+
+				if (servingValid && cookingTimeValid && prepTimeValid && amountValid)
 					saveBtn.setDisable(false);
 				else
 					saveBtn.setDisable(true);
 			}
 		});
-		
-		//cookingTime numeric input listener
+
+		// cookingTime numeric input listener
 		cookingTimeTxtField.focusedProperty().addListener((obs, oldVal, newVal) -> {
 			String content = cookingTimeTxtField.getText().trim();
-			if(oldVal) {
-				if(content.matches("[0-9]*")) {
-					cookingTimeTxtField.setStyle("-fx-border-color:black;"
-							+ "-fx-border-width:0 0 1 0;"
-							+ "-fx-background-color:#ffffff;");
+			if (oldVal) {
+				if (content.matches("[0-9]*")) {
+					cookingTimeTxtField.setStyle(
+							"-fx-border-color:black;" + "-fx-border-width:0 0 1 0;" + "-fx-background-color:#ffffff;");
 					cookingTimeValid = true;
-				}else {
-					cookingTimeTxtField.setStyle("-fx-border-color:red;"
-							+ "-fx-border-width:0 0 1 0;"
-							+ "-fx-text-fill:derive(red,.3);");
+				} else {
+					cookingTimeTxtField.setStyle(
+							"-fx-border-color:red;" + "-fx-border-width:0 0 1 0;" + "-fx-text-fill:derive(red,.3);");
 					cookingTimeValid = false;
 				}
-				
-				if(servingValid && cookingTimeValid && prepTimeValid && amountValid)
+
+				if (servingValid && cookingTimeValid && prepTimeValid && amountValid)
 					saveBtn.setDisable(false);
 				else
 					saveBtn.setDisable(true);
 			}
 		});
-		
-		//preparation time numeric input listener
+
+		// preparation time numeric input listener
 		prepareTimeTxtField.focusedProperty().addListener((obs, oldVal, newVal) -> {
 			String content = prepareTimeTxtField.getText().trim();
-			if(oldVal) {
-				if(content.matches("[0-9]*")) {
-					prepareTimeTxtField.setStyle("-fx-border-color:black;"
-							+ "-fx-border-width:0 0 1 0;"
-							+ "-fx-background-color:#ffffff;");
+			if (oldVal) {
+				if (content.matches("[0-9]*")) {
+					prepareTimeTxtField.setStyle(
+							"-fx-border-color:black;" + "-fx-border-width:0 0 1 0;" + "-fx-background-color:#ffffff;");
 					prepTimeValid = true;
-				}else {
-					prepareTimeTxtField.setStyle("-fx-border-color:red;"
-							+ "-fx-border-width:0 0 1 0;"
-							+ "-fx-text-fill:derive(red,.3);");
+				} else {
+					prepareTimeTxtField.setStyle(
+							"-fx-border-color:red;" + "-fx-border-width:0 0 1 0;" + "-fx-text-fill:derive(red,.3);");
 					prepTimeValid = false;
 				}
-				if(servingValid && cookingTimeValid && prepTimeValid && amountValid)
+				if (servingValid && cookingTimeValid && prepTimeValid && amountValid)
 					saveBtn.setDisable(false);
 				else
 					saveBtn.setDisable(true);
 			}
 		});
-		
-		//amount numeric input listener
+
+		// amount numeric input listener
 		amountTxtField.focusedProperty().addListener((obs, oldVal, newVal) -> {
 			String content = amountTxtField.getText().trim();
-			if(oldVal) {
-				if(content.matches("[0-9]*")) {
-					amountTxtField.setStyle("-fx-border-color:black;"
-							+ "-fx-border-width:0 0 1 0;"
-							+ "-fx-background-color:#ffffff;");
+			if (oldVal) {
+				if (content.matches("[0-9]*")) {
+					amountTxtField.setStyle(
+							"-fx-border-color:black;" + "-fx-border-width:0 0 1 0;" + "-fx-background-color:#ffffff;");
 					amountValid = true;
-				}else {
-					amountTxtField.setStyle("-fx-border-color:red;"
-							+ "-fx-border-width:0 0 1 0;"
-							+ "-fx-text-fill:derive(red,.3);");
+				} else {
+					amountTxtField.setStyle(
+							"-fx-border-color:red;" + "-fx-border-width:0 0 1 0;" + "-fx-text-fill:derive(red,.3);");
 					amountValid = false;
 				}
-				if(servingValid && cookingTimeValid && prepTimeValid && amountValid)
+				if (servingValid && cookingTimeValid && prepTimeValid && amountValid)
 					saveBtn.setDisable(false);
 				else
 					saveBtn.setDisable(true);

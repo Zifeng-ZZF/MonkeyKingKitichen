@@ -134,7 +134,8 @@ public class RecipeViewController implements Initializable{
     	String ingredientDesc = "";
     	for(Ingredient ingredient : recipe.getIngredients()) {
     		String ingredientTxt = ingredient.getName()+" * "+ingredient.getAmount()+" "+ingredient.getUnit();
-			ingredientDesc += (ingredient.getName()+" * "+ingredient.getAmount()+"  "+ingredient.getUnit()+"  "+ingredient.getProcessMethod());
+			ingredientDesc += (ingredient.getName()+" * "+ingredient.getAmount()+"  "+ingredient.getUnit()+"  "+
+    		ingredient.getProcessMethod()+"\n");
     	}
     	ingredientsTxtArea.setText(ingredientDesc);
     }
@@ -147,9 +148,9 @@ public class RecipeViewController implements Initializable{
 		ArrayList<String> steps = recipe.getPreparationSetps();
 		String step = "";
 		for (String str : steps) {
-			step += str;
+			step += str + "\n";
 		}
-		this.stepsTxtArea.setText(step+"\n");
+		this.stepsTxtArea.setText(step);
 	}
     
     /**
@@ -163,11 +164,6 @@ public class RecipeViewController implements Initializable{
     	int originalServings = currentRecipe.getServings();
     	//Get current servings
     	int servings = Integer.parseInt(servingsTxtField.getText());
-    	//Change times
-		int preparationTime = servings * (currentRecipe.getPreparationTime()) / originalServings;
-		int cookingTime = servings * (currentRecipe.getCookingTime()) / originalServings;
-		this.preparationTimeLb.setText("preparation time : "+preparationTime);
-		this.cookingTimeLb.setText("cooking time : "+cookingTime);
 		//Change ingredients
 		String ingredientDesc = "";
 		for (Ingredient ingredient : currentRecipe.getIngredients()) {

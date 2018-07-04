@@ -453,7 +453,6 @@ public class DBProcessor {
 		SQLException e1) {
 			e1.printStackTrace();
 		}
-		System.out.println("Current Max id is: " + maxID);
 		return maxID;
 	}
 

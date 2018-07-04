@@ -24,7 +24,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -32,6 +34,7 @@ import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -246,8 +249,14 @@ public class ResultViewController implements Initializable {
 		
 		//exitLabel
 		exitLabel.setOnMouseClicked(e->{
-			Stage currentStage = (Stage) ((Node)e.getSource()).getScene().getWindow();
-			currentStage.close();
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setContentText("Do you want to exit?");
+			alert.showAndWait().ifPresent(response -> {
+				if (response == ButtonType.OK) {
+					Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+					currentStage.close();
+				}
+			});
 		});
 		
 		//Listen to the menuitems to change the searching type

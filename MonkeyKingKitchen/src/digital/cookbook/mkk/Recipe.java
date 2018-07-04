@@ -50,7 +50,7 @@ public class Recipe implements Serializable {
 	 */
 	public void addIngredient(Ingredient ingredient) {
 		ingredient.setRecipeId(recipeId);
-		this.ingredients.add(ingredient);
+		ingredients.add(ingredient);
 	}
 	
 	public void deleteIngredient(Ingredient ingredient) {

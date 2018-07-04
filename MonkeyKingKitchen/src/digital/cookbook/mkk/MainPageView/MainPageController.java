@@ -21,17 +21,21 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
  * View Controller for main page
+ * 
  * @author Zifeng Zhang, Xinyue Shi, Zhibin Xin, Sheng Ji
  *
  */
@@ -142,12 +146,12 @@ public class MainPageController implements Initializable {
 	 * @return
 	 */
 	public ArrayList<Recipe> searchRecipeByName(String recipeName) {
-		//get the recipe_id with given name
+		// get the recipe_id with given name
 		ArrayList<Integer> recipeIds = dbProcessor.matchRecipeName(recipeName);
-		
+
 		ArrayList<Recipe> results = new ArrayList<Recipe>();
-		if(!recipeIds.isEmpty()) {
-			for(Integer recipeId : recipeIds) {
+		if (!recipeIds.isEmpty()) {
+			for (Integer recipeId : recipeIds) {
 				results.add(allRecipes.get(recipeId));
 			}
 		}
@@ -156,6 +160,7 @@ public class MainPageController implements Initializable {
 
 	/**
 	 * Jump to my recipe list
+	 * 
 	 * @param e
 	 */
 	@FXML
@@ -171,9 +176,10 @@ public class MainPageController implements Initializable {
 			e1.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Jump to my favorite recipe list
+	 * 
 	 * @param e
 	 */
 	@FXML
@@ -191,8 +197,8 @@ public class MainPageController implements Initializable {
 	}
 
 	/**
-	 * Handle the recommend recipe imageview and label
-	 * jump to the recipe detail
+	 * Handle the recommend recipe imageview and label jump to the recipe detail
+	 * 
 	 * @param e
 	 */
 	@FXML
@@ -203,37 +209,42 @@ public class MainPageController implements Initializable {
 		try {
 			Scene scene = new Scene(fxmlLoader.load());
 			RecipeViewController controller = fxmlLoader.getController();
-			//set up the recommend recipe
+			// set up the recommend recipe
 			controller.setRecipeDetail(CookBook.getCurrentRecipe());
-			Stage currentStage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+			Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 			currentStage.setScene(scene);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
 	}
-	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		allRecipes = dbProcessor.fetchRecipe();
-		
+
 		setUserTag(CookBook.getCurrentUser().getName());
 
 		// Set exit label
 		exitLabel.setOnMouseClicked(e -> {
-			Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-			currentStage.close();
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setContentText("Do you want to exit?");
+			alert.showAndWait().ifPresent(response -> {
+				if (response == ButtonType.OK) {
+					Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+					currentStage.close();
+				}
+			});
 		});
-		
-		//Listen to the menuitems to change the searching type
-		for(MenuItem menuItem : typeBtn.getItems()) {
+
+		// Listen to the menu-items to change the searching type
+		for (MenuItem menuItem : typeBtn.getItems()) {
 			menuItem.setOnAction(e -> {
 				String text = menuItem.getText();
 				typeBtn.setText(text);
 			});
 		}
-		
-		//Initialize the recommendation
+
+		// Initialize the recommendation
 		recommendNameLabel.setText(CookBook.getRecommandRecipe().getName());
 		briefStepLabel.setText(CookBook.getRecommandRecipe().getPreparationSetps().get(0));
 		briefStepLabel.setWrapText(true);
