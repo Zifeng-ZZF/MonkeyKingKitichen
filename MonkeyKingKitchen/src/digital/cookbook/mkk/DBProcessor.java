@@ -46,7 +46,6 @@ public class DBProcessor {
 	/**
 	 * Fetch all the Recipe in the db to the CookBook
 	 * 
-	 * @param uid
 	 * @return all recipes
 	 */
 	public HashMap<Integer, Recipe> fetchRecipe() {

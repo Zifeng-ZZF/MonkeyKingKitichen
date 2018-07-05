@@ -44,10 +44,6 @@ public class User implements Serializable {
 		dbProcessor.insertRate(recipe, this.uid, rate);
 	}
 
-	/**
-	 * getters and setters
-	 */
-	
 	public String getPasswd() {
 		return this.passwd;
 	}

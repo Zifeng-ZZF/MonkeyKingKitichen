@@ -104,7 +104,7 @@ public class ResultViewController implements Initializable {
 	/**
 	 * Get searching result from main page and list it
 	 * 
-	 * @param results
+	 * @param results searching results
 	 */
 	public void intializeResult(ArrayList<Recipe> results) {
 		this.results = results;

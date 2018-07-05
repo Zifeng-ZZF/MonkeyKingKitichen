@@ -161,7 +161,6 @@ public class RecipeViewController implements Initializable{
 	 * according to servings
 	 * 
 	 * @param e ActionEvent
-	 * @return the altered recipe
 	 */
     public void handleChangeServings(ActionEvent e) {
     	int originalServings = currentRecipe.getServings();
