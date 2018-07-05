@@ -241,6 +241,11 @@ public class RecipeViewController implements Initializable{
 		rateOnLb.setText("Successful!");
 	}
 	
+	/**
+	 * Setting up the page
+	 * Add to favorite btn setting up
+	 * rate setting up
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		pdfProcessor = new PdfProcess();

@@ -11,6 +11,11 @@ import digital.cookbook.mkk.PdfProcess;
 import digital.cookbook.mkk.Recipe;
 import junit.framework.TestCase;
 
+/**
+ * Test for pdfprocess
+ * @author User
+ *
+ */
 public class PdfTest extends TestCase {
 	
 	DBProcessor dbProcessor;

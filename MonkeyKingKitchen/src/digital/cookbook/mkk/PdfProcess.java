@@ -23,6 +23,12 @@ import com.itextpdf.layout.element.ListItem;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Text;
 
+/**
+ * Class for formating the pdf for recipe
+ * 
+ * @author Zifeng Zhang
+ *
+ */
 public class PdfProcess {
 	/**
 	 * Export recipe as pdf

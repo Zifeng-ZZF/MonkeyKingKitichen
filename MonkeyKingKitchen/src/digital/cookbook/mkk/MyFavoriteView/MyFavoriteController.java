@@ -32,6 +32,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 /**
+ * Controller for my favorite list
  * 
  * @author Zhibin Xin, Zifeng Zhang
  *
@@ -168,6 +169,10 @@ public class MyFavoriteController implements Initializable {
 		}
 	}
 
+	/**
+	 * Listener for delete button for every item
+	 * grab necessary info
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.currentUser = CookBook.getCurrentUser();

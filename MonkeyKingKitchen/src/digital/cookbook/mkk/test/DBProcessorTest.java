@@ -16,6 +16,11 @@ import digital.cookbook.mkk.Recipe;
 import digital.cookbook.mkk.User;
 import junit.framework.TestCase;
 
+/**
+ * Test case for DBProcessor
+ * @author Zhibin Xin
+ *
+ */
 public class DBProcessorTest extends TestCase{
 	
 	DBProcessor dbProcessor = new DBProcessor();

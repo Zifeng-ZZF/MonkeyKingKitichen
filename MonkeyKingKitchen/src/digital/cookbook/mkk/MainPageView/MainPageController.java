@@ -197,7 +197,8 @@ public class MainPageController implements Initializable {
 	}
 
 	/**
-	 * Handle the recommend recipe imageview and label jump to the recipe detail
+	 * Handle all the operation and setting up for recommendation part.
+	 * Including the recommend recipe imageview and label jump to the recipe detail
 	 * 
 	 * @param e
 	 */
@@ -218,6 +219,11 @@ public class MainPageController implements Initializable {
 		}
 	}
 
+	/**
+	 * 1. Setting up the username tag
+	 * 2. Menu-Item listener set
+	 * 3. Initialize the recommendation part
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		allRecipes = dbProcessor.fetchRecipe();

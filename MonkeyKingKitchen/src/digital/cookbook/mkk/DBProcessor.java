@@ -8,7 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 /**
- * Retrieve information from the DB
+ * All the information exchange or operation with the DB
  * 
  * @author Zifeng Zhang, Xinyue Shi, Sheng Ji, Zhibin Xin
  * 

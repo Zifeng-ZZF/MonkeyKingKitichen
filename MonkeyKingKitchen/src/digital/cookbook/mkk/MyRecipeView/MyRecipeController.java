@@ -39,7 +39,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 /**
- * 
+ * Controller for my recipe view
  * @author Zhibin Xin, Zifeng Zhang
  *
  */
@@ -227,6 +227,10 @@ public class MyRecipeController implements Initializable {
 		}
 	}
 
+	/**
+	 * Grab the user's recipes
+	 * listener for delete btns for all the items in the list
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		

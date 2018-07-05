@@ -41,7 +41,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * 
+ * Controller for result view
  * @author Zifeng Zhang, Sheng Ji, Xinyue Shi
  *
  */
@@ -241,6 +241,8 @@ public class ResultViewController implements Initializable {
 	
 	/**
 	 * Initialize the variables for this UI
+	 * Listener for the menuitem
+	 * set up the exit label
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

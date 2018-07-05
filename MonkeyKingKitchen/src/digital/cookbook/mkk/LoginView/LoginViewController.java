@@ -191,7 +191,7 @@ public class LoginViewController implements Initializable {
 	}
 
 	/**
-	 * Grap needed info Add properties listeners
+	 * 1. Grap needed info and 2. Add focused properties listeners to the text fields
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

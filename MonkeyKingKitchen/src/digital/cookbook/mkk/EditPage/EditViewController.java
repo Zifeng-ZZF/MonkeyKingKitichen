@@ -210,8 +210,7 @@ public class EditViewController implements Initializable {
 	}
 
 	/**
-	 * Save the ingredient
-	 * 
+	 * Save the recipe and ingredient differently and respectively on creating or editing operation
 	 * @param e
 	 */
 	@FXML
@@ -353,10 +352,10 @@ public class EditViewController implements Initializable {
 	}
 
 	/**
-	 * Handle events while openning the page 1. Grab all the ingredients from the db
-	 * 2. Grab all the recipe from the db and match the user's own recipe 3.
-	 * Listeners from the focused properties for servings, cookingTime,
-	 * preparationTime and amount
+	 * Handle events while openning the page 
+	 * 1. Grab all the ingredients from the db
+	 * 2. Grab all the recipe from the db and match the user's own recipe 
+	 * 3.Listeners from the focused properties for servings, cookingTime,preparationTime and amount
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

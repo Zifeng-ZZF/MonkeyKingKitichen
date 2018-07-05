@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 /**
+ * The main appliction class for the application. This class create a cookbook object and start the login view
  * @author Zifeng Zhang The class for testing search method
  */
 public class DemoTest extends Application{
@@ -25,6 +26,10 @@ public class DemoTest extends Application{
 		launch(args);
 	}
 
+	/**
+	 * Override for the start mehtod of Application
+	 * Present the login view
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		String url = "LoginView/LoginView.fxml";

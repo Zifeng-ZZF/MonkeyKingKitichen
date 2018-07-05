@@ -9,6 +9,11 @@ import digital.cookbook.mkk.Ingredient;
 import digital.cookbook.mkk.Recipe;
 import junit.framework.TestCase;
 
+/**
+ * Test for recipe class
+ * @author Zifeng Zhang
+ *
+ */
 public class RecipeTest extends TestCase {
 	
 	DBProcessor dbProcessor;

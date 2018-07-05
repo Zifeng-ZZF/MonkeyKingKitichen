@@ -6,7 +6,11 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import junit.framework.TestSuite;
-
+/**
+ * Test suite
+ * @author Zifeng Zhang, Zhixin Xin
+ *
+ */
 @RunWith(Suite.class)
 @SuiteClasses({
 	DBProcessorTest.class,
