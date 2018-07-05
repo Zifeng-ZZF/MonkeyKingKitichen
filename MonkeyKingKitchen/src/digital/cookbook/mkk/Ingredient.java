@@ -22,9 +22,9 @@ public class Ingredient implements Serializable {
 	/**
 	 * Constructor without process method of the ingredient
 	 * 
-	 * @param name
-	 * @param amount
-	 * @param unit
+	 * @param name name
+	 * @param amount amount
+	 * @param unit unit
 	 */
 	public Ingredient(String name, double amount, String unit) {
 		this.name = name;
@@ -36,10 +36,10 @@ public class Ingredient implements Serializable {
 	/**
 	 * Constructor with process method of the ingredient
 	 * 
-	 * @param name
-	 * @param amount
-	 * @param unit
-	 * @param processMethod
+	 * @param name name
+	 * @param amount amount
+	 * @param unit unit
+	 * @param processMethod processMethod
 	 */
 	public Ingredient(String name, double amount, String unit, String processMethod) {
 		this.name = name;

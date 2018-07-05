@@ -119,7 +119,7 @@ public class EditViewController implements Initializable {
 	/**
 	 * Initialize the editing page of an existing recipe
 	 * 
-	 * @param recipe
+	 * @param recipe Editing recipe
 	 */
 	public void setRecipeDetails(Recipe recipe) {
 		this.recipeNameTxtField.setText(recipe.getName());
@@ -148,7 +148,7 @@ public class EditViewController implements Initializable {
 	/**
 	 * Add a ingredient to the interface
 	 * 
-	 * @param ingredient
+	 * @param ingredient added ingredients by the user
 	 */
 	public void addIngredientHBox(Ingredient ingredient) {
 		String ingredientDesc = ingredient.getName() + " * " + ingredient.getAmount() + " " + ingredient.getUnit() + " "
@@ -173,7 +173,7 @@ public class EditViewController implements Initializable {
 	 * Listen to the ingredient adding button Add an ingredient item to the recipe
 	 * and show on the view
 	 * 
-	 * @param e
+	 * @param e ActionEvent
 	 */
 	@FXML
 	public void addBtnAction(ActionEvent e) {
@@ -211,7 +211,7 @@ public class EditViewController implements Initializable {
 
 	/**
 	 * Save the recipe and ingredient differently and respectively on creating or editing operation
-	 * @param e
+	 * @param e ActionEvent
 	 */
 	@FXML
 	public void saveBtnAction(ActionEvent e) {
@@ -292,7 +292,7 @@ public class EditViewController implements Initializable {
 	/**
 	 * Canceling edit and return to my recipe list. For the canceling btn on the UI
 	 * Also insert the ingredients into the db
-	 * @param e
+	 * @param e ActionEvent
 	 */
 	@FXML
 	public void cancelBtnAction(ActionEvent e) {

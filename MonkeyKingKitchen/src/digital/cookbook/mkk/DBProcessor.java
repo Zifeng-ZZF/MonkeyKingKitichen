@@ -47,7 +47,7 @@ public class DBProcessor {
 	 * Fetch all the Recipe in the db to the CookBook
 	 * 
 	 * @param uid
-	 * @return
+	 * @return all recipes
 	 */
 	public HashMap<Integer, Recipe> fetchRecipe() {
 
@@ -123,7 +123,7 @@ public class DBProcessor {
 	/**
 	 * Fetch all the MyFavouriteRecipe from the db to the ArrayList MyFavouriteList
 	 * 
-	 * @param uid
+	 * @param uid uid
 	 * @return ArrayList contains all recipes from MyFavouriteList
 	 */
 	public ArrayList<Recipe> fetchFavorite(int uid) {
@@ -178,7 +178,7 @@ public class DBProcessor {
 	/**
 	 * Insert new user into the db
 	 * 
-	 * @param user
+	 * @param user new user
 	 */
 	public void insertUser(User user) {
 		Connection conn = DBUtil.getConnection();
@@ -216,7 +216,8 @@ public class DBProcessor {
 	/**
 	 * Insert one recipe into recipetb in DB
 	 * 
-	 * @param recipe
+	 * @param recipe recipe
+	 * @param currentUserID current user id
 	 */
 	public void insertRecipe(Recipe recipe, int currentUserID) {
 		Connection conn = DBUtil.getConnection();
@@ -248,7 +249,7 @@ public class DBProcessor {
 	/**
 	 * Insert an ingredient into the db while adding ingredient to recipe
 	 * 
-	 * @param ingredient
+	 * @param ingredient ingredient
 	 */
 	public void addIngredient(Ingredient ingredient) {
 		Connection connection = DBUtil.getConnection();
@@ -270,8 +271,7 @@ public class DBProcessor {
 	/**
 	 * Delete a ingredient from recipeingredientdb in db
 	 * 
-	 * @param recipe,
-	 *            ingredient
+	 * @param recipeId recipe id
 	 */
 	public void deleteIngredient(int recipeId) {
 		Connection conn = DBUtil.getConnection();
@@ -288,7 +288,7 @@ public class DBProcessor {
 	/**
 	 * Update the recipe if it is editted
 	 * 
-	 * @param recipe
+	 * @param recipe recipe
 	 */
 	public void updateRecipe(Recipe recipe) {
 		Connection connection = DBUtil.getConnection();
@@ -323,7 +323,7 @@ public class DBProcessor {
 	/**
 	 * Delete a Recipe in db
 	 * 
-	 * @param recipeId
+	 * @param recipeId recipe id
 	 */
 	public void deleteRecipe(int recipeId) {
 		Connection connection = DBUtil.getConnection();
@@ -340,7 +340,8 @@ public class DBProcessor {
 	/**
 	 * Delete a Recipe from favorite in db
 	 * 
-	 * @param recipeId
+	 * @param recipeId recipe id
+	 * @param userId user id
 	 */
 	public void deleteFavoriteRecipe(int recipeId, int userId) {
 		Connection connection = DBUtil.getConnection();
@@ -358,7 +359,8 @@ public class DBProcessor {
 	/**
 	 * insert the chosen recipe into myfavoritetb
 	 * 
-	 * @param recipe,currentUserID
+	 * @param currentUserID, currentUserID
+	 * @param currentRecipe,currentRecipeID
 	 */
 	public void insertIntoFavorite(Recipe currentRecipe, int currentUserID) {
 		Connection conn = DBUtil.getConnection();
@@ -382,9 +384,9 @@ public class DBProcessor {
 	/**
 	 * Insert individual rates of the user
 	 * 
-	 * @param recipe
-	 * @param userID
-	 * @param rate
+	 * @param recipe recipe
+	 * @param userID userID
+	 * @param rate rate
 	 */
 	public void insertRate(Recipe recipe, int userID, double rate) {
 		Connection conn = DBUtil.getConnection();
@@ -459,7 +461,7 @@ public class DBProcessor {
 	/**
 	 * Get the recommending Recipe
 	 * 
-	 * @return
+	 * @return the recommended recipe
 	 */
 	public Recipe getRecommendRecipe() {
 		Connection connection = DBUtil.getConnection();
@@ -504,9 +506,9 @@ public class DBProcessor {
 
 	/**
 	 * 
-	 * @param recipe
-	 * @param userID
-	 * @return
+	 * @param recipe current reicpe
+	 * @param userID user id for the recipe
+	 * @return rate
 	 */
 	public int getTheRate(Recipe recipe, int userID) {
 
@@ -532,8 +534,8 @@ public class DBProcessor {
 
 	/**
 	 * Search recipe in the DB by name 
-	 * @param name
-	 * @return
+	 * @param name recipe name
+	 * @return matched recipe
 	 */
 	public ArrayList<Integer> matchRecipeName(String name) {
 

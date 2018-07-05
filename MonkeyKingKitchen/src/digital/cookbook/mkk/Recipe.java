@@ -30,9 +30,9 @@ public class Recipe implements Serializable {
 	
 	/**
 	 * Constructor
-	 * @param name
-	 * @param type
-	 * @param servings
+	 * @param name name
+	 * @param type type
+	 * @param servings servings
 	 */
 	public Recipe(String name, String type, int servings) {
 		this.name = name;
@@ -46,7 +46,7 @@ public class Recipe implements Serializable {
 	/**
 	 * Add ingredients to the recipe
 	 * insert the item into DB
-	 * @param ingredient
+	 * @param ingredient added ingredient
 	 */
 	public void addIngredient(Ingredient ingredient) {
 		ingredient.setRecipeId(recipeId);
@@ -59,7 +59,7 @@ public class Recipe implements Serializable {
 	}
 	/**
 	 * Add steps of preparing the meal
-	 * @param preparationSetp
+	 * @param preparationSetp user's input
 	 */
 	public void addPreparationStep(String preparationSetp) {
 		this.preparationSetps.add(preparationSetp);

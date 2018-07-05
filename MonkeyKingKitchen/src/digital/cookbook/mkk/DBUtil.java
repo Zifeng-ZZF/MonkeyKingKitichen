@@ -57,7 +57,6 @@ public class DBUtil {
 	
 	/**
 	 * Close given connection to the database
-	 * @param connection
 	 */
 	public static void close() {
 		try {

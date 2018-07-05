@@ -95,7 +95,7 @@ public class MyRecipeController implements Initializable {
 
 	/**
 	 * Jump to my favorite recipe list
-	 * @param e
+	 * @param event ActionEvent
 	 */
 	@FXML
 	public void jumpToMyFavoriteEvent(ActionEvent event) {
@@ -114,7 +114,7 @@ public class MyRecipeController implements Initializable {
 
 	/**
 	 * Jump to main page
-	 * @param event
+	 * @param event ActionEvent
 	 */
 	@FXML
 	public void jumpToMainPageEvent(ActionEvent event) {
@@ -137,7 +137,7 @@ public class MyRecipeController implements Initializable {
 	/**
 	 * Jump to edit page view to create new recipe
 	 * 
-	 * @param event
+	 * @param event ActionEvent
 	 */
 	@FXML
 	public void createEvent(ActionEvent event) {
@@ -157,7 +157,7 @@ public class MyRecipeController implements Initializable {
 	/**
 	 * setup recipe list
 	 * 
-	 * @param results
+	 * @param myRecipes the list of the user's recipes
 	 */
 	public void setMyRecipeList(ArrayList<Recipe> myRecipes) {
 		

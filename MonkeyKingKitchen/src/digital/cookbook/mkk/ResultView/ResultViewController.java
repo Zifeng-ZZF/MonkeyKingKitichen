@@ -151,7 +151,7 @@ public class ResultViewController implements Initializable {
 	/**
 	 * Search in the result UI
 	 * After searching in the main page, user can continue to search
-	 * @param e
+	 * @param e ActionEvent
 	 */
 	public void handleSearchBtn(ActionEvent e) {
 		
@@ -185,7 +185,7 @@ public class ResultViewController implements Initializable {
 	
 	/**
 	 * Jump to main page
-	 * @param e
+	 * @param e MouseEvent
 	 */
 	@FXML
 	public void handleMainPageBtn(MouseEvent e) {
@@ -205,7 +205,7 @@ public class ResultViewController implements Initializable {
 	
 	/**
 	 * Jump to my recipe list
-	 * @param e
+	 * @param e MouseEvent
 	 */
 	@FXML
 	public void handleMyRecipeBtn(MouseEvent e) {
@@ -223,7 +223,7 @@ public class ResultViewController implements Initializable {
 	
 	/**
 	 * Jump to my favorite recipe list
-	 * @param e
+	 * @param e MouseEvent
 	 */
 	@FXML
 	public void handleMyFavoriteBtn(MouseEvent e) {

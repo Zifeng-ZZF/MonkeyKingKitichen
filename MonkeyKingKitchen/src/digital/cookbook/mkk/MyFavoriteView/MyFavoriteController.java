@@ -81,7 +81,7 @@ public class MyFavoriteController implements Initializable {
 	/**
 	 * Jump to my recipe list
 	 * 
-	 * @param event
+	 * @param event ActionEvent
 	 */
 	@FXML
 	public void jumpToMyRecipeEvent(ActionEvent event) {
@@ -101,7 +101,7 @@ public class MyFavoriteController implements Initializable {
 	/**
 	 * Jump to main page
 	 * 
-	 * @param event
+	 * @param event ActionEvent
 	 */
 	@FXML
 	public void jumpToMainPageEvent(ActionEvent event) {
@@ -122,7 +122,7 @@ public class MyFavoriteController implements Initializable {
 	/**
 	 * Get my favorite recipes from main page and list it
 	 * 
-	 * @param results
+	 * @param myFavorites the list of my favorite recipes
 	 */
 	public void setMyFavoriteList(ArrayList<Recipe> myFavorites) {
 

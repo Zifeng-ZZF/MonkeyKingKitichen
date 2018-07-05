@@ -42,6 +42,7 @@ import javafx.stage.Stage;
  *
  */
 public class RecipeViewController implements Initializable{
+	
 	private DBProcessor dbProcessor = new DBProcessor();
 	private Recipe currentRecipe;
 	private User currentUser;
@@ -93,7 +94,7 @@ public class RecipeViewController implements Initializable{
 	/**
 	 * Button to export the pdf
 	 * 
-	 * @param e
+	 * @param e ActionEvent
 	 */
 	@FXML
 	public void exportPDF(ActionEvent e) {
@@ -113,6 +114,7 @@ public class RecipeViewController implements Initializable{
 	
 	/**
 	 * Input all the detail of the currentRecipe into the UI
+	 * @param recipe the current recipe
 	 */
 	@FXML
 	public void setRecipeDetail(Recipe recipe) {
@@ -125,9 +127,10 @@ public class RecipeViewController implements Initializable{
 		setSteps(recipe);
 	}  
     
-    /**
-     * Update or insert the ingredient descrption
-     */
+	/**
+	 * Update or insert the ingredient descrption
+	 * @param recipe the current recipe
+	 */
 	@FXML
     public void setIngredients(Recipe recipe) {
     	ArrayList<Ingredient> ingredients = recipe.getIngredients();
@@ -142,7 +145,7 @@ public class RecipeViewController implements Initializable{
 	
 	/**
 	 * Update or insert the reicpe steps
-	 * @param recipe
+	 * @param recipe the current recipe
 	 */
 	public void setSteps(Recipe recipe) {
 		ArrayList<String> steps = recipe.getPreparationSetps();
@@ -157,7 +160,7 @@ public class RecipeViewController implements Initializable{
 	 * Change amount of preparation time, ingredients amount and cooking time
 	 * according to servings
 	 * 
-	 * @param Servings
+	 * @param e ActionEvent
 	 * @return the altered recipe
 	 */
     public void handleChangeServings(ActionEvent e) {
@@ -176,7 +179,7 @@ public class RecipeViewController implements Initializable{
 
     /**
      * Add recipe to favorite or cancel the favorite
-     * @param e
+     * @param e ActionEvent
      */
 	public void handleFavoriteBtn(ActionEvent e) {
    		if(addToFavoriteBtn.getText().equals("Remove from Favorite")) {
@@ -207,7 +210,7 @@ public class RecipeViewController implements Initializable{
     
 	/**
 	 * Return to the main page
-	 * @param e
+	 * @param e ActionEvent
 	 */
 	public void returnToHomepage(ActionEvent e) {
 		//Clear currentRecipe

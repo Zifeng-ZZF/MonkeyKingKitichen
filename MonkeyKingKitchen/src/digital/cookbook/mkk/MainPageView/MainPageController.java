@@ -80,7 +80,7 @@ public class MainPageController implements Initializable {
 	/**
 	 * Invoked in LoginView to set the user name tag
 	 * 
-	 * @param username
+	 * @param username current user's name
 	 */
 	public void setUserTag(String username) {
 		userLabel.setText(username);
@@ -89,7 +89,7 @@ public class MainPageController implements Initializable {
 	/**
 	 * Search recipe by name or ingredientNmae
 	 * 
-	 * @param e
+	 * @param e ActionEvent
 	 */
 	@FXML
 	public void handleSearchResult(ActionEvent e) {
@@ -124,8 +124,8 @@ public class MainPageController implements Initializable {
 	/**
 	 * Search recipe by using ingredient name
 	 * 
-	 * @param ingredientName
-	 * @return
+	 * @param ingredientName user's input
+	 * @return search results
 	 */
 	public ArrayList<Recipe> searchRecipeByIngredient(String ingredientName) {
 		ArrayList<Recipe> resultRecipes = new ArrayList<Recipe>();
@@ -142,8 +142,8 @@ public class MainPageController implements Initializable {
 	/**
 	 * Search recipe by using recipe name
 	 * 
-	 * @param recipeName
-	 * @return
+	 * @param recipeName user's input
+	 * @return search results
 	 */
 	public ArrayList<Recipe> searchRecipeByName(String recipeName) {
 		// get the recipe_id with given name
@@ -161,7 +161,7 @@ public class MainPageController implements Initializable {
 	/**
 	 * Jump to my recipe list
 	 * 
-	 * @param e
+	 * @param e MouseEvent
 	 */
 	@FXML
 	public void handleMyRecipeLabel(MouseEvent e) {
@@ -180,7 +180,7 @@ public class MainPageController implements Initializable {
 	/**
 	 * Jump to my favorite recipe list
 	 * 
-	 * @param e
+	 * @param e MouseEvent
 	 */
 	@FXML
 	public void handleMyFavoriteLabel(MouseEvent e) {
@@ -200,7 +200,7 @@ public class MainPageController implements Initializable {
 	 * Handle all the operation and setting up for recommendation part.
 	 * Including the recommend recipe imageview and label jump to the recipe detail
 	 * 
-	 * @param e
+	 * @param e MouseEvent
 	 */
 	@FXML
 	public void handleRecommendation(MouseEvent e) {

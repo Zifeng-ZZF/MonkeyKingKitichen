@@ -32,7 +32,8 @@ import com.itextpdf.layout.element.Text;
 public class PdfProcess {
 	/**
 	 * Export recipe as pdf
-	 * @param recipe
+	 * @param recipe exporting recipe
+	 * @param path exporting pdf
 	 */
 	public void exportPDF(Recipe recipe,String path) {
 		

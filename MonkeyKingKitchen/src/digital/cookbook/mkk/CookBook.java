@@ -31,7 +31,7 @@ public class CookBook {
 	
 	/**
 	 * This method will be called via login
-	 * @param user
+	 * @param user user
 	 */
 	public static void setCurrentUser(User user) {
 		currentUser = user;
@@ -48,7 +48,7 @@ public class CookBook {
 	/**
 	 * Set the current recipe
 	 * Called while editing the recipe or browsing the recipe
-	 * @param recipe
+	 * @param recipe recipe
 	 */
 	public static void setCurrentRecipe(Recipe recipe) {
 		currentRecipe = recipe;
@@ -59,7 +59,7 @@ public class CookBook {
 	 * fetch recommending recipe using DBProcessor from DB
 	 * fetch all recipes from the DB
 	 * 
-	 * @param title
+	 * @param title title
 	 */
 	public CookBook(String title) {
 		recommendRecipe = dbProcessor.getRecommendRecipe();
@@ -80,7 +80,7 @@ public class CookBook {
 	
 	/**
 	 * Get the recommendRecipe
-	 * @return
+	 * @return recommending recipe
 	 */
 	public static Recipe getRecommandRecipe() {
 		return recommendRecipe;

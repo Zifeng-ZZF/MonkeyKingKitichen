@@ -24,8 +24,8 @@ public class User implements Serializable {
 	/**
 	 * Constructor of user
 	 * 
-	 * @param username
-	 * @param passwd
+	 * @param username username
+	 * @param passwd password
 	 */
 	public User(String username, String passwd) {
 
@@ -37,7 +37,8 @@ public class User implements Serializable {
 	/**
 	 * Rate the recipe
 	 * 
-	 * @param rate
+	 * @param rate user input for rating
+	 * @param recipe rated recipe
 	 */
 	public void rate(double rate, Recipe recipe) {
 		dbProcessor.insertRate(recipe, this.uid, rate);
@@ -45,9 +46,8 @@ public class User implements Serializable {
 
 	/**
 	 * getters and setters
-	 * 
-	 * @return
 	 */
+	
 	public String getPasswd() {
 		return this.passwd;
 	}

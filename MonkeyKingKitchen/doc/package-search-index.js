@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"digital.cookbook.mkk"},{"l":"digital.cookbook.mkk.EditPage"},{"l":"digital.cookbook.mkk.LoginView"},{"l":"digital.cookbook.mkk.MainPageView"},{"l":"digital.cookbook.mkk.MyFavoriteView"},{"l":"digital.cookbook.mkk.MyRecipeView"},{"l":"digital.cookbook.mkk.RecipeView"},{"l":"digital.cookbook.mkk.ResultView"},{"l":"digital.cookbook.mkk.test"}]
